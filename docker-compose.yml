@@ -1,8 +1,8 @@
 version: "3.7"
 services:
 
-  db:
-    image: postgres:13
+  fusion_db:
+    image: postgres:latest
     container_name: fusion_db
     env_file:
       - ../env_vars/fusionauth/dev.env
@@ -13,16 +13,16 @@ services:
     ports:
       - ${FUSION_DB_PORT}:5432
     networks:
-      - db
+      - fusion_net
     restart: unless-stopped
     volumes:
-      - db_data:/var/lib/postgresql/data
+      - fusion_data:/var/lib/postgresql/data
       
   fusionauth:
     image: fusionauth/fusionauth-app:latest
     container_name: fusionauth
     depends_on:
-      - db
+      - fusion_db
     env_file:
       - ../env_vars/fusionauth/dev.env
     environment:
@@ -35,7 +35,7 @@ services:
       SEARCH_TYPE: ${FUSION_API_SEARCH_TYPE}
       FUSIONAUTH_APP_URL: ${FUSION_API_URL}
     networks:
-      - db
+      - fusion_net
       - pylocker_net
     restart: unless-stopped
     ports:
@@ -44,7 +44,7 @@ services:
       - fa_config:/usr/local/fusionauth/config
 
   pylocker_db:
-    image: postgres:13
+    image: postgres:latest
     container_name: pylocker_db
     env_file:
       - ../env_vars/pylocker/dev.env
@@ -84,8 +84,8 @@ networks:
       driver: default
       config:
         - subnet: 192.168.52.0/24
-  db:
-    name: db
+  fusion_net:
+    name: fusion_net
     driver: bridge
     ipam:
       driver: default
@@ -94,5 +94,5 @@ networks:
 
 volumes:
   pylocker_data:
-  db_data:
+  fusion_data:
   fa_config:
