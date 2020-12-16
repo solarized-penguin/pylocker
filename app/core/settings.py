@@ -1,11 +1,26 @@
+import os
 from functools import lru_cache
 from typing import List
 
-from pydantic import BaseSettings, PostgresDsn
+from pydantic import BaseSettings, PostgresDsn, SecretStr
+
+DB_SCHEMA = './database_schema.py'
 
 
 def _comma_separated_env_str_to_list(env_str: str) -> List[str]:
     return [value.strip() for value in env_str.split(',') if value]
+
+
+def _set_up_environment() -> None:
+    """
+    Sets correct PYTHONPATH and PYTHONUNBUFFERED
+    environmental variables
+    """
+    full_path = os.path.abspath(DB_SCHEMA)
+    pythonpath = os.environ['PYTHONPATH']
+
+    os.environ['PYTHONPATH'] = f'{pythonpath}:{full_path}'
+    os.environ['PYTHONUNBUFFERED'] = str(True)
 
 
 class Settings(BaseSettings):
@@ -13,10 +28,8 @@ class Settings(BaseSettings):
     | Settings model for entire application.
     | Values are read from environment.
     Available settings:
-        1. General environment:
-            * APP_ENV - specifies environment in which application will be run
-            * PYTHONPATH - absolute path to database metadata files (**/app/core/database_models.py**)
-            * PYTHONUNBUFFERED - disable buffering to get errors printed to console quicker, True by default.
+        1. General environment info:
+            * app_env - specifies environment in which application will be run
         2. General API:
             * api_title - name of the app
             * api_description - apps description, shows under title in swagger
@@ -25,14 +38,20 @@ class Settings(BaseSettings):
             * api_redoc_url - redoc documentation location: **<api address>/api_redoc_url**
         3. Connections (database dsn, redis, itp...):
             * postgres_dsn - postgresql api database url
+        4. Security (OAuth2, OpenId Connect):
+            * secret_key - api key
+            * app_id - application id
+            * auth_provider_url - base address of identity provider
+            * token_url - url that should be used to obtain access token
+            * access_token_expire_seconds - longevity of the access token in seconds
+            * jwt_algorithm - token hashing algorithm
+            * pswd_algorithm - password hashing algorithm
     """
 
-    # General
-    APP_ENV: str
-    PYTHONPATH: str
-    PYTHONUNBUFFERED: bool = True
+    # General environment info
+    app_env: str
 
-    # API
+    # api
     api_title: str
     api_description: str
     api_version: str
@@ -42,6 +61,17 @@ class Settings(BaseSettings):
     # connections
     postgres_dsn: PostgresDsn
 
+    # security
+    secret_key: SecretStr
+    app_id: SecretStr
+
+    auth_provider_url: str
+    token_url: str
+
+    access_token_expire_seconds: int
+    jwt_algorithm: str
+    pswd_algorithm: str
+
     class Config:
         case_sensitive = False
 
@@ -49,7 +79,10 @@ class Settings(BaseSettings):
 @lru_cache()
 def get_settings() -> Settings:
     """
-    Loads settings
+    Loads settings and
+    sets up environment
     :rtype: Settings
     """
+    _set_up_environment()
+
     return Settings()
