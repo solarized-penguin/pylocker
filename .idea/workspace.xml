@@ -6,8 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="c26abca9-597d-48b7-a21a-635f2174fe78" name="Default Changelist" comment="working on app security">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/LICENSE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/core/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/core/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/security/auth_client.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/security/auth_client.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -165,7 +163,7 @@
       <workItem from="1608092924121" duration="113000" />
       <workItem from="1608093635332" duration="998000" />
       <workItem from="1608098684762" duration="38000" />
-      <workItem from="1608101208864" duration="29787000" />
+      <workItem from="1608101208864" duration="31065000" />
     </task>
     <task id="LOCAL-00001" summary="basic app setup almost done&#10;making fusionauth work with swagger - implicit is a next step">
       <created>1608069962421</created>
@@ -230,7 +228,14 @@
       <option name="project" value="LOCAL" />
       <updated>1608133354198</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="working on app security">
+      <created>1608135024702</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1608135024702</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

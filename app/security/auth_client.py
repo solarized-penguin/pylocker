@@ -1,5 +1,6 @@
 from fastapi.security import OAuth2PasswordBearer
 from fusionauth.fusionauth_client import FusionAuthClient
+from fusionauth.rest_client import ClientResponse
 from passlib.context import CryptContext
 
 from .users import UserWrite, UserRead, UserRegistrationRequest
@@ -27,9 +28,10 @@ class AuthClient:
 
     def register_user(self, user: UserWrite) -> UserRead:
         request = UserRegistrationRequest(
-            registration={
+            registrations={
                 'applicationId': self._settings,
-                'roles': []
-            }
+                'roles': [self._settings.standard_user_role]
+            },
+            user=user.dict()
         )
-        response = self._client.register()
+        response: ClientResponse = self._client.register(request)
