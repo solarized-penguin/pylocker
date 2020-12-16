@@ -1,43 +1,42 @@
 version: "3.7"
 services:
   # fusionauth
-  fusion_db:
+  db:
     image: postgres:13
     container_name: fusion_db
     env_file:
-      - ../env_vars/pylocker/dev.env
+      - ../env_vars/fusionauth/dev.env
     environment:
       PGDATA: ${FUSION_DB_DATA}
       POSTGRES_USER: ${FUSION_DB_USER}
       POSTGRES_PASSWORD: ${FUSION_DB_PASSWORD}
-      POSTGRES_DB: ${FUSION_DB_NAME}
     ports:
       - ${FUSION_DB_PORT}:5432
+    networks:
+      - db
     restart: unless-stopped
     volumes:
-      - fusion_data:/var/lib/postgresql/data
-    networks:
-      - fusion_net
+      - db_data:/var/lib/postgresql/data
 
   fusionauth:
     image: fusionauth/fusionauth-app:latest
-    container_name: fusionauth_api
+    container_name: fusionauth
     depends_on:
-      - fusion_db
+      - db
     env_file:
-      - ../env_vars/pylocker/dev.env
+      - ../env_vars/fusionauth/dev.env
     environment:
       DATABASE_URL: ${FUSION_API_DB_URL}
-      DATABASE_ROOT_USERNAME: ${FUSION_API_DB_ROOT_USERNAME}
-      DATABASE_ROOT_PASSWORD: ${FUSION_API_DB_ROOT_PASSWORD}
+      DATABASE_ROOT_USERNAME: ${FUSION_DB_USER}
+      DATABASE_ROOT_PASSWORD: ${FUSION_DB_PASSWORD}
       DATABASE_USERNAME: ${FUSION_API_DB_USERNAME}
       DATABASE_PASSWORD: ${FUSION_API_DB_PASSWORD}
       FUSIONAUTH_APP_MEMORY: ${FUSION_API_MEMORY}
-      FUSIONAUTH_APP_RUNTIME_MODE: ${FUSION_API_RUNTIME}
-      FUSIONAUTH_APP_URL: ${FUSION_API_URL}
       SEARCH_TYPE: ${FUSION_API_SEARCH_TYPE}
+      FUSIONAUTH_APP_URL: ${FUSION_API_URL}
     networks:
-      - fusion_net
+      - db
+      - pylocker_net
     restart: unless-stopped
     ports:
       - ${FUSION_API_PORT}:9011
@@ -76,7 +75,6 @@ services:
       - ${APP_PORT}:80
     networks:
       - pylocker_net
-      - fusion_net
     restart: unless-stopped
 
 networks:
@@ -87,8 +85,8 @@ networks:
       driver: default
       config:
         - subnet: 192.168.52.0/24
-  fusion_net:
-    name: fusion_net
+  db:
+    name: db
     driver: bridge
     ipam:
       driver: default
@@ -96,5 +94,5 @@ networks:
         - subnet: 192.168.53.0/24
 volumes:
   pylocker_data:
-  fusion_data:
+  db_data:
   fa_config:
