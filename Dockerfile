@@ -1,9 +1,4 @@
 FROM tiangolo/uvicorn-gunicorn-fastapi:python3.8
-
-ENV PORT $APP_PORT
-
-RUN echo "APP PORT: ${APP_PORT}\nPORT: ${PORT}"
-
 WORKDIR /app
 
 RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py\
@@ -22,4 +17,4 @@ COPY ./alembic.ini ./
 COPY ./main.py ./main.py
 COPY ./prestart.sh ./prestart.sh
 
-EXPOSE $PORT
+EXPOSE 80

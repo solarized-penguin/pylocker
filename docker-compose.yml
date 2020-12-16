@@ -1,70 +1,82 @@
 version: "3.7"
 services:
-  pylocker_db:
+  # fusionauth
+  fusion_db:
     image: postgres:13
-    container_name: pylocker_db
+    container_name: fusion_db
+    env_file:
+      - ../env_vars/pylocker/dev.env
     environment:
-      POSTGRES_USER: "${PYLOCKER_POSTGRES_USER}"
-      POSTGRES_PASSWORD: "${PYLOCKER_POSTGRES_PASSWORD}"
-      POSTGRES_DB: "${PYLOCKER_POSTGRES_DB}"
-      PG_DATA: "${PYLOCKER_PG_DATA}"
+      PGDATA: ${FUSION_DB_DATA}
+      POSTGRES_USER: ${FUSION_DB_USER}
+      POSTGRES_PASSWORD: ${FUSION_DB_PASSWORD}
+      POSTGRES_DB: ${FUSION_DB_NAME}
     ports:
-      - "${PYLOCKER_DB_PORT}:5432"
-    volumes:
-      - "pylocker_data:${PYLOCKER_PG_DATA}"
-    restart: unless-stopped
-    networks:
-      - pylocker_net
-
-  fusionauth_db:
-    image: postgres:13
-    container_name: fusionauth_db
-    environment:
-      PGDATA: "${FUSIONAUTH_PG_DATA}"
-      POSTGRES_USER: "${FUSIONAUTH_POSTGRES_USER}"
-      POSTGRES_PASSWORD: "${FUSIONAUTH_POSTGRES_PASSWORD}"
-      POSTGRES_DB: "${FUSIONAUTH_POSTGRES_DB}"
-    ports:
-      - "${FUSIONAUTH_DB_PORT}:5432"
+      - ${FUSION_DB_PORT}:5432
     restart: unless-stopped
     volumes:
-      - "fusionauth_data:${FUSIONAUTH_PG_DATA}"
+      - fusion_data:/var/lib/postgresql/data
     networks:
-      - pylocker_net
+      - fusion_net
 
   fusionauth:
     image: fusionauth/fusionauth-app:latest
+    container_name: fusionauth_api
     depends_on:
-      - fusionauth_db
+      - fusion_db
+    env_file:
+      - ../env_vars/pylocker/dev.env
     environment:
-      DATABASE_URL: "jdbc:postgresql://pylocker_net:5432/${FUSIONAUTH_POSTGRES_DB}"
-      DATABASE_ROOT_USERNAME: "${FUSIONAUTH_POSTGRES_USER}"
-      DATABASE_ROOT_PASSWORD: "${FUSIONAUTH_POSTGRES_PASSWORD}"
-      DATABASE_USERNAME: "${FUSIONAUTH_POSTGRES_USER}"
-      DATABASE_PASSWORD: "${FUSIONAUTH_POSTGRES_PASSWORD}"
-      FUSIONAUTH_APP_MEMORY: 1G
-      SEARCH_TYPE: database
-      FUSIONAUTH_APP_URL: "${FUSIONAUTH_URL}"
+      DATABASE_URL: ${FUSION_API_DB_URL}
+      DATABASE_ROOT_USERNAME: ${FUSION_API_DB_ROOT_USERNAME}
+      DATABASE_ROOT_PASSWORD: ${FUSION_API_DB_ROOT_PASSWORD}
+      DATABASE_USERNAME: ${FUSION_API_DB_USERNAME}
+      DATABASE_PASSWORD: ${FUSION_API_DB_PASSWORD}
+      FUSIONAUTH_APP_MEMORY: ${FUSION_API_MEMORY}
+      FUSIONAUTH_APP_RUNTIME_MODE: ${FUSION_API_RUNTIME}
+      FUSIONAUTH_APP_URL: ${FUSION_API_URL}
+      SEARCH_TYPE: ${FUSION_API_SEARCH_TYPE}
     networks:
-      - pylocker_net
+      - fusion_net
     restart: unless-stopped
     ports:
-      - "${FUSIONAUTH_PORT}:9011"
+      - ${FUSION_API_PORT}:9011
     volumes:
-      - "fa_config:${FUSIONAUTH_CONFIG}"
+      - fa_config:/usr/local/fusionauth/config
+
+  # pylocker
+  pylocker_db:
+    image: postgres:13
+    container_name: pylocker_db
+    env_file:
+      - ../env_vars/pylocker/dev.env
+    environment:
+      PGDATA: ${PYLOCKER_DB_DATA}
+      POSTGRES_USER: ${PYLOCKER_DB_USER}
+      POSTGRES_PASSWORD: ${PYLOCKER_DB_PASSWORD}
+      POSTGRES_DB: ${PYLOCKER_DB_NAME}
+    ports:
+      - ${PYLOCKER_DB_PORT}:5432
+    volumes:
+      - pylocker_data:${PYLOCKER_DB_DATA}
+    restart: unless-stopped
+    networks:
+      - pylocker_net
 
   pylocker:
     container_name: pylocker
+    env_file:
+      - ../env_vars/pylocker/dev.env
     build:
       context: .
       dockerfile: ./Dockerfile
     depends_on:
       - pylocker_db
-      - fusionauth
     ports:
-      - "${APP_PORT}:9000"
+      - ${APP_PORT}:80
     networks:
       - pylocker_net
+      - fusion_net
     restart: unless-stopped
 
 networks:
@@ -75,7 +87,14 @@ networks:
       driver: default
       config:
         - subnet: 192.168.52.0/24
+  fusion_net:
+    name: fusion_net
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.53.0/24
 volumes:
   pylocker_data:
-  fusionauth_data:
+  fusion_data:
   fa_config:

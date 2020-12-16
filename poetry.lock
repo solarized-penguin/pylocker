@@ -557,7 +557,7 @@ standard = ["websockets (>=8.0.0,<9.0.0)", "watchgod (>=0.6,<0.7)", "python-dote
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "ad5fad841b096e98048cbccf48ed89c4b1772ffa2675877fbcedad6c442fd361"
+content-hash = "1be99ed350f53f5ec7f1e1c40b8f49b2a5dfafb9f748c86d814f7e54802a3f27"
 
 [metadata.files]
 alembic = [
