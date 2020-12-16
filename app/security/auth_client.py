@@ -2,6 +2,7 @@ from fastapi.security import OAuth2PasswordBearer
 from fusionauth.fusionauth_client import FusionAuthClient
 from passlib.context import CryptContext
 
+from .users import UserWrite, UserRead, UserRegistrationRequest
 from ..core.settings import get_settings, Settings
 
 
@@ -24,5 +25,11 @@ class AuthClient:
         if exc_type:
             raise Exception("auth client error - TODO")
 
-    def register_user(self, ) -> bool:
-        pass
+    def register_user(self, user: UserWrite) -> UserRead:
+        request = UserRegistrationRequest(
+            registration={
+                'applicationId': self._settings,
+                'roles': []
+            }
+        )
+        response = self._client.register()

@@ -46,6 +46,8 @@ class Settings(BaseSettings):
             * access_token_expire_seconds - longevity of the access token in seconds
             * jwt_algorithm - token hashing algorithm
             * pswd_algorithm - password hashing algorithm
+        5. Scopes/Roles:
+            * standard_user_scope - role with privileges for the standard user
     """
 
     # General environment info
@@ -71,6 +73,9 @@ class Settings(BaseSettings):
     access_token_expire_seconds: int
     jwt_algorithm: str
     pswd_algorithm: str
+
+    # roles\scopes
+    standard_user_role: str
 
     class Config:
         case_sensitive = False
