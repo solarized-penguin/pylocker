@@ -1,7 +1,7 @@
 from datetime import datetime
 from enum import Enum
 from typing import Optional, List
-
+from fastapi import Form
 from pydantic import BaseModel, EmailStr, SecretStr
 
 
@@ -47,8 +47,31 @@ class UserRead(UserBase):
 
 
 class UserWrite(UserBase):
-    password: SecretStr
+    password1: SecretStr
+    password2: SecretStr
+    imageUrl: Optional[str] = None
     twoFactorEnabled: bool = False
+    skipVerification: bool = False
+
+    @classmethod
+    def as_form(
+            cls,
+            email: Form = Form(..., description='used as username as well'),
+            fullName: Form = Form(None, description='first and last name'),
+            mobilePhone: Form = Form(None, description='phone number'),
+            birthDate: Form = Form(None, description='day of birth'),
+            password1: Form = Form(..., description='account password'),
+            password2: Form = Form(..., description='password repeat'),
+            imageUrl: Form = Form(None, description='account avatar/picture url'),
+            twoFactorEnabled: Form = Form(False, description='is 2FA enabled for this account?'),
+            skipVerification: Form = Form(False, description='skip verification during user creation process?')
+    ) -> Form:
+        cls(
+            email=email, fullName=fullName, mobilePhone=mobilePhone,
+            birthDate=birthDate, password1=password1, password2=password2,
+            imageUrl=imageUrl, twoFactorEnabled=twoFactorEnabled,
+            skipVerification=skipVerification
+        )
 
 
 class Registration(BaseModel):
@@ -60,7 +83,7 @@ class Registration(BaseModel):
 
 
 class UserRegistrationRequest(BaseModel):
-    registration: Registration
+    registrations: List[Registration]
     user: UserWrite
     sendSetPasswordEmail: bool = False
     skipVerification: bool = False

@@ -24,5 +24,5 @@ class AuthClient:
         if exc_type:
             raise Exception("auth client error - TODO")
 
-    def verify_user(self, email: str) -> bool:
+    def register_user(self, ) -> bool:
         pass
