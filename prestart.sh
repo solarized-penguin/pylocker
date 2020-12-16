@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 
-echo "CURRENT ENVIRONMENT: $(printenv APP_ENV)"
+echo "CURRENT ENVIRONMENT:${APP_ENV}"
 
 # Let the DB start
 sleep 10

@@ -1,5 +1,6 @@
 version: "3.7"
 services:
+
   db:
     image: postgres:13
     container_name: fusion_db
@@ -16,6 +17,7 @@ services:
     restart: unless-stopped
     volumes:
       - db_data:/var/lib/postgresql/data
+      
   fusionauth:
     image: fusionauth/fusionauth-app:latest
     container_name: fusionauth
@@ -40,6 +42,7 @@ services:
       - ${FUSION_API_PORT}:9011
     volumes:
       - fa_config:/usr/local/fusionauth/config
+
   pylocker_db:
     image: postgres:13
     container_name: pylocker_db
@@ -57,6 +60,7 @@ services:
     restart: unless-stopped
     networks:
       - pylocker_net
+
   pylocker:
     container_name: pylocker
     env_file:
@@ -71,6 +75,7 @@ services:
     networks:
       - pylocker_net
     restart: unless-stopped
+
 networks:
   pylocker_net:
     name: pylocker_net
@@ -86,6 +91,7 @@ networks:
       driver: default
       config:
         - subnet: 192.168.53.0/24
+
 volumes:
   pylocker_data:
   db_data:
