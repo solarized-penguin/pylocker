@@ -3,7 +3,7 @@ from fusionauth.fusionauth_client import FusionAuthClient
 from fusionauth.rest_client import ClientResponse
 from passlib.context import CryptContext
 
-from .users import UserWrite, UserRead, UserRegistrationRequest
+from .users import UserWrite, UserRead, UserRegistrationRequest, Registration
 from ..core.settings import get_settings, Settings
 
 
@@ -28,10 +28,18 @@ class AuthClient:
 
     def register_user(self, user: UserWrite) -> UserRead:
         request = UserRegistrationRequest(
-            registrations={
-                'applicationId': self._settings,
-                'roles': [self._settings.standard_user_role]
-            },
+            registrations=[
+                Registration(
+                    applicationId=self._settings.app_id.get_secret_value(),
+                    roles=[self._settings.standard_user_role]
+                )
+            ],
             user=user.dict()
         )
         response: ClientResponse = self._client.register(request)
+
+        if response.was_successful():
+            result: UserRead = UserRead(**response.success_response)
+            return result
+        else:
+            error_response = response.error_response

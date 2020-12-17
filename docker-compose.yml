@@ -1,11 +1,34 @@
 version: "3.7"
 services:
 
+  fusion_search:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.8.1
+    container_name: fusion_search
+    env_file:
+      - ../../Documents/env_vars/fusionauth/${app_env}.env
+    environment:
+      cluster.name: fusionauth
+      bootstrap.memory_lock: "true"
+      discovery.type: single-node
+      ES_JAVA_OPTS: ${FUSION_ES_JAVA_OPTS}
+    ports:
+      - 9200:9200
+      - 9300:9300
+    networks:
+      - fusion_search
+    restart: unless-stopped
+    ulimits:
+      memlock:
+        soft: -1
+        hard: 1
+    volumes:
+      - es_data:/usr/share/elasticsearch/data
+
   fusion_db:
     image: postgres:latest
     container_name: fusion_db
     env_file:
-      - ../env_vars/fusionauth/dev.env
+      - ../../Documents/env_vars/fusionauth/${app_env}.env
     environment:
       PGDATA: ${FUSION_DB_DATA}
       POSTGRES_USER: ${FUSION_DB_USER}
@@ -23,8 +46,9 @@ services:
     container_name: fusionauth
     depends_on:
       - fusion_db
+      - - fusion_search
     env_file:
-      - ../env_vars/fusionauth/dev.env
+      - ../../Documents/env_vars/fusionauth/${app_env}.env
     environment:
       DATABASE_URL: ${FUSION_API_DB_URL}
       DATABASE_ROOT_USERNAME: ${FUSION_DB_USER}
@@ -47,7 +71,7 @@ services:
     image: postgres:latest
     container_name: pylocker_db
     env_file:
-      - ../env_vars/pylocker/dev.env
+      - ../../Documents/env_vars/pylocker/${app_env}.env
     environment:
       PGDATA: ${PYLOCKER_DB_DATA}
       POSTGRES_USER: ${PYLOCKER_DB_USER}
@@ -64,7 +88,7 @@ services:
   pylocker:
     container_name: pylocker
     env_file:
-      - ../env_vars/pylocker/dev.env
+      - ../../Documents/env_vars/pylocker/${app_env}.env
     build:
       context: .
       dockerfile: ./Dockerfile
@@ -91,8 +115,15 @@ networks:
       driver: default
       config:
         - subnet: 192.168.53.0/24
-
+  fusion_search:
+    name: fusion_search
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.54.0/24
 volumes:
   pylocker_data:
   fusion_data:
   fa_config:
+  es_data:
