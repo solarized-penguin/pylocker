@@ -22,9 +22,9 @@ services:
   auth_db:
     image: postgres:13
     environment:
-      PGDATA: ${auth_pg_data}
-      POSTGRES_USER: ${auth_pg_user}
-      POSTGRES_PASSWORD: ${auth_pg_password}
+      PGDATA: ${auth_db_data}
+      POSTGRES_USER: ${auth_db_user}
+      POSTGRES_PASSWORD: ${auth_db_password}
     ports:
       - ${auth_db_port}:5432
     networks:
@@ -37,6 +37,7 @@ services:
     image: fusionauth/fusionauth-app:latest
     depends_on:
       - auth_search
+      - auth_db
     environment:
       SEARCH_SERVERS: ${auth_api_search_url}
       SEARCH_TYPE: ${auth_api_search_type}

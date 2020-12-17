@@ -4,18 +4,9 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c26abca9-597d-48b7-a21a-635f2174fe78" name="Default Changelist" comment="adding elastic search to fusionauth">
-      <change afterPath="$PROJECT_DIR$/compose.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docker-composes/auth-compose.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docker-composes/pylocker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/pylocker.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/pylocker.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/redisSettings.xml" beforeDir="false" />
+    <list default="true" id="c26abca9-597d-48b7-a21a-635f2174fe78" name="Default Changelist" comment="creating working auth_search service (elasticsearch)&#10;working on plugging postgres database next">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/poetry.lock" beforeDir="false" afterPath="$PROJECT_DIR$/poetry.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run-compose.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-composes/auth-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-composes/auth-compose.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -136,7 +127,7 @@
       <workItem from="1608101208864" duration="31065000" />
       <workItem from="1608138927699" duration="150000" />
       <workItem from="1608139094264" duration="12045000" />
-      <workItem from="1608188981295" duration="25851000" />
+      <workItem from="1608188981295" duration="27506000" />
     </task>
     <task id="LOCAL-00001" summary="basic app setup almost done&#10;making fusionauth work with swagger - implicit is a next step">
       <created>1608069962421</created>
@@ -215,7 +206,14 @@
       <option name="project" value="LOCAL" />
       <updated>1608192224745</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="creating working auth_search service (elasticsearch)&#10;working on plugging postgres database next">
+      <created>1608225226256</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1608225226257</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -238,7 +236,8 @@
     <MESSAGE value="refactoring naming in docker-compose.yml" />
     <MESSAGE value="working on app security" />
     <MESSAGE value="adding elastic search to fusionauth" />
-    <option name="LAST_COMMIT_MESSAGE" value="adding elastic search to fusionauth" />
+    <MESSAGE value="creating working auth_search service (elasticsearch)&#10;working on plugging postgres database next" />
+    <option name="LAST_COMMIT_MESSAGE" value="creating working auth_search service (elasticsearch)&#10;working on plugging postgres database next" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/pylocker$main.coverage" NAME="main Coverage Results" MODIFIED="1608130663561" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
