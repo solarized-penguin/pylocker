@@ -1,0 +1,74 @@
+version: "3.7"
+services:
+  pylocker_db:
+    image: postgres:latest
+    env_file:
+      - ../../../Documents/env_vars/pylocker/${app_env}.env
+    environment:
+      PGDATA: ${pylocker_db_data}
+      POSTGRES_USER: ${pylocker_db_user}
+      POSTGRES_PASSWORD: ${pylocker_db_password}
+      POSTGRES_DB: ${pylocker_db_name}
+    ports:
+      - ${pylocker_db_port}:5432
+    volumes:
+      - pylocker_data:/var/lib/postgresql/data
+    restart: unless-stopped
+    networks:
+      - pylocker_net
+
+  pylocker_redis:
+    image: redis:6-alpine
+    env_file:
+      - ../../../Documents/env_vars/pylocker/${app_env}.env
+    environment:
+      ALLOW_EMPTY_PASSWORD: ${redis_allow_empty_password}
+      REDIS_DISABLE_COMMANDS: ${redis_disable_commands}
+      REDIS_PASSWORD: ${redis_password}
+    ports:
+      - ${redis_port}:6379
+    command: ["redis-server", "--appendonly", "yes"]
+    restart: unless-stopped
+    volumes:
+      - cache_data:/bitnami/redis/data
+    networks:
+      - cache_net
+
+  pylocker:
+    env_file:
+      - ../../../Documents/env_vars/pylocker/${app_env}.env
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    depends_on:
+      - pylocker_db
+      - pylocker_redis
+    ports:
+      - ${app_port}:80
+    restart: unless-stopped
+    networks:
+      - pylocker_net
+      - auth_net
+      - cache_net
+
+networks:
+  cache_net:
+    name: cache_net
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.51.0/24
+  pylocker_net:
+    name: pylocker_net
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.52.0/24
+  auth_net:
+    name: auth_net
+    external: true
+volumes:
+  pylocker_data:
+  cache_data:
