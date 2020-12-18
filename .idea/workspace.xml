@@ -65,7 +65,13 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="BashSupport Pro.all-compose">
+  <component name="RunManager" selected="BashSupport Pro.pylocker_api-compose">
+    <configuration name="pylocker_api-compose" type="BashProRunConfiguration">
+      <option name="scriptParameters" value="PYLOCKER_API" />
+      <option name="scriptPath" value="$PROJECT_DIR$/docker/compose.sh" />
+      <RunnerSettings bashdbVersion="Automatic" bashPathMapper="Automatic" RunnerId="pro.bashsupport.shDebugRunner" />
+      <method v="2" />
+    </configuration>
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <module name="pylocker" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -102,6 +108,7 @@
       <item itemvalue="BashSupport Pro.auth-compose" />
       <item itemvalue="BashSupport Pro.pylocker-compose" />
       <item itemvalue="BashSupport Pro.all-compose" />
+      <item itemvalue="BashSupport Pro.pylocker_api-compose" />
     </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
