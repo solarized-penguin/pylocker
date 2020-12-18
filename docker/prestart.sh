@@ -6,6 +6,7 @@ PYTHONPATH="${PYTHONPATH}:$(find ./app -name 'database_schema.py' -exec readlink
 export PYTHONPATH
 
 printf "CURRENT PYTHONPATH:\n%s", "${PYTHONPATH}"
+ZZZZZZZZ
 
 echo "Waiting 10 seconds to let database start..."
 # Let the DB start

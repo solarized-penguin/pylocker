@@ -37,8 +37,6 @@ services:
   pylocker:
     env_file:
       - ../../../Documents/env_vars/pylocker/${app_env}.env
-    environment:
-      PYTHONPATH: ${pythonpath}
     build:
       context:  ..
       dockerfile: ./docker/Dockerfile
