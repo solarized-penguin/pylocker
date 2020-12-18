@@ -15,6 +15,6 @@ COPY ./app ./app/
 COPY ./migrations ./migrations/
 COPY ./alembic.ini ./
 COPY ./main.py ./main.py
-COPY ./prestart.sh ./prestart.sh
+COPY ./docker/prestart.sh ./prestart.sh
 
 EXPOSE 80

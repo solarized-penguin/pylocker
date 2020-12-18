@@ -2,8 +2,8 @@
 # shellcheck shell=bash
 
 compose() {
-  docker-compose --env-file ../../Documents/env_vars/"$1"/"${env}".env \
-    -f ./docker-composes/"$1"-compose.yml up -d --build
+  docker-compose --env-file ../../../Documents/env_vars/"$1"/"${env}".env \
+    -f ./"$1"-compose.yml up -d --build
 }
 
 export env=dev

@@ -5,8 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c26abca9-597d-48b7-a21a-635f2174fe78" name="Default Changelist" comment="creating working auth_search service (elasticsearch)&#10;working on plugging postgres database next">
+      <change beforePath="$PROJECT_DIR$/.idea/pylocker.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/pylocker.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-composes/auth-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-composes/auth-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/docker/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/compose.sh" beforeDir="false" afterPath="$PROJECT_DIR$/docker/compose.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-composes/auth-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker/auth-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-composes/pylocker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker/pylocker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prestart.sh" beforeDir="false" afterPath="$PROJECT_DIR$/docker/prestart.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,23 +59,18 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/run-compose.sh" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/docker/compose.sh" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="preferences.redisPlugin" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/docker" />
       <recent name="$PROJECT_DIR$/docker-composes" />
+      <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager">
-    <configuration name="compose_containers.sh" type="BashProRunConfiguration" temporary="true">
-      <option name="scriptParameters" value="AUTH" />
-      <option name="scriptPath" value="$PROJECT_DIR$/compose.sh" />
-      <RunnerSettings bashdbVersion="Automatic" bashPathMapper="Automatic" RunnerId="pro.bashsupport.shDebugRunner" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="BashSupport Pro.all-compose">
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <module name="pylocker" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -102,11 +103,11 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="BashSupport Pro.compose_containers.sh" />
-      </list>
-    </recent_temporary>
+    <list>
+      <item itemvalue="BashSupport Pro.auth-compose" />
+      <item itemvalue="BashSupport Pro.pylocker-compose" />
+      <item itemvalue="BashSupport Pro.all-compose" />
+    </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -128,6 +129,7 @@
       <workItem from="1608138927699" duration="150000" />
       <workItem from="1608139094264" duration="12045000" />
       <workItem from="1608188981295" duration="27506000" />
+      <workItem from="1608272854832" duration="9516000" />
     </task>
     <task id="LOCAL-00001" summary="basic app setup almost done&#10;making fusionauth work with swagger - implicit is a next step">
       <created>1608069962421</created>

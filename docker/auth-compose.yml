@@ -1,0 +1,47 @@
+version: "3.7"
+services:
+  auth_db:
+    image: postgres:13
+    environment:
+      PGDATA: ${auth_db_data}
+      POSTGRES_USER: ${auth_db_root_user}
+      POSTGRES_PASSWORD: ${auth_db_root_password}
+    ports:
+      - ${auth_db_port}:5432
+    networks:
+      - auth_net
+    restart: unless-stopped
+    volumes:
+      - auth_data:/var/lib/postgresql/data
+
+  auth:
+    image: fusionauth/fusionauth-app:latest
+    depends_on:
+      - auth_db
+    environment:
+      DATABASE_URL: ${auth_db_url}
+      DATABASE_ROOT_USERNAME: ${auth_db_root_user}
+      DATABASE_ROOT_PASSWORD: ${auth_db_root_password}
+      DATABASE_USERNAME: ${auth_db_user}
+      DATABASE_PASSWORD: ${auth_db_password}
+      SEARCH_TYPE: ${auth_api_search_type}
+      FUSIONAUTH_APP_MEMORY: ${auth_api_memory}
+      FUSIONAUTH_APP_URL: ${auth_api_url}
+    networks:
+      - auth_net
+    restart: unless-stopped
+    ports:
+      - ${auth_api_port}:9011
+    volumes:
+      - auth_config:/usr/local/fusionauth/config
+networks:
+  auth_net:
+    name: auth_net
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.50.0/24
+volumes:
+  auth_data:
+  auth_config:

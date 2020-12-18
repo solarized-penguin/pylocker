@@ -27,7 +27,7 @@ services:
       REDIS_PASSWORD: ${redis_password}
     ports:
       - ${redis_port}:6379
-    command: ["redis-server", "--appendonly", "yes"]
+    command: [ "redis-server", "--appendonly", "yes" ]
     restart: unless-stopped
     volumes:
       - cache_data:/bitnami/redis/data
@@ -38,8 +38,8 @@ services:
     env_file:
       - ../../../Documents/env_vars/pylocker/${app_env}.env
     build:
-      context: ..
-      dockerfile: Dockerfile
+      context:  ..
+      dockerfile: ./docker/Dockerfile
     depends_on:
       - pylocker_db
       - pylocker_redis
