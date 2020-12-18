@@ -37,7 +37,7 @@ case $CHOICE in
   compose_selected pylocker pylocker
   ;;
 
-  *)
+*)
   printf "Wrong input parameters!\n
     Legal input: AUTH, PYLOCKER or ALL"
 

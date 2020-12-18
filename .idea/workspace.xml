@@ -4,7 +4,12 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c26abca9-597d-48b7-a21a-635f2174fe78" name="Default Changelist" comment="- fighting with deplojment issues continues..." />
+    <list default="true" id="c26abca9-597d-48b7-a21a-635f2174fe78" name="Default Changelist" comment="- fighting with deplojment issues continues...">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/compose.sh" beforeDir="false" afterPath="$PROJECT_DIR$/docker/compose.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/prestart.sh" beforeDir="false" afterPath="$PROJECT_DIR$/docker/prestart.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/pylocker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker/pylocker-compose.yml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -45,16 +50,20 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="DatabaseDriversLRU" value="redshift&#10;postgresql" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/docker/compose.sh" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="preferences.redisPlugin" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/docker" />
       <recent name="$PROJECT_DIR$/docker-composes" />
@@ -139,6 +148,7 @@
       <workItem from="1608188981295" duration="27506000" />
       <workItem from="1608272854832" duration="10863000" />
       <workItem from="1608288785430" duration="12494000" />
+      <workItem from="1608302040881" duration="1654000" />
     </task>
     <task id="LOCAL-00001" summary="basic app setup almost done&#10;making fusionauth work with swagger - implicit is a next step">
       <created>1608069962421</created>

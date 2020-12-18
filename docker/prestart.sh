@@ -12,11 +12,11 @@ export PYTHONPATH="${PYTHONPATH}:${calculated_path}"
 
 printf "CURRENT PYTHONPATH:\n%s", "${PYTHONPATH}"
 
-printf  "WAITING 10 SECONDS..."
+printf "WAITING 10 SECONDS..."
 
 sleep 10
 
-printf  "MIGRATING..."
+printf "MIGRATING..."
 
 alembic upgrade head
 

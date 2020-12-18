@@ -38,7 +38,7 @@ services:
     env_file:
       - ../../../Documents/env_vars/pylocker/${app_env}.env
     build:
-      context:  ..
+      context: ..
       dockerfile: ./docker/Dockerfile
     depends_on:
       - pylocker_db
