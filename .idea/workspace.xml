@@ -5,14 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c26abca9-597d-48b7-a21a-635f2174fe78" name="Default Changelist" comment="- fixing dockerfile and deploy scripts">
-      <change beforePath="$PROJECT_DIR$/.idea/pylocker.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/pylocker.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/docker/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/compose.sh" beforeDir="false" afterPath="$PROJECT_DIR$/docker/compose.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-composes/auth-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker/auth-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-composes/pylocker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker/pylocker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prestart.sh" beforeDir="false" afterPath="$PROJECT_DIR$/docker/prestart.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/prestart.sh" beforeDir="false" afterPath="$PROJECT_DIR$/docker/prestart.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/pylocker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker/pylocker-compose.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -129,7 +124,8 @@
       <workItem from="1608138927699" duration="150000" />
       <workItem from="1608139094264" duration="12045000" />
       <workItem from="1608188981295" duration="27506000" />
-      <workItem from="1608272854832" duration="9922000" />
+      <workItem from="1608272854832" duration="10863000" />
+      <workItem from="1608288785430" duration="1941000" />
     </task>
     <task id="LOCAL-00001" summary="basic app setup almost done&#10;making fusionauth work with swagger - implicit is a next step">
       <created>1608069962421</created>
@@ -222,7 +218,14 @@
       <option name="project" value="LOCAL" />
       <updated>1608287154464</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="- fixing dockerfile and deploy scripts">
+      <created>1608287247778</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1608287247778</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
