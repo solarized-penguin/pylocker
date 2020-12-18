@@ -1,19 +1,23 @@
 #! /usr/bin/env bash
 
-echo "CURRENT ENVIRONMENT:${app_env}"
+printf "CURRENT ENVIRONMENT: %s \n
+CALCULATING PYTHONPATH...", "${app_env}"
 
-PYTHONPATH="${PYTHONPATH}:$(find ./app -name 'database_schema.py' -exec readlink -f {} \;)"
-export PYTHONPATH
+calculated_path=$(find ./app -name 'database_schema.py' -exec readlink -f {} \;)
+
+printf "CALCULATED PATH: %s", "${calculated_path} \n
+EXPORTING TO PYTHONPATH..."
+
+export PYTHONPATH="${PYTHONPATH}:${calculated_path}"
 
 printf "CURRENT PYTHONPATH:\n%s", "${PYTHONPATH}"
-ZZZZZZZZ
 
-echo "Waiting 10 seconds to let database start..."
-# Let the DB start
+printf  "WAITING 10 SECONDS..."
+
 sleep 10
 
-echo "Running migrations..."
-# Run migrations
+printf  "MIGRATING..."
+
 alembic upgrade head
 
-echo "Migrations concluded. All done!"
+printf "ALL FINISHED SUCCESSFULLY!"
