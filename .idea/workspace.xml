@@ -131,7 +131,7 @@
       <workItem from="1608139094264" duration="12045000" />
       <workItem from="1608188981295" duration="27506000" />
       <workItem from="1608272854832" duration="10863000" />
-      <workItem from="1608288785430" duration="3069000" />
+      <workItem from="1608288785430" duration="3501000" />
     </task>
     <task id="LOCAL-00001" summary="basic app setup almost done&#10;making fusionauth work with swagger - implicit is a next step">
       <created>1608069962421</created>
@@ -252,7 +252,14 @@
       <option name="project" value="LOCAL" />
       <updated>1608291749784</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="- minor modification in prestart script">
+      <created>1608291863704</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1608291863704</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
