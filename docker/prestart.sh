@@ -1,7 +1,7 @@
 #! /usr/bin/env bash
 
-echo "CURRENT ENVIRONMENT:${app_env}"
-echo "CURRENT PYTHONPATH:${pythonpath}"
+echo "CURRENT ENVIRONMENT:${APP_ENV}"
+echo "CURRENT PYTHONPATH:${PYTHONPATH}"
 
 # Let the DB start
 sleep 10

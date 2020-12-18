@@ -6,6 +6,11 @@ compose() {
     -f ./"$1"-compose.yml up -d --build
 }
 
+compose_selected() {
+  docker-compose --env-file ../../../Documents/env_vars/"$1"/"${env}".env \
+    -f ./"$1"-compose.yml up -d --build "$2"
+}
+
 export env=dev
 CHOICE=$1
 
@@ -27,7 +32,12 @@ case $CHOICE in
   compose pylocker
   ;;
 
-*)
+"PYLOCKER_API")
+  echo "CHOICE: ${CHOICE}"
+  compose_selected pylocker pylocker
+  ;;
+
+  *)
   printf "Wrong input parameters!\n
     Legal input: AUTH, PYLOCKER or ALL"
 
