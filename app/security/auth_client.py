@@ -5,6 +5,7 @@ from passlib.context import CryptContext
 
 from .users import UserWrite, UserRead, UserRegistrationRequest, Registration
 from ..core.settings import get_settings, Settings
+from ..errors import UserRegistrationError
 
 
 class AuthClient:
@@ -43,3 +44,7 @@ class AuthClient:
             return result
         else:
             error_response = response.error_response
+            raise UserRegistrationError(
+                error_code=error_response.status_code,
+                error_message=error_response
+            )
