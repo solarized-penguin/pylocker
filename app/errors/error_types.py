@@ -37,3 +37,8 @@ class BasicError(ABC, Exception):
 class UserRegistrationError(BasicError):
     def __init__(self, error_code: int, error_message: Union[str, Dict[str, Any]]) -> None:
         super().__init__(error_code=error_code, error_message=error_message)
+
+
+class UserNotFoundError(BasicError):
+    def __init__(self, error_message: Union[str, Dict[str, Any]]) -> None:
+        super().__init__(error_code=401, error_message=error_message)
