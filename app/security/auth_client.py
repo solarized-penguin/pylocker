@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from typing import List
 
 from fusionauth.fusionauth_client import FusionAuthClient
@@ -11,6 +13,10 @@ from ..errors import UserSignUpError, UserSignInError
 
 
 class AuthClient:
+    """
+    Provides a way to communicate with authentication and authorization service.
+    """
+
     def __init__(self) -> None:
         self._settings: Settings = get_settings()
         self._client: FusionAuthClient = FusionAuthClient(
@@ -19,6 +25,10 @@ class AuthClient:
         )
 
     def register_user(self, user: UserSignUp, roles: List[str]) -> UserInfo:
+        """
+        Creates new user account and registers it with selected application.
+        :rtype: UserInfo
+        """
         request = RegistrationRequest(
             registration=AppRegistrationForm(
                 applicationId=self._settings.app_id.get_secret_value(),
@@ -42,8 +52,11 @@ class AuthClient:
             raise UserSignUpError(response.error_response)
 
     def login_user(self, email: str, password: str) -> Token:
-        response = self._client \
-            .exchange_user_credentials_for_access_token(
+        """
+        Obtains access token - password grant type.
+        :rtype: Token
+        """
+        response = self._client.exchange_user_credentials_for_access_token(
             username=email,
             password=password,
             client_id=self._settings.client_id.get_secret_value(),
@@ -55,6 +68,10 @@ class AuthClient:
         else:
             raise UserSignInError(response.error_response)
 
-
-def create_auth_client() -> AuthClient:
-    return AuthClient()
+    @classmethod
+    def create_client(cls) -> AuthClient:
+        """
+        Returns new instance of self.
+        :rtype: AuthClient
+        """
+        return AuthClient()
