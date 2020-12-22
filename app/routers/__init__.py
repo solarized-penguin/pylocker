@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 
 
-def register_routers(app: FastAPI):
+def register_routers(app: FastAPI) -> None:
     """
     Registers all routers.
     :param app: FastAPI application instance
