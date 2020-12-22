@@ -11,10 +11,8 @@ router = APIRouter()
     response_model=UserRead,
     status_code=201
 )
-async def sign_up(user: UserSignUp = Depends(UserSignUp.as_form)) -> UserRead:
-    with AuthClient() as client:
-        res = client.register_user(
-            user.email,
-            password=user.password1
-        )
-        return res
+async def sign_up(
+        user: UserSignUp = Depends(UserSignUp.as_form),
+        client: AuthClient = Depends(AuthClient)
+) -> UserRead:
+    return client.register_user(user)
