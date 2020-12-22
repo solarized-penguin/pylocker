@@ -5,12 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c26abca9-597d-48b7-a21a-635f2174fe78" name="Default Changelist" comment="- basic authorization (swagger-ui) finished&#10;- tests will follow">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/security/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/security/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/security/security_enums.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/security/enum_models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/security/users_schemas.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/security/users_schemas.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/poetry.lock" beforeDir="false" afterPath="$PROJECT_DIR$/poetry.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/main.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -151,6 +146,7 @@
       <workItem from="1608584289287" duration="62000" />
       <workItem from="1608596122463" duration="25457000" />
       <workItem from="1608626425993" duration="3881000" />
+      <workItem from="1608631319609" duration="211000" />
     </task>
     <task id="LOCAL-00001" summary="basic app setup almost done&#10;making fusionauth work with swagger - implicit is a next step">
       <created>1608069962421</created>
@@ -399,6 +395,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="- basic authorization (swagger-ui) finished&#10;- tests will follow" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/pylocker$main.coverage" NAME="main Coverage Results" MODIFIED="1608630285297" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/pylocker$main.coverage" NAME="main Coverage Results" MODIFIED="1608631477911" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
