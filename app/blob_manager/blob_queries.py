@@ -6,4 +6,4 @@ read_data_from_blob = "SELECT lo_get(CAST(:loid AS OID), :offset, :length)"
 
 delete_blob = "SELECT lo_unlink(CAST(:loid AS OID))"
 
-get_size_of_blob = ""
+get_size_of_blob = "SELECT get_lo_size(:loid)"

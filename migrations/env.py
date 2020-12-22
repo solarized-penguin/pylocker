@@ -21,7 +21,10 @@ fileConfig(config.config_file_name)
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-from app.core.database_schema import db_schema
+from alembic_utils.replaceable_entity import register_entities
+from app.core.database_schema import db_schema, get_blob_size
+
+register_entities([get_blob_size])
 
 target_metadata = db_schema
 
