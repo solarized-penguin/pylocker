@@ -5,4 +5,4 @@ router = APIRouter()
 
 @router.get('/')
 async def all_files():
-    return {'message': 'result'}
+    return {'TODO': 'fetch all files for user'}

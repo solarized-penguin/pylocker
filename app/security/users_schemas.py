@@ -1,9 +1,10 @@
-from datetime import datetime
+from datetime import datetime, date
 from enum import Enum
 from typing import Optional, List
 
-from fastapi import Form
 from pydantic import BaseModel, EmailStr, SecretStr
+
+from ..schemas.utils import as_form
 
 
 class UsernameStatus(str, Enum):
@@ -26,7 +27,7 @@ class UserBase(BaseModel):
     email: EmailStr
     fullName: Optional[str] = None
     mobilePhone: Optional[str] = None
-    birthDate: Optional[datetime] = None
+    birthDate: Optional[date] = None
 
     class Config:
         orm_mode = True
@@ -47,32 +48,21 @@ class UserRead(UserBase):
     twoFactorEnabled: bool
 
 
-class UserWrite(UserBase):
+@as_form
+class UserSignUp(UserBase):
     password1: SecretStr
     password2: SecretStr
     imageUrl: Optional[str] = None
     twoFactorEnabled: bool = False
     skipVerification: bool = False
 
-    @classmethod
-    def as_form(
-            cls,
-            email: Form = Form(..., description='used as username as well'),
-            fullName: Form = Form(None, description='first and last name'),
-            mobilePhone: Form = Form(None, description='phone number'),
-            birthDate: Form = Form(None, description='day of birth'),
-            password1: Form = Form(..., description='account password'),
-            password2: Form = Form(..., description='password repeat'),
-            imageUrl: Form = Form(None, description='account avatar/picture url'),
-            twoFactorEnabled: Form = Form(False, description='is 2FA enabled for this account?'),
-            skipVerification: Form = Form(False, description='skip verification during user creation process?')
-    ) -> Form:
-        cls(
-            email=email, fullName=fullName, mobilePhone=mobilePhone,
-            birthDate=birthDate, password1=password1, password2=password2,
-            imageUrl=imageUrl, twoFactorEnabled=twoFactorEnabled,
-            skipVerification=skipVerification
-        )
+
+class UserWrite(BaseModel):
+    email: str
+    password: str
+
+    class Config:
+        orm_mode = True
 
 
 class Registration(BaseModel):

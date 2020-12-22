@@ -39,7 +39,7 @@ class Settings(BaseSettings):
         3. Connections (database dsn, redis, itp...):
             * postgres_dsn - postgresql api database url
         4. Security (OAuth2, OpenId Connect):
-            * secret_key - api key
+            * api_key - api key
             * app_id - application id
             * auth_provider_url - base address of identity provider
             * token_url - url that should be used to obtain access token
@@ -64,7 +64,7 @@ class Settings(BaseSettings):
     postgres_dsn: PostgresDsn
 
     # security
-    secret_key: SecretStr
+    api_key: SecretStr
     app_id: SecretStr
 
     auth_provider_url: str
