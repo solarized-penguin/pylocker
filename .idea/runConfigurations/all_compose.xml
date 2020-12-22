@@ -1,0 +1,8 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="all-compose" type="BashProRunConfiguration">
+    <option name="scriptParameters" value="ALL" />
+    <option name="scriptPath" value="$PROJECT_DIR$/docker/compose.sh" />
+    <RunnerSettings bashdbVersion="Automatic" bashPathMapper="Automatic" RunnerId="pro.bashsupport.shDebugRunner" />
+    <method v="2" />
+  </configuration>
+</component>
