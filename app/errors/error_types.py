@@ -34,11 +34,11 @@ class BasicError(ABC, Exception):
                f'mimetype: {self.mimetype}'
 
 
-class UserRegistrationError(BasicError):
-    def __init__(self, error_code: int, error_message: Union[str, Dict[str, Any]]) -> None:
-        super().__init__(error_code=error_code, error_message=error_message)
-
-
-class UserNotFoundError(BasicError):
+class UserSignUpError(BasicError):
     def __init__(self, error_message: Union[str, Dict[str, Any]]) -> None:
-        super().__init__(error_code=401, error_message=error_message)
+        super(UserSignUpError, self).__init__(error_code=400, error_message=error_message)
+
+
+class UserSignInError(BasicError):
+    def __init__(self, error_message: Union[str, Dict[str, Any]]) -> None:
+        super(UserSignInError, self).__init__(error_code=401, error_message=error_message)

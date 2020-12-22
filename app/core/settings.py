@@ -43,11 +43,8 @@ class Settings(BaseSettings):
             * app_id - application id
             * auth_provider_url - base address of identity provider
             * token_url - url that should be used to obtain access token
-            * access_token_expire_seconds - longevity of the access token in seconds
-            * jwt_algorithm - token hashing algorithm
-            * pswd_algorithm - password hashing algorithm
         5. Scopes/Roles:
-            * standard_user_scope - role with privileges for the standard user
+            * standard_user_roles - roles assigned by default to standard user account
     """
 
     # General environment info
@@ -66,16 +63,18 @@ class Settings(BaseSettings):
     # security
     api_key: SecretStr
     app_id: SecretStr
+    client_id: SecretStr
+    client_secret: SecretStr
 
     auth_provider_url: str
     token_url: str
 
-    access_token_expire_seconds: int
-    jwt_algorithm: str
-    pswd_algorithm: str
-
     # roles\scopes
-    standard_user_role: str
+    standard_user_roles_list: str
+
+    @property
+    def standard_user_roles(self) -> List[str]:
+        return _comma_separated_env_str_to_list(self.standard_user_roles_list)
 
     class Config:
         case_sensitive = False

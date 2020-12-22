@@ -1,39 +1,35 @@
-from __future__ import annotations
+from typing import List
 
-from fastapi.security import OAuth2PasswordBearer
 from fusionauth.fusionauth_client import FusionAuthClient
 from fusionauth.rest_client import ClientResponse
-from passlib.context import CryptContext
 
-from .users_schemas import UserRegistrationForm, UserRead, RegistrationRequest, AppRegistrationForm, UserSignUp
+from .tokens import Token
+from .users_schemas import UserRegistrationForm, UserInfo, \
+    RegistrationRequest, AppRegistrationForm, UserSignUp, UserSignIn
 from ..core.settings import get_settings, Settings
-from ..errors import UserRegistrationError
+from ..errors import UserSignUpError, UserSignInError
 
 
 class AuthClient:
     def __init__(self) -> None:
         self._settings: Settings = get_settings()
-        self._context = CryptContext(
-            schemes=[self._settings.pswd_algorithm]
-        )
-        self._oauth2_schema: OAuth2PasswordBearer \
-            = OAuth2PasswordBearer(tokenUrl=self._settings.token_url)
         self._client: FusionAuthClient = FusionAuthClient(
             self._settings.api_key.get_secret_value(),
             self._settings.auth_provider_url
         )
 
-    def register_user(self, user: UserSignUp) -> UserRead:
+    def register_user(self, user: UserSignUp, roles: List[str]) -> UserInfo:
         request = RegistrationRequest(
             registration=AppRegistrationForm(
                 applicationId=self._settings.app_id.get_secret_value(),
-                roles=[self._settings.standard_user_role]
+                roles=roles
             ),
             user=UserRegistrationForm(
                 email=user.email,
                 fullName=user.fullName,
                 mobilePhone=user.mobilePhone,
-                birthDate=user.birthDate.strftime('%Y-%m-%d') if user.birthDate is not None else None,
+                birthDate=user.birthDate.strftime('%Y-%m-%d')
+                if user.birthDate is not None else None,
                 password=user.password1.get_secret_value()
             )
         ).dict(exclude_none=True)
@@ -41,10 +37,20 @@ class AuthClient:
         response: ClientResponse = self._client.register(request)
 
         if response.was_successful():
-            result: UserRead = UserRead(**response.success_response['user'])
-            return result
+            return UserInfo(**response.success_response['user'])
         else:
-            raise UserRegistrationError(
-                error_code=response.status,
-                error_message=response.error_response
-            )
+            raise UserSignUpError(response.error_response)
+
+    def login_user(self, user: UserSignIn) -> Token:
+        response = self._client \
+            .exchange_user_credentials_for_access_token(
+            username=user.email,
+            password=user.password.get_secret_value(),
+            client_id=self._settings.client_id.get_secret_value(),
+            client_secret=self._settings.client_secret.get_secret_value()
+        )
+
+        if response.was_successful():
+            return Token(**response.success_response)
+        else:
+            raise UserSignInError(response.error_response)

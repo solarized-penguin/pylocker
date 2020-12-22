@@ -5,9 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c26abca9-597d-48b7-a21a-635f2174fe78" name="Default Changelist" comment="- register user endpoint finished">
-      <change afterPath="$PROJECT_DIR$/app/security/security_enums.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/errors/error_handlers.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/errors/error_handlers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/core/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/core/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/errors/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/errors/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/errors/error_types.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/errors/error_types.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/security/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/security/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/security/auth_client.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/security/auth_client.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/security/users_router.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/security/users_router.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/security/users_schemas.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/security/users_schemas.py" afterDir="false" />
@@ -148,7 +151,7 @@
       <workItem from="1608476613170" duration="3609000" />
       <workItem from="1608583155261" duration="56000" />
       <workItem from="1608584289287" duration="62000" />
-      <workItem from="1608596122463" duration="11267000" />
+      <workItem from="1608596122463" duration="20165000" />
     </task>
     <task id="LOCAL-00001" summary="basic app setup almost done&#10;making fusionauth work with swagger - implicit is a next step">
       <created>1608069962421</created>
@@ -332,7 +335,21 @@
       <option name="project" value="LOCAL" />
       <updated>1608607385831</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="- register user endpoint finished">
+      <created>1608607409560</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1608607409560</updated>
+    </task>
+    <task id="LOCAL-00028" summary="- register user endpoint finished">
+      <created>1608607441536</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1608607441536</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -367,6 +384,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="- register user endpoint finished" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/pylocker$main.coverage" NAME="main Coverage Results" MODIFIED="1608607345161" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/pylocker$main.coverage" NAME="main Coverage Results" MODIFIED="1608616561591" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

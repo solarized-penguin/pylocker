@@ -30,11 +30,7 @@ class UserInfo(UserBase):
     twoFactorEnabled: bool
 
 
-class UserRead(UserBase):
-    birthDate: Optional[date]
-
-
-# user registration models
+# user sign up models
 @as_form
 class UserSignUp(UserBase):
     password1: SecretStr
@@ -63,6 +59,16 @@ class RegistrationRequest(BaseModel):
     user: UserRegistrationForm
     sendSetPasswordEmail: bool = False
     skipVerification: bool = False
+
+    class Config:
+        orm_mode = True
+
+
+# user sign in models
+@as_form
+class UserSignIn(BaseModel):
+    email: EmailStr
+    password: SecretStr
 
     class Config:
         orm_mode = True
