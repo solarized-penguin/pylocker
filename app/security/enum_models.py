@@ -15,3 +15,7 @@ class UsernameStatus(str, Enum):
 class TwoFactorDelivery(str, Enum):
     NONE = 'None',
     TextMessage = 'TextMessage'
+
+
+class GrantType(str, Enum):
+    Password = 'PASSWORD'

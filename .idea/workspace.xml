@@ -4,12 +4,13 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c26abca9-597d-48b7-a21a-635f2174fe78" name="Default Changelist" comment="- sign-in endpoint finished">
+    <list default="true" id="c26abca9-597d-48b7-a21a-635f2174fe78" name="Default Changelist" comment="- basic authorization (swagger-ui) finished&#10;- tests will follow">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routers/files.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routers/files.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/security/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/security/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/security/auth_client.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/security/auth_client.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/security/users_router.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/security/users_router.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/security/security_enums.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/security/enum_models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/security/users_schemas.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/security/users_schemas.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/poetry.lock" beforeDir="false" afterPath="$PROJECT_DIR$/poetry.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -148,7 +149,8 @@
       <workItem from="1608476613170" duration="3609000" />
       <workItem from="1608583155261" duration="56000" />
       <workItem from="1608584289287" duration="62000" />
-      <workItem from="1608596122463" duration="25044000" />
+      <workItem from="1608596122463" duration="25457000" />
+      <workItem from="1608626425993" duration="3881000" />
     </task>
     <task id="LOCAL-00001" summary="basic app setup almost done&#10;making fusionauth work with swagger - implicit is a next step">
       <created>1608069962421</created>
@@ -353,7 +355,14 @@
       <option name="project" value="LOCAL" />
       <updated>1608616862278</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="- basic authorization (swagger-ui) finished&#10;- tests will follow">
+      <created>1608622140906</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1608622140906</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -386,20 +395,10 @@
     <MESSAGE value="- working on user registration process" />
     <MESSAGE value="- register user endpoint finished" />
     <MESSAGE value="- sign-in endpoint finished" />
-    <option name="LAST_COMMIT_MESSAGE" value="- sign-in endpoint finished" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/app/security/users_router.py</url>
-          <line>37</line>
-          <option name="timeStamp" value="45" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="- basic authorization (swagger-ui) finished&#10;- tests will follow" />
+    <option name="LAST_COMMIT_MESSAGE" value="- basic authorization (swagger-ui) finished&#10;- tests will follow" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/pylocker$main.coverage" NAME="main Coverage Results" MODIFIED="1608621842193" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/pylocker$main.coverage" NAME="main Coverage Results" MODIFIED="1608630285297" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

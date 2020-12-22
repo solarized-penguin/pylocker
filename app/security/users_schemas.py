@@ -1,9 +1,11 @@
+from __future__ import annotations
+
 from datetime import datetime, date
 from typing import Optional, List
 
 from pydantic import BaseModel, EmailStr, SecretStr
 
-from .security_enums import TwoFactorDelivery, UsernameStatus
+from .enum_models import TwoFactorDelivery, UsernameStatus
 from ..schemas.utils import as_form
 
 
@@ -59,16 +61,6 @@ class RegistrationRequest(BaseModel):
     user: UserRegistrationForm
     sendSetPasswordEmail: bool = False
     skipVerification: bool = False
-
-    class Config:
-        orm_mode = True
-
-
-# user sign in models
-@as_form
-class UserSignIn(BaseModel):
-    email: EmailStr
-    password: SecretStr
 
     class Config:
         orm_mode = True
