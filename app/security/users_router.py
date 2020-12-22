@@ -1,10 +1,10 @@
 from fastapi import APIRouter, Depends
 from fastapi.responses import JSONResponse
+from fastapi.security import OAuth2PasswordRequestForm
 
-from . import create_auth_client
-from .auth_client import AuthClient
+from .auth_client import AuthClient, create_auth_client
 from .tokens import Token
-from .users_schemas import UserInfo, UserSignUp, UserSignIn
+from .users_schemas import UserInfo, UserSignUp
 from ..core import Settings, get_settings
 
 router = APIRouter()
@@ -35,7 +35,10 @@ async def sign_up(
     status_code=200
 )
 async def sign_in(
-        user: UserSignIn = Depends(UserSignIn.as_form),
+        auth_form: OAuth2PasswordRequestForm = Depends(),
         client: AuthClient = Depends(create_auth_client)
 ) -> Token:
-    return client.login_user(user)
+    return client.login_user(
+        email=auth_form.username,
+        password=auth_form.password
+    )

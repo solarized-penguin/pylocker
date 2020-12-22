@@ -4,8 +4,8 @@ from fusionauth.fusionauth_client import FusionAuthClient
 from fusionauth.rest_client import ClientResponse
 
 from .tokens import Token
-from .users_schemas import UserRegistrationForm, UserInfo, \
-    RegistrationRequest, AppRegistrationForm, UserSignUp, UserSignIn
+from .users_schemas import UserRegistrationForm, UserInfo, RegistrationRequest, \
+    AppRegistrationForm, UserSignUp
 from ..core.settings import get_settings, Settings
 from ..errors import UserSignUpError, UserSignInError
 
@@ -41,11 +41,11 @@ class AuthClient:
         else:
             raise UserSignUpError(response.error_response)
 
-    def login_user(self, user: UserSignIn) -> Token:
+    def login_user(self, email: str, password: str) -> Token:
         response = self._client \
             .exchange_user_credentials_for_access_token(
-            username=user.email,
-            password=user.password.get_secret_value(),
+            username=email,
+            password=password,
             client_id=self._settings.client_id.get_secret_value(),
             client_secret=self._settings.client_secret.get_secret_value()
         )
@@ -54,3 +54,7 @@ class AuthClient:
             return Token(**response.success_response)
         else:
             raise UserSignInError(response.error_response)
+
+
+def create_auth_client() -> AuthClient:
+    return AuthClient()
