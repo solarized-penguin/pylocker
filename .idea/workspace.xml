@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="d7c14d73-f948-4f51-85f4-6e060db6510b" name="Default Changelist" comment="- minor refactor, moving main.py to docker folder, adding upgrade of pip to Dockerfile">
+      <change afterPath="$PROJECT_DIR$/tests/conftest.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/pytest.ini" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/security_tests/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/security_tests/test_auth_client.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/settings_tests_version.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/utils/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/utils/queries.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/pylocker.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/pylocker.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/pylocker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker/pylocker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/poetry.lock" beforeDir="false" afterPath="$PROJECT_DIR$/poetry.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1m1EdsakCNAmfQW2SXfTbIoqHNJ" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="false" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="DatabaseDriversLRU" value="postgresql" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/tests" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/tests/test_utils" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/tests" />
+      <recent name="$PROJECT_DIR$/app" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python tests.pytest in tests">
+    <configuration name="pytest in tests" type="tests" factoryName="py.test" nameIsGenerated="true">
+      <module name="pylocker" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="$USER_HOME$/.cache/pypoetry/virtualenvs/pylocker-KaPH-tJm-py3.8/bin/python" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <EXTENSION ID="net.ashald.envfile">
+        <option name="IS_ENABLED" value="false" />
+        <option name="IS_SUBST" value="false" />
+        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
+        <option name="IS_IGNORE_MISSING_FILES" value="false" />
+        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
+        <ENTRIES>
+          <ENTRY IS_ENABLED="true" PARSER="runconfig" />
+        </ENTRIES>
+      </EXTENSION>
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_parameters" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/tests&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="BashSupport Pro.pylocker-compose" />
+      <item itemvalue="BashSupport Pro.pylocker_api-compose" />
+      <item itemvalue="BashSupport Pro.all-compose" />
+      <item itemvalue="BashSupport Pro.auth-compose" />
+      <item itemvalue="Python.main_local" />
+      <item itemvalue="Python tests.pytest in tests" />
+    </list>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task id="LOCAL-00001" summary="- setting up file upload">
+      <created>1608637092110</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1608637092110</updated>
+    </task>
+    <task id="LOCAL-00002" summary="- hiding user endpoints from swagger&#10;- adding docstrings">
+      <created>1608640992584</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1608640992584</updated>
+    </task>
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d7c14d73-f948-4f51-85f4-6e060db6510b" name="Default Changelist" comment="- hiding user endpoints from swagger&#10;- adding docstrings" />
+      <created>1608652788121</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1608652788121</updated>
+      <workItem from="1608652791548" duration="4640000" />
+      <workItem from="1608657825346" duration="2598000" />
+      <workItem from="1608733891520" duration="16045000" />
+      <workItem from="1608751005365" duration="4265000" />
+      <workItem from="1608756525145" duration="3521000" />
+    </task>
+    <task id="LOCAL-00003" summary="- adding queries for blob manager">
+      <created>1608654774414</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1608654774414</updated>
+    </task>
+    <task id="LOCAL-00004" summary="- adding get_lo_size function to migration scripts">
+      <created>1608657535559</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1608657535559</updated>
+    </task>
+    <task id="LOCAL-00005" summary="- finishing basic blob manager">
+      <created>1608660393197</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1608660393197</updated>
+    </task>
+    <task id="LOCAL-00006" summary="- minor refactor, moving main.py to docker folder, adding upgrade of pip to Dockerfile">
+      <created>1608739428150</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1608739428150</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="- setting up file upload" />
+    <MESSAGE value="- hiding user endpoints from swagger&#10;- adding docstrings" />
+    <MESSAGE value="- adding queries for blob manager" />
+    <MESSAGE value="- adding get_lo_size function to migration scripts" />
+    <MESSAGE value="- finishing basic blob manager" />
+    <MESSAGE value="- minor refactor, moving main.py to docker folder, adding upgrade of pip to Dockerfile" />
+    <option name="LAST_COMMIT_MESSAGE" value="- minor refactor, moving main.py to docker folder, adding upgrade of pip to Dockerfile" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/app/blob_manager/blob_manager.py</url>
+          <line>20</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/app/blob_manager/blob_manager.py</url>
+          <line>26</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/app/blob_manager/blob_manager.py</url>
+          <line>38</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/app/blob_manager/blob_manager.py</url>
+          <line>49</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/app/blob_manager/blob_manager.py</url>
+          <line>58</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/pylocker$Unittests_in_tests.coverage" NAME="Unittests in tests Coverage Results" MODIFIED="1608749715426" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/pylocker$pytest_in_tests.coverage" NAME="pytest in tests Coverage Results" MODIFIED="1608759845025" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/pylocker$main.coverage" NAME="main_local Coverage Results" MODIFIED="1608746865452" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+</project>
