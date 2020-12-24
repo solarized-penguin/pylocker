@@ -1,5 +1,9 @@
+from typing import Any, AsyncGenerator
+
 import pytest
-from sqlalchemy import create_engine, text
+from databases import Database
+from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
+from sqlalchemy import create_engine
 from sqlalchemy.engine import Engine
 
 from app.core import Settings, get_settings
@@ -11,14 +15,32 @@ test_db_name: str = 'pylocker_test_db'
 settings: Settings = get_settings()
 
 
-@pytest.fixture(scope='session')
-def engine() -> Engine:
-    return create_engine(base_db_url)
-
-
 @pytest.fixture(scope='session', autouse=True)
-def setup_database(engine) -> None:
-    drop_if_exists_query = queries \
-        .drop_database_if_exists \
-        .replace(':dbname', 'test_db_name')
-    engine.execute(text(drop_if_exists_query))
+def create_test_database() -> None:
+    engine: Engine = create_engine(base_db_url)
+    with engine.connect() as conn:
+        conn.connection.set_isolation_level(
+            ISOLATION_LEVEL_AUTOCOMMIT
+        )
+        conn.execute(
+            queries.drop_database_if_exists \
+                .replace(':dbname', test_db_name)
+        )
+        conn.execute(
+            queries.create_database \
+                .replace(':dbname', test_db_name)
+        )
+        yield
+        conn.execute(
+            queries.drop_database_if_exists \
+                .replace(':dbname', test_db_name)
+        )
+
+
+@pytest.mark.asyncio
+@pytest.fixture(scope='function')
+async def db() -> AsyncGenerator[Any, Database]:
+    db: Database = Database(settings.postgres_dsn)
+    await db.connect()
+    yield db
+    await db.disconnect()

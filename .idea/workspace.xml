@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d7c14d73-f948-4f51-85f4-6e060db6510b" name="Default Changelist" comment="- minor refactor, moving main.py to docker folder, adding upgrade of pip to Dockerfile">
-      <change afterPath="$PROJECT_DIR$/tests/conftest.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/pytest.ini" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/security_tests/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/security_tests/test_auth_client.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/settings_tests_version.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/utils/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/utils/queries.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/pylocker.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/pylocker.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker/pylocker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker/pylocker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/poetry.lock" beforeDir="false" afterPath="$PROJECT_DIR$/poetry.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
+    <list default="true" id="d7c14d73-f948-4f51-85f4-6e060db6510b" name="Default Changelist" comment="- adding additional run configs and test config&#10;- working on test setup">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/0b6eb900-d1d0-47f9-b0f9-42af7bce8dda.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/0b6eb900-d1d0-47f9-b0f9-42af7bce8dda.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/0b6eb900-d1d0-47f9-b0f9-42af7bce8dda/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/0b6eb900-d1d0-47f9-b0f9-42af7bce8dda/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/bc01a6e7-45ff-45f5-a927-8abfbbf0f9a3/storage_v2/_src_/database/pylocker_db.HPOpYw/schema/public.abK9xQ.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/conftest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/utils/queries.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/utils/queries.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,7 +112,8 @@
       <workItem from="1608657825346" duration="2598000" />
       <workItem from="1608733891520" duration="16045000" />
       <workItem from="1608751005365" duration="4265000" />
-      <workItem from="1608756525145" duration="3521000" />
+      <workItem from="1608756525145" duration="3841000" />
+      <workItem from="1608803673384" duration="4685000" />
     </task>
     <task id="LOCAL-00003" summary="- adding queries for blob manager">
       <created>1608654774414</created>
@@ -148,7 +143,14 @@
       <option name="project" value="LOCAL" />
       <updated>1608739428150</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="- adding additional run configs and test config&#10;- working on test setup">
+      <created>1608760342020</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1608760342020</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -170,7 +172,8 @@
     <MESSAGE value="- adding get_lo_size function to migration scripts" />
     <MESSAGE value="- finishing basic blob manager" />
     <MESSAGE value="- minor refactor, moving main.py to docker folder, adding upgrade of pip to Dockerfile" />
-    <option name="LAST_COMMIT_MESSAGE" value="- minor refactor, moving main.py to docker folder, adding upgrade of pip to Dockerfile" />
+    <MESSAGE value="- adding additional run configs and test config&#10;- working on test setup" />
+    <option name="LAST_COMMIT_MESSAGE" value="- adding additional run configs and test config&#10;- working on test setup" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -205,7 +208,7 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/pylocker$Unittests_in_tests.coverage" NAME="Unittests in tests Coverage Results" MODIFIED="1608749715426" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
-    <SUITE FILE_PATH="coverage/pylocker$pytest_in_tests.coverage" NAME="pytest in tests Coverage Results" MODIFIED="1608759845025" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/pylocker$pytest_in_tests.coverage" NAME="pytest in tests Coverage Results" MODIFIED="1608813869604" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/pylocker$main.coverage" NAME="main_local Coverage Results" MODIFIED="1608746865452" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
