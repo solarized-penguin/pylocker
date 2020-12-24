@@ -17,7 +17,6 @@ psycopg2 = "^2.8.6"
 asyncpg = "^0.21.0"
 config = "^0.5.0"
 fusionauth-client = "^1.22.2"
-alembic_utils = "^0.2.11"
 fastapi-plugins = { extras = ["all"], version = "^0.6.0" }
 
 [tool.poetry.dev-dependencies]

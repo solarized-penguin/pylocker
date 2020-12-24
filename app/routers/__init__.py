@@ -10,4 +10,4 @@ def register_routers(app: FastAPI) -> None:
     from ..security.users_router import router as user_router
 
     app.include_router(files_router, prefix='/files', tags=['files'])
-    app.include_router(user_router, prefix='/users', tags=['users'], include_in_schema=False)
+    app.include_router(user_router, prefix='/users', tags=['users'])

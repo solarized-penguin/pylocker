@@ -39,7 +39,8 @@ async def sign_up(
 @router.post(
     '/sign-in',
     response_model=Token,
-    status_code=200
+    status_code=200,
+    include_in_schema=False
 )
 async def sign_in(
         auth_form: OAuth2PasswordRequestForm = Depends(),
