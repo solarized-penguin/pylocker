@@ -37,6 +37,11 @@ case $CHOICE in
   compose_selected pylocker pylocker
   ;;
 
+"PYLOCKER_DB")
+  echo "CHOICE: ${CHOICE}"
+  compose_selected pylocker pylocker_db
+  ;;
+
 *)
   printf "Wrong input parameters!\n
     Legal input: AUTH, PYLOCKER or ALL"
