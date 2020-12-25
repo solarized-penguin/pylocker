@@ -27,6 +27,7 @@ async def sign_up(
     :returns: 201 - account created
     """
     user_info: UserInfo = client.register_user(user, settings.standard_user_roles)
+
     return JSONResponse(
         content={
             'message': f"Registration process for user with email: "

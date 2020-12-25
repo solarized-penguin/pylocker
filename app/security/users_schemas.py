@@ -34,16 +34,16 @@ class UserBase(BaseModel):
 
 class UserInfo(UserBase):
     id: str
+    imageUrl: Optional[HttpUrl]
+    birthDate: Optional[date]
     active: bool
     passwordLastUpdateInstant: datetime
     usernameStatus: UsernameStatus
     twoFactorDelivery: TwoFactorDelivery
     verified: bool
     tenantId: str
-    birthDate: Optional[date]
     passwordChangeRequired: bool
     insertInstant: int
-    twoFactorEnabled: bool
 
 
 # user sign up models
@@ -53,8 +53,6 @@ class UserSignUp(UserBase):
     password2: SecretStr
     imageUrl: Optional[HttpUrl] = None
     birthDate: Optional[date] = None
-    twoFactorEnabled: bool = False
-    skipVerification: bool = False
 
     @validator('password1')
     def password_complexity_rules(cls, v: SecretStr) -> SecretStr:
