@@ -40,7 +40,8 @@ class AuthClient:
                 mobilePhone=user.mobilePhone,
                 birthDate=user.birthDate.strftime('%Y-%m-%d')
                 if user.birthDate is not None else None,
-                password=user.password1.get_secret_value()
+                password=user.password1.get_secret_value(),
+                imageUrl=user.imageUrl
             )
         ).dict(exclude_none=True)
 
