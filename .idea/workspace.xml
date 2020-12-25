@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d7c14d73-f948-4f51-85f4-6e060db6510b" name="Default Changelist" comment="- adding validation rules for user models">
+    <list default="true" id="d7c14d73-f948-4f51-85f4-6e060db6510b" name="Default Changelist" comment="- preparing for user model validation tests&#10;- correcting user models (adding missing parameters, removing needless once)">
+      <change afterPath="$PROJECT_DIR$/tests/utils/assert_extensions.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/security/users_router.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/security/users_router.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/security/users_schemas.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/security/users_schemas.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/conftest.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/security_tests/test_users_router.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/security_tests/test_users_router.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -47,7 +47,7 @@
       <recent name="$PROJECT_DIR$/app" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.main_local">
+  <component name="RunManager" selected="Python tests.pytest in tests">
     <configuration name="pylocker_db-compose" type="BashProRunConfiguration">
       <option name="scriptParameters" value="PYLOCKER_DB" />
       <option name="scriptPath" value="$PROJECT_DIR$/docker/compose.sh" />
@@ -121,7 +121,7 @@
       <workItem from="1608803673384" duration="6233000" />
       <workItem from="1608823019110" duration="7666000" />
       <workItem from="1608896113130" duration="166000" />
-      <workItem from="1608914306452" duration="11698000" />
+      <workItem from="1608914306452" duration="16750000" />
     </task>
     <task id="LOCAL-00003" summary="- adding queries for blob manager">
       <created>1608654774414</created>
@@ -200,7 +200,14 @@
       <option name="project" value="LOCAL" />
       <updated>1608920066924</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="- preparing for user model validation tests&#10;- correcting user models (adding missing parameters, removing needless once)">
+      <created>1608927206315</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1608927206315</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -229,7 +236,8 @@
     <MESSAGE value="- finishing basic test setup: schema setup added" />
     <MESSAGE value="- fixing alembic after removing alembic_utils package (package complicated testing unnecessarily)" />
     <MESSAGE value="- adding validation rules for user models" />
-    <option name="LAST_COMMIT_MESSAGE" value="- adding validation rules for user models" />
+    <MESSAGE value="- preparing for user model validation tests&#10;- correcting user models (adding missing parameters, removing needless once)" />
+    <option name="LAST_COMMIT_MESSAGE" value="- preparing for user model validation tests&#10;- correcting user models (adding missing parameters, removing needless once)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -259,13 +267,23 @@
           <line>58</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/app/security/users_router.py</url>
+          <line>30</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/tests/security_tests/test_users_router.py</url>
+          <line>74</line>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/pylocker$Unittests_in_tests.coverage" NAME="Unittests in tests Coverage Results" MODIFIED="1608749715426" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
-    <SUITE FILE_PATH="coverage/pylocker$main_local.coverage" NAME="main_local Coverage Results" MODIFIED="1608926957667" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/pylocker$pytest_in_tests.coverage" NAME="pytest in tests Coverage Results" MODIFIED="1608924863191" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/pylocker$main_local.coverage" NAME="main_local Coverage Results" MODIFIED="1608931156035" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/pylocker$pytest_in_tests.coverage" NAME="pytest in tests Coverage Results" MODIFIED="1608932053330" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/pylocker$main.coverage" NAME="main_local Coverage Results" MODIFIED="1608746865452" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
