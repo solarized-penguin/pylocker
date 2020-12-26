@@ -76,7 +76,7 @@ class TestSignUp:
 
         assert_that(response.status_code).is_successful_status_code()
 
-    def test__full_name_filled_incorrectly__returns_400(
+    def test__full_name_filled_incorrectly__returns_400_and_message(
             self, client: TestClient,
             assertion_extensions: Callable[[None], None]
     ) -> None:
@@ -95,7 +95,7 @@ class TestSignUp:
             UserValidationRules.full_name_error_message
         )
 
-    def test__mobile_phone_filled_incorrectly__returns_400(
+    def test__mobile_phone_filled_incorrectly__returns_400_and_message(
             self, client: TestClient,
             assertion_extensions: Callable[[None], None]
     ) -> None:
@@ -114,7 +114,7 @@ class TestSignUp:
             UserValidationRules.mobile_error_message
         )
 
-    def test__password_filled_incorrectly__returns_400(
+    def test__password_filled_incorrectly__returns_400_and_message(
             self, client: TestClient,
             assertion_extensions: Callable[[None], None]
     ) -> None:
@@ -134,7 +134,7 @@ class TestSignUp:
             UserValidationRules.password_error_message
         )
 
-    def test__passwords_do_not_match__returns_400(
+    def test__passwords_do_not_match__returns_400_and_message(
             self, client: TestClient,
             assertion_extensions: Callable[[None], None]
     ) -> None:

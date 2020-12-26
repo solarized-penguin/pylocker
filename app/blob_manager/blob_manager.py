@@ -4,7 +4,7 @@ from databases import Database
 from fastapi import Depends
 
 from .blob_queries import create_empty_blob, write_data_to_blob, \
-    read_data_from_blob, delete_blob, get_size_of_blob
+    read_data_from_blob, delete_blob, get_size_of_blob, get_size_of_blob_function
 from ..core import get_db
 
 
@@ -47,22 +47,24 @@ class BlobManager:
         return blob_chunk
 
     async def remove_blob(self, loid: int) -> bool:
-        is_deleted: int = await self._db.execute(
+        await self._db.execute(
             delete_blob,
             {
                 'loid': loid
             }
         )
-        return True if is_deleted == 1 else False
+        return True
 
     async def get_last_byte(self, loid: int) -> int:
-        file_size: int = await self._db.execute(
-            get_size_of_blob,
-            {
-                'loid': loid
-            }
-        )
-        return file_size
+        async with self._db.transaction():
+            await self._db.execute(get_size_of_blob_function)
+            file_size: int = await self._db.execute(
+                get_size_of_blob,
+                {
+                    'loid': loid
+                }
+            )
+            return file_size
 
     @classmethod
     def create_manager(

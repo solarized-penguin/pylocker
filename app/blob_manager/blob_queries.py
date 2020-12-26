@@ -6,7 +6,7 @@ read_data_from_blob = "SELECT lo_get(CAST(:loid AS OID), :offset, :length)"
 
 delete_blob = "SELECT lo_unlink(CAST(:loid AS OID))"
 
-get_size_of_blob = """
+get_size_of_blob_function = """
 CREATE OR REPLACE FUNCTION pg_temp.get_lo_size(loid INTEGER)
 RETURNS BIGINT AS $lo_size$
 DECLARE
@@ -32,5 +32,6 @@ BEGIN
 END;
 $lo_size$
 LANGUAGE plpgsql;
-SELECT pg_temp.get_lo_size(:loid);
 """
+
+get_size_of_blob = "SELECT pg_temp.get_lo_size(:loid);"
