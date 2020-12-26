@@ -1,3 +1,4 @@
+from copy import deepcopy
 from datetime import datetime, date
 from typing import Dict, List, Any, Callable
 
@@ -7,6 +8,7 @@ from pytest_mock import MockerFixture
 from requests import Response
 
 from app.security.enum_models import UsernameStatus, TwoFactorDelivery
+from app.security.user_validations import UserValidationRules
 from app.security.users_schemas import UserSignUp, UserInfo
 
 test_user_sign_up: Dict[str, Any] = {
@@ -73,3 +75,81 @@ class TestSignUp:
         )
 
         assert_that(response.status_code).is_successful_status_code()
+
+    def test__full_name_filled_incorrectly__returns_400(
+            self, client: TestClient,
+            assertion_extensions: Callable[[None], None]
+    ) -> None:
+        request_data: Dict[str, Any] = deepcopy(test_user_sign_up)
+
+        request_data['fullName'] = 'JustOneName'
+
+        response: Response = client.post(
+            '/users/sign-up',
+            data=request_data,
+            headers=form_headers
+        )
+
+        assert_that(response.json()) \
+            .is_validation_message_correct(
+            UserValidationRules.full_name_error_message
+        )
+
+    def test__mobile_phone_filled_incorrectly__returns_400(
+            self, client: TestClient,
+            assertion_extensions: Callable[[None], None]
+    ) -> None:
+        request_data: Dict[str, Any] = deepcopy(test_user_sign_up)
+
+        request_data['mobilePhone'] = '123.456$789'
+
+        response: Response = client.post(
+            '/users/sign-up',
+            data=request_data,
+            headers=form_headers
+        )
+
+        assert_that(response.json()) \
+            .is_validation_message_correct(
+            UserValidationRules.mobile_error_message
+        )
+
+    def test__password_filled_incorrectly__returns_400(
+            self, client: TestClient,
+            assertion_extensions: Callable[[None], None]
+    ) -> None:
+        request_data: Dict[str, Any] = deepcopy(test_user_sign_up)
+
+        request_data['password1'] = 'incorrect_password'
+        request_data['password2'] = request_data['password1']
+
+        response: Response = client.post(
+            '/users/sign-up',
+            data=request_data,
+            headers=form_headers
+        )
+
+        assert_that(response.json()) \
+            .is_validation_message_correct(
+            UserValidationRules.password_error_message
+        )
+
+    def test__passwords_do_not_match__returns_400(
+            self, client: TestClient,
+            assertion_extensions: Callable[[None], None]
+    ) -> None:
+        request_data: Dict[str, Any] = deepcopy(test_user_sign_up)
+
+        request_data['password1'] = 'pa$Sw0rd'
+        request_data['password2'] = 'incorrect_repeat'
+
+        response: Response = client.post(
+            '/users/sign-up',
+            data=request_data,
+            headers=form_headers
+        )
+
+        assert_that(response.json()) \
+            .is_validation_message_correct(
+            UserValidationRules.passwords_not_match_error_message
+        )

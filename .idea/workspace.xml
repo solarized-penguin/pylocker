@@ -2,10 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d7c14d73-f948-4f51-85f4-6e060db6510b" name="Default Changelist" comment="- preparing for user model validation tests&#10;- correcting user models (adding missing parameters, removing needless once)">
-      <change afterPath="$PROJECT_DIR$/tests/utils/assert_extensions.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/security/user_validations.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/security/user_validations.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/conftest.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/security_tests/test_users_router.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/security_tests/test_users_router.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/utils/assert_extensions.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/utils/assert_extensions.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,6 +123,7 @@
       <workItem from="1608823019110" duration="7666000" />
       <workItem from="1608896113130" duration="166000" />
       <workItem from="1608914306452" duration="16750000" />
+      <workItem from="1608938104515" duration="2707000" />
     </task>
     <task id="LOCAL-00003" summary="- adding queries for blob manager">
       <created>1608654774414</created>
@@ -267,23 +269,13 @@
           <line>58</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/app/security/users_router.py</url>
-          <line>30</line>
-          <option name="timeStamp" value="17" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/tests/security_tests/test_users_router.py</url>
-          <line>74</line>
-          <option name="timeStamp" value="18" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/pylocker$Unittests_in_tests.coverage" NAME="Unittests in tests Coverage Results" MODIFIED="1608749715426" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
-    <SUITE FILE_PATH="coverage/pylocker$main_local.coverage" NAME="main_local Coverage Results" MODIFIED="1608931156035" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/pylocker$pytest_in_tests.coverage" NAME="pytest in tests Coverage Results" MODIFIED="1608932053330" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/pylocker$main_local.coverage" NAME="main_local Coverage Results" MODIFIED="1608940359253" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/pylocker$pytest_in_tests.coverage" NAME="pytest in tests Coverage Results" MODIFIED="1608940805519" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/pylocker$main.coverage" NAME="main_local Coverage Results" MODIFIED="1608746865452" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

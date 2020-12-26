@@ -12,7 +12,7 @@ from sqlalchemy.engine import Engine
 from app.core import Settings, get_settings, create_app, get_db
 from app.core.database_schema import db_schema
 from .utils import queries
-from .utils.assert_extensions import is_successful_status_code
+from .utils.assert_extensions import is_successful_status_code, is_validation_message_correct
 
 base_db_url: str = 'postgresql://postgres:postgres@0.0.0.0:5433/postgres'
 test_db_name: str = 'pylocker_test_db'
@@ -23,6 +23,7 @@ settings: Settings = get_settings()
 @pytest.fixture(scope='session')
 def assertion_extensions() -> None:
     add_extension(is_successful_status_code)
+    add_extension(is_validation_message_correct)
 
 
 @pytest.fixture(scope='session', autouse=True)
