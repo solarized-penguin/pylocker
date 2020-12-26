@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends
 from starlette.requests import Request
 
-from ..blob_manager import BlobManager
+from ..daos.blob_dao import BlobDao
 from ..schemas.files import FileRead
 from ..security import logged_user, UserInfo
 
@@ -15,14 +15,14 @@ router = APIRouter()
 )
 async def upload_file(
         request: Request,
-        blob_manager: BlobManager = Depends(BlobManager.create_manager),
+        blob_dao: BlobDao = Depends(BlobDao.create_dao),
         user_info: UserInfo = Depends(logged_user)
 ) -> FileRead:
-    loid: int = await blob_manager.create_blob()
+    loid: int = await blob_dao.create_blob()
 
     offset: int = 0
     async for chunk in request.stream():
-        await blob_manager.write_to_blob(
+        await blob_dao.write_to_blob(
             loid=loid, offset=offset, data=chunk
         )
         offset += len(chunk)

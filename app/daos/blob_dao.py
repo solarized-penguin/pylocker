@@ -3,12 +3,12 @@ from __future__ import annotations
 from databases import Database
 from fastapi import Depends
 
-from .blob_queries import create_empty_blob, write_data_to_blob, \
+from app.core import get_db
+from app.daos.queries.blob_queries import create_empty_blob, write_data_to_blob, \
     read_data_from_blob, delete_blob, get_size_of_blob, get_size_of_blob_function
-from ..core import get_db
 
 
-class BlobManager:
+class BlobDao:
     """
     Provides interface that enables communication with
     postgres large objects(BLOBs).
@@ -67,13 +67,13 @@ class BlobManager:
             return file_size
 
     @classmethod
-    def create_manager(
+    def create_dao(
             cls, db_pool: Database = Depends(get_db)
-    ) -> BlobManager:
+    ) -> BlobDao:
         """
         Creates new instance of self.
         :param db_pool: database connection pool
         :return: instance of BlobManager
-        :rtype: BlobManager
+        :rtype: BlobDao
         """
-        return BlobManager(db_pool)
+        return BlobDao(db_pool)
