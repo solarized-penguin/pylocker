@@ -1,7 +1,7 @@
 from typing import Callable, Any
 
 from databases import Database
-from fastapi import FastAPI, Response, Request, Depends
+from fastapi import FastAPI, Response, Request
 
 from .logging import configure_logging
 from .middleware import register_middleware
@@ -48,8 +48,7 @@ def create_app() -> FastAPI:
             request: Request, call_next: Callable[..., Any]
     ) -> Response:
         request.state.db = db_pool
-        response: Response = await call_next(request)
-        return response
+        return await call_next(request)
 
     # register other middleware
     register_middleware(app)
@@ -66,7 +65,7 @@ def create_app() -> FastAPI:
     return app
 
 
-def get_db(request: Depends(Request)) -> Database:
+def get_db(request: Request) -> Database:
     """
     Factory method returns database pool object
     extracted from request.

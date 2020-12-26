@@ -9,10 +9,10 @@ security_scheme: OAuth2PasswordBearer = OAuth2PasswordBearer(
 )
 
 
-def logged_user_id(
+def logged_user(
         token: str = Depends(security_scheme),
         client: AuthClient = Depends(AuthClient.create_client)
-) -> str:
+) -> UserInfo:
     """
     Returns id of currently logged user.
     :param client: identity provider client
@@ -20,5 +20,4 @@ def logged_user_id(
     :return: user id
     :rtype: str
     """
-    user_info: UserInfo = client.fetch_user_info(token)
-    return user_info.id
+    return client.fetch_user_info(token)
