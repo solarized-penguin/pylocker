@@ -29,9 +29,9 @@ class BasicError(ABC, Exception):
         return str(_repr)
 
     def __str__(self) -> str:
-        return f'error_code: {self.error_code}\n' \
-               f'error_message: {_parse_error_message(self.error_message)}\n' \
-               f'mimetype: {self.mimetype}'
+        error_name = self.__class__.__name__
+
+        return f'{error_name} | {self.error_code}\n{self.error_message}'
 
 
 class UserSignUpError(BasicError):

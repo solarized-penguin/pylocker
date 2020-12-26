@@ -4,6 +4,7 @@ from databases import Database
 from fastapi import FastAPI, Response, Request, Depends
 
 from .logging import configure_logging
+from .middleware import register_middleware
 from .settings import get_settings, Settings
 from ..errors import register_error_handlers
 from ..routers import register_routers
@@ -41,7 +42,7 @@ def create_app() -> FastAPI:
         url=_settings.postgres_dsn
     )
 
-    # register middleware
+    # register database middleware
     @app.middleware('http')
     async def enrich_request_with_database_connection_pool(
             request: Request, call_next: Callable[..., Any]
@@ -49,6 +50,9 @@ def create_app() -> FastAPI:
         request.state.db = db_pool
         response: Response = await call_next(request)
         return response
+
+    # register other middleware
+    register_middleware(app)
 
     # start/stop db pool
     @app.on_event('startup')
