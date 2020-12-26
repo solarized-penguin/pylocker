@@ -3,6 +3,7 @@ from typing import Callable, Any
 from databases import Database
 from fastapi import FastAPI, Response, Request, Depends
 
+from .logging import configure_logging
 from .settings import get_settings, Settings
 from ..errors import register_error_handlers
 from ..routers import register_routers
@@ -25,6 +26,9 @@ def create_app() -> FastAPI:
         docs_url=_settings.api_swagger_url,
         redoc_url=_settings.api_redoc_url
     )
+
+    # configure logging
+    configure_logging()
 
     # register routers
     register_routers(app)

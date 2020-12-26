@@ -45,6 +45,11 @@ class Settings(BaseSettings):
             * token_url - url that should be used to obtain access token
         5. Scopes/Roles:
             * standard_user_roles - roles assigned by default to standard user account
+        6. Logging:
+            * log_format - log message formatting
+            * log_level - minimal logging level
+            * log_file_path - path to log file
+            * log_file_rotation - how often log files should be rotated
     """
 
     # General environment info
@@ -71,6 +76,12 @@ class Settings(BaseSettings):
 
     # roles\scopes
     standard_user_roles_list: str
+
+    # logging
+    log_format: str
+    log_level: str
+    log_file_path: str
+    log_file_rotation: str
 
     @property
     def standard_user_roles(self) -> List[str]:
