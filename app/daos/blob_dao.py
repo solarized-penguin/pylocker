@@ -73,7 +73,7 @@ class BlobDao:
         """
         Creates new instance of self.
         :param db_pool: database connection pool
-        :return: instance of BlobManager
+        :return: instance of BlobDao
         :rtype: BlobDao
         """
         return BlobDao(db_pool)
