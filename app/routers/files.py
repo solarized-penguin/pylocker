@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends
 from starlette.requests import Request
 
 from ..schemas.files import FileRead
-from ..security import security_scheme
+from ..security import logged_user_id
 
 router = APIRouter()
 
@@ -14,7 +14,7 @@ router = APIRouter()
 )
 async def upload_files(
         request: Request,
-        token: str = Depends(security_scheme)
+        user_id: str = Depends(logged_user_id)
 ) -> FileRead:
     async for chunk in request.stream():
         pass

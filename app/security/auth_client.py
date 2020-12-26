@@ -9,7 +9,7 @@ from .tokens import Token
 from .users_schemas import UserRegistrationForm, UserInfo, RegistrationRequest, \
     AppRegistrationForm, UserSignUp
 from ..core.settings import get_settings, Settings
-from ..errors import UserSignUpError, UserSignInError
+from ..errors import UserSignUpError, UserSignInError, UserInfoNotFoundError
 
 
 class AuthClient:
@@ -68,6 +68,23 @@ class AuthClient:
             return Token(**response.success_response)
         else:
             raise UserSignInError(response.error_response)
+
+    def fetch_user_info(self, access_token: str) -> UserInfo:
+        """
+        Fetches info about user from valid access token.
+        :param access_token: access token obtained after signing in
+        :return: information about logged user
+        :rtype: UserInfo
+        """
+        response: ClientResponse = self._client.retrieve_user_using_jwt(access_token)
+
+        if response.was_successful():
+            return UserInfo(**response.success_response['user'])
+        else:
+            raise UserInfoNotFoundError(
+                error_code=response.status,
+                error_message=response.error_response
+            )
 
     @classmethod
     def create_client(cls) -> AuthClient:

@@ -42,3 +42,10 @@ class UserSignUpError(BasicError):
 class UserSignInError(BasicError):
     def __init__(self, error_message: Union[str, Dict[str, Any]]) -> None:
         super(UserSignInError, self).__init__(error_code=401, error_message=error_message)
+
+
+class UserInfoNotFoundError(BasicError):
+    def __init__(self, error_code: int, error_message: Union[str, Dict[str, Any]]) -> None:
+        super(UserInfoNotFoundError, self).__init__(
+            error_code=error_code, error_message=error_message
+        )
