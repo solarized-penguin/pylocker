@@ -49,7 +49,6 @@ class Settings(BaseSettings):
             * log_format - log message formatting
             * log_level - minimal logging level
             * log_file_path - path to log file
-            * log_file_rotation - how often log files should be rotated
     """
 
     # General environment info
@@ -81,7 +80,6 @@ class Settings(BaseSettings):
     log_format: str
     log_level: str
     log_file_path: str
-    log_file_rotation: str
 
     @property
     def standard_user_roles(self) -> List[str]:

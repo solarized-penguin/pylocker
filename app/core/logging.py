@@ -16,10 +16,10 @@ def configure_logging() -> None:
     )
     logger.add(
         _settings.log_file_path,
-        rotation=_settings.log_file_rotation,
         format=_settings.log_format,
         level=_settings.log_level,
         backtrace=True,
         diagnose=True,
-        catch=True
+        catch=True,
+        rotation="00:00"
     )

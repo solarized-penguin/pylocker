@@ -1,11 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d7c14d73-f948-4f51-85f4-6e060db6510b" name="Default Changelist" comment="- refactoring blob manager into dao">
+    <list default="true" id="d7c14d73-f948-4f51-85f4-6e060db6510b" name="Default Changelist" comment="- adding factory method to FilesDao">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/core/app_factory.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/core/app_factory.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/core/logging.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/core/logging.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/core/middleware.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/core/middleware.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/core/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/core/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/daos/blob_dao.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/daos/blob_dao.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/daos/files_dao.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/daos/files_dao.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/errors/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/errors/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/errors/error_handlers.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/errors/error_handlers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/routers/files.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routers/files.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/schemas/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/schemas/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/security/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/security/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/security/auth_client.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/security/auth_client.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/security/tokens.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/security/tokens.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/security/users_router.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/security/users_router.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/security/users_schemas.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/security/users_schemas.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/compose.sh" beforeDir="false" afterPath="$PROJECT_DIR$/docker/compose.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/prestart.sh" beforeDir="false" afterPath="$PROJECT_DIR$/docker/prestart.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_local.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_local.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/env.py" beforeDir="false" afterPath="$PROJECT_DIR$/migrations/env.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/blob_dao_tests/test_blob_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/blob_dao_tests/test_blob_manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/conftest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/router_tests/test_users_router.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/router_tests/test_users_router.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/settings_tests_version.env" beforeDir="false" afterPath="$PROJECT_DIR$/tests/settings_tests_version.env" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -134,7 +154,7 @@
       <workItem from="1608914306452" duration="16750000" />
       <workItem from="1608938104515" duration="7734000" />
       <workItem from="1608985672581" duration="14783000" />
-      <workItem from="1609007815989" duration="5109000" />
+      <workItem from="1609007815989" duration="6385000" />
     </task>
     <task id="LOCAL-00003" summary="- adding queries for blob manager">
       <created>1608654774414</created>
@@ -262,7 +282,14 @@
       <option name="project" value="LOCAL" />
       <updated>1609012089089</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="- adding factory method to FilesDao">
+      <created>1609013006581</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1609013006581</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -298,7 +325,8 @@
     <MESSAGE value="- adding logging to requests and error handlers" />
     <MESSAGE value="- working on files_dao" />
     <MESSAGE value="- refactoring blob manager into dao" />
-    <option name="LAST_COMMIT_MESSAGE" value="- refactoring blob manager into dao" />
+    <MESSAGE value="- adding factory method to FilesDao" />
+    <option name="LAST_COMMIT_MESSAGE" value="- adding factory method to FilesDao" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -314,9 +342,9 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/pylocker$Unittests_in_router_tests.coverage" NAME="Unittests in router_tests Coverage Results" MODIFIED="1608987872720" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/router_tests" />
     <SUITE FILE_PATH="coverage/pylocker$pytest_for_blob_manager_tests_test_blob_manager.coverage" NAME="pytest-blob_manager Coverage Results" MODIFIED="1608992220846" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
-    <SUITE FILE_PATH="coverage/pylocker$pytest_all.coverage" NAME="pytest-all Coverage Results" MODIFIED="1609012728802" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/pylocker$pytest_all.coverage" NAME="pytest-all Coverage Results" MODIFIED="1609012977702" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/pylocker$Unittests_in_tests.coverage" NAME="Unittests in tests Coverage Results" MODIFIED="1608749715426" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
-    <SUITE FILE_PATH="coverage/pylocker$main_local.coverage" NAME="main_local Coverage Results" MODIFIED="1609012733631" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/pylocker$main_local.coverage" NAME="main_local Coverage Results" MODIFIED="1609013911261" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/pylocker$pytest_in_tests.coverage" NAME="pytest-all Coverage Results" MODIFIED="1608997585694" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/pylocker$main.coverage" NAME="main Coverage Results" MODIFIED="1608630285297" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
