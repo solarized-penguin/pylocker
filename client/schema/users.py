@@ -18,4 +18,8 @@ class UserSignUp(BaseModel):
 
 
 class UserSignIn(BaseModel):
-    pass
+    username: EmailStr
+    password: SecretStr
+
+    class Config:
+        orm_mode = True

@@ -3,7 +3,7 @@ from starlette.requests import Request
 
 from ..repositories.blob_repository import BlobRepository
 from ..repositories.files_repository import FilesRepository
-from ..schemas.files import FileRead
+from ..schemas.files import FileRead, FileUploadHeaders
 from ..security import logged_user, UserInfo
 
 router = APIRouter()
@@ -16,6 +16,7 @@ router = APIRouter()
 )
 async def upload_file(
         request: Request,
+        headers: FileUploadHeaders = Depends(FileUploadHeaders.as_header),
         blob_repository: BlobRepository = Depends(BlobRepository.create),
         files_repository: FilesRepository = Depends(FilesRepository.create),
         user_info: UserInfo = Depends(logged_user)
@@ -30,5 +31,5 @@ async def upload_file(
         offset += len(chunk)
 
     return await files_repository.create_file(
-        loid, 'todo', 1, user_info
+        loid, str(headers.file_path), offset, user_info
     )
