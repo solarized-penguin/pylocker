@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d7c14d73-f948-4f51-85f4-6e060db6510b" name="Default Changelist" comment="- upgrading logging mechanism">
+    <list default="true" id="d7c14d73-f948-4f51-85f4-6e060db6510b" name="Default Changelist" comment="- adding file_path header to upload file endpoint">
+      <change afterPath="$PROJECT_DIR$/client/routers/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/routers/files.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/routers/users.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routers/files.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routers/files.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/schemas/files.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/schemas/files.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/schema/users.py" beforeDir="false" afterPath="$PROJECT_DIR$/client/schema/users.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -135,7 +135,7 @@
       <workItem from="1608938104515" duration="7734000" />
       <workItem from="1608985672581" duration="14783000" />
       <workItem from="1609007815989" duration="6406000" />
-      <workItem from="1609071693607" duration="7121000" />
+      <workItem from="1609071693607" duration="8155000" />
     </task>
     <task id="LOCAL-00003" summary="- adding queries for blob manager">
       <created>1608654774414</created>
@@ -298,7 +298,14 @@
       <option name="project" value="LOCAL" />
       <updated>1609076029874</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="- adding file_path header to upload file endpoint">
+      <created>1609079070211</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1609079070211</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -314,7 +321,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="- setting up file upload" />
     <MESSAGE value="- hiding user endpoints from swagger&#10;- adding docstrings" />
     <MESSAGE value="- adding queries for blob manager" />
     <MESSAGE value="- adding get_lo_size function to migration scripts" />
@@ -339,7 +345,8 @@
     <MESSAGE value="- minor refactor" />
     <MESSAGE value="- fixing logger configuration" />
     <MESSAGE value="- upgrading logging mechanism" />
-    <option name="LAST_COMMIT_MESSAGE" value="- upgrading logging mechanism" />
+    <MESSAGE value="- adding file_path header to upload file endpoint" />
+    <option name="LAST_COMMIT_MESSAGE" value="- adding file_path header to upload file endpoint" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
