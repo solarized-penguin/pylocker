@@ -4,7 +4,6 @@ from databases import Database
 from fastapi import FastAPI, Response, Request
 
 from .logging import configure_logging
-from .middleware import register_middleware
 from .settings import get_settings, Settings
 from ..errors import register_error_handlers
 from ..routers import register_routers
@@ -49,9 +48,6 @@ def create_app() -> FastAPI:
     ) -> Response:
         request.state.db = db_pool
         return await call_next(request)
-
-    # register other middleware
-    register_middleware(app)
 
     # start/stop db pool
     @app.on_event('startup')
