@@ -1,5 +1,3 @@
-from datetime import datetime
-
 from fastapi import APIRouter, Depends
 from fastapi.responses import JSONResponse
 from fastapi.security import OAuth2PasswordRequestForm
@@ -31,8 +29,7 @@ async def sign_up(
     """
     user_info: UserInfo = client.register_user(user, settings.standard_user_roles)
 
-    logger.info(f"Account: '{user_info.email}' created successfully.\n"
-                f"Account created at: {datetime.fromtimestamp(user_info.insertInstant)}")
+    logger.info(f"Account: '{user_info.email}' created successfully.")
 
     return JSONResponse(
         content={
