@@ -1,6 +1,9 @@
+from datetime import datetime
+
 from fastapi import APIRouter, Depends
 from fastapi.responses import JSONResponse
 from fastapi.security import OAuth2PasswordRequestForm
+from loguru import logger
 
 from .auth_client import AuthClient
 from .tokens import Token
@@ -28,6 +31,9 @@ async def sign_up(
     """
     user_info: UserInfo = client.register_user(user, settings.standard_user_roles)
 
+    logger.info(f"Account: '{user_info.email}' created successfully.\n"
+                f"Account created at: {datetime.fromtimestamp(user_info.insertInstant)}")
+
     return JSONResponse(
         content={
             'message': f"Registration process for user with email: "
@@ -54,7 +60,11 @@ async def sign_in(
     :return: access token
     :rtype: Token
     """
-    return client.login_user(
+    token: Token = client.login_user(
         email=auth_form.username,
         password=auth_form.password
     )
+
+    logger.info(f"User: '{auth_form.username}' logged successfully.")
+
+    return token
