@@ -8,7 +8,7 @@ from app.schemas.files import FileRead
 from app.security import UserInfo
 
 
-class FilesDao:
+class FilesRepository:
     """
     Provides interface that enables communication with
     'files' table.
@@ -23,13 +23,13 @@ class FilesDao:
         pass
 
     @classmethod
-    def create_dao(
-            self, db_pool: Database = Depends(get_db)
-    ) -> FilesDao:
+    def create(
+            cls, db_pool: Database = Depends(get_db)
+    ) -> FilesRepository:
         """
         Creates new instance of self.
         :param db_pool: database connection pool
-        :return: instance of FilesDao
-        :rtype: FilesDao
+        :return: instance of FilesRepository
+        :rtype: FilesRepository
         """
-        return FilesDao(db_pool)
+        return FilesRepository(db_pool)

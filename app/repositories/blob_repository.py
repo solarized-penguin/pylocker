@@ -4,11 +4,11 @@ from databases import Database
 from fastapi import Depends
 
 from app.core import get_db
-from app.daos.queries.blob_queries import create_empty_blob, write_data_to_blob, \
+from app.repositories.queries.blob_queries import create_empty_blob, write_data_to_blob, \
     read_data_from_blob, delete_blob, get_size_of_blob, get_size_of_blob_function
 
 
-class BlobDao:
+class BlobRepository:
     """
     Provides interface that enables communication with
     postgres large objects(BLOBs).
@@ -67,13 +67,13 @@ class BlobDao:
             return file_size
 
     @classmethod
-    def create_dao(
+    def create(
             cls, db_pool: Database = Depends(get_db)
-    ) -> BlobDao:
+    ) -> BlobRepository:
         """
         Creates new instance of self.
         :param db_pool: database connection pool
-        :return: instance of BlobDao
-        :rtype: BlobDao
+        :return: instance of BlobRepository
+        :rtype: BlobRepository
         """
-        return BlobDao(db_pool)
+        return BlobRepository(db_pool)

@@ -4,12 +4,12 @@ import pytest
 from assertpy import assert_that
 from databases import Database
 
-from app.daos.blob_dao import BlobDao
+from app.repositories.blob_repository import BlobRepository
 
 
 @pytest.fixture(scope='function')
-def blob_dao(db: Database) -> BlobDao:
-    return BlobDao.create_dao(db)
+def blob_repository(db: Database) -> BlobRepository:
+    return BlobRepository.create(db)
 
 
 class TestCreateBlob:
@@ -17,10 +17,10 @@ class TestCreateBlob:
 
     @pytest.mark.asyncio
     async def test__works_correctly__oid_created(
-            self, blob_dao: BlobDao, db: Database
+            self, blob_repository: BlobRepository, db: Database
     ) -> None:
         async with db.transaction(force_rollback=True):
-            loid: int = await blob_dao.create_blob()
+            loid: int = await blob_repository.create_blob()
 
             assert_that(loid).is_greater_than_or_equal_to(
                 self.lowest_possible_blob_oid
@@ -30,17 +30,17 @@ class TestCreateBlob:
 test_blob_content = 'This is test blob content'
 
 
-async def write_to_blob(blob_dao: BlobDao, data: bytes) -> int:
+async def write_to_blob(blob_repository: BlobRepository, data: bytes) -> int:
     """
     Creates blob and writes data to it.
-    :param blob_dao: BlobDao instance
+    :param blob_repository: BlobDao instance
     :param data: blobs content
     :return: Blobs oid
     :rtype: int
     """
-    loid: int = await blob_dao.create_blob()
+    loid: int = await blob_repository.create_blob()
 
-    await blob_dao.write_to_blob(
+    await blob_repository.write_to_blob(
         loid=loid, offset=0, data=data
     )
     return loid
@@ -50,11 +50,11 @@ class TestWriteToBlob:
 
     @pytest.mark.asyncio
     async def test__data_supplied_correctly__data_written_to_blob(
-            self, blob_dao: BlobDao, db: Database
+            self, blob_repository: BlobRepository, db: Database
     ) -> None:
         async with db.transaction(force_rollback=True):
             blob_content: bytes = test_blob_content.encode('utf-8')
-            loid: int = await write_to_blob(blob_dao, blob_content)
+            loid: int = await write_to_blob(blob_repository, blob_content)
 
             result: bytes = await db.execute('SELECT lo_get(:loid)', {'loid': loid})
 
@@ -73,13 +73,13 @@ class TestReadFromBlob:
     @pytest.mark.parametrize('length,expected_result', test_data)
     @pytest.mark.asyncio
     async def test__length_defined_correctly__returns_correct_part_of_content(
-            self, blob_dao: BlobDao, db: Database,
+            self, blob_repository: BlobRepository, db: Database,
             length: int, expected_result: bytes
     ) -> None:
         async with db.transaction(force_rollback=True):
-            loid: int = await write_to_blob(blob_dao, self.blob_content)
+            loid: int = await write_to_blob(blob_repository, self.blob_content)
 
-            result: bytes = await blob_dao.read_from_blob(
+            result: bytes = await blob_repository.read_from_blob(
                 loid=loid, offset=0, length=length
             )
 
@@ -90,13 +90,13 @@ class TestRemoveBlob:
 
     @pytest.mark.asyncio
     async def test__blob_with_selected_oid_exists__returns_true(
-            self, blob_dao: BlobDao, db: Database
+            self, blob_repository: BlobRepository, db: Database
     ) -> None:
         async with db.transaction(force_rollback=True):
             blob_content: bytes = test_blob_content.encode('utf-8')
-            loid: int = await write_to_blob(blob_dao, blob_content)
+            loid: int = await write_to_blob(blob_repository, blob_content)
 
-            result: bool = await blob_dao.remove_blob(loid=loid)
+            result: bool = await blob_repository.remove_blob(loid=loid)
 
             assert_that(result).is_true()
 
@@ -115,12 +115,12 @@ class TestGetLastByte:
     @pytest.mark.parametrize('blob_data,expected_result', test_data)
     @pytest.mark.asyncio
     async def test__blob_with_supplied_oid_exists__returns_last_byte(
-            self, blob_dao: BlobDao, db: Database,
+            self, blob_repository: BlobRepository, db: Database,
             blob_data: bytes, expected_result: int
     ) -> None:
         async with db.transaction(force_rollback=True):
-            loid: int = await write_to_blob(blob_dao, blob_data)
+            loid: int = await write_to_blob(blob_repository, blob_data)
 
-            result: int = await blob_dao.get_last_byte(loid=loid)
+            result: int = await blob_repository.get_last_byte(loid=loid)
 
             assert_that(result).is_equal_to(expected_result)
