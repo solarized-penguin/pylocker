@@ -1,8 +1,6 @@
 from fastapi import APIRouter, Depends
 from starlette.requests import Request
 
-from ..core import Settings
-from ..errors.error_types import ChunkTooBigError
 from ..repositories.blob_repository import BlobRepository
 from ..repositories.files_repository import FilesRepository
 from ..schemas.files import FileRead, FileUploadHeaders
@@ -21,16 +19,12 @@ async def upload_file(
         headers: FileUploadHeaders = Depends(FileUploadHeaders.as_header),
         blob_repository: BlobRepository = Depends(BlobRepository.create),
         files_repository: FilesRepository = Depends(FilesRepository.create),
-        user_info: UserInfo = Depends(logged_user),
-        settings: Settings = Depends(Settings.get)
+        user_info: UserInfo = Depends(logged_user)
 ) -> FileRead:
     loid: int = await blob_repository.create_blob()
 
     offset: int = 0
     async for chunk in request.stream():
-        if len(chunk) > settings.max_chunk_size:
-            raise ChunkTooBigError()
-
         await blob_repository.write_to_blob(
             loid=loid, offset=offset, data=chunk
         )
