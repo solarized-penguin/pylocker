@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import os
 from functools import lru_cache
 from typing import List
@@ -49,6 +51,8 @@ class Settings(BaseSettings):
             * log_format - log message formatting
             * log_level - minimal logging level
             * log_file_path - path to log file
+        7. Files:
+            * max_chunk_size - maximal size of a single chunk
     """
 
     # General environment info
@@ -81,6 +85,9 @@ class Settings(BaseSettings):
     log_level: str
     log_file_path: str
 
+    # files
+    max_chunk_size: int
+
     @property
     def standard_user_roles(self) -> List[str]:
         return _comma_separated_env_str_to_list(self.standard_user_roles_list)
@@ -88,14 +95,14 @@ class Settings(BaseSettings):
     class Config:
         case_sensitive = False
 
+    @classmethod
+    @lru_cache()
+    def get(cls) -> Settings:
+        """
+        Loads settings and
+        sets up environment
+        :rtype: Settings
+        """
+        _set_up_environment()
 
-@lru_cache()
-def get_settings() -> Settings:
-    """
-    Loads settings and
-    sets up environment
-    :rtype: Settings
-    """
-    _set_up_environment()
-
-    return Settings()
+        return Settings()

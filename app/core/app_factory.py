@@ -4,7 +4,7 @@ from databases import Database
 from fastapi import FastAPI, Response, Request
 
 from .logging import configure_logging
-from .settings import get_settings, Settings
+from .settings import Settings
 from ..errors import register_error_handlers
 from ..routers import register_routers
 
@@ -16,7 +16,7 @@ def create_app() -> FastAPI:
     :rtype: FastAPI
     """
     # initialize settings
-    _settings: Settings = get_settings()
+    _settings: Settings = Settings.get()
 
     # create api instance
     app: FastAPI = FastAPI(

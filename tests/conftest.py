@@ -9,7 +9,7 @@ from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 from sqlalchemy import create_engine
 from sqlalchemy.engine import Engine
 
-from app.core import Settings, get_settings, create_app, get_db
+from app.core import Settings, create_app, get_db
 from app.core.database_schema import db_schema
 from .utils import queries
 from .utils.assert_extensions import is_successful_status_code, is_validation_message_correct
@@ -17,7 +17,7 @@ from .utils.assert_extensions import is_successful_status_code, is_validation_me
 base_db_url: str = 'postgresql://postgres:postgres@0.0.0.0:5433/postgres'
 test_db_name: str = 'pylocker_test_db'
 
-settings: Settings = get_settings()
+settings: Settings = Settings.get()
 
 
 @pytest.fixture(scope='session')

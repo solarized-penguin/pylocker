@@ -8,7 +8,7 @@ from fusionauth.rest_client import ClientResponse
 from .tokens import Token
 from .users_schemas import UserRegistrationForm, UserInfo, RegistrationRequest, \
     AppRegistrationForm, UserSignUp
-from ..core.settings import get_settings, Settings
+from ..core.settings import Settings
 from ..errors import UserSignUpError, UserSignInError, UserInfoNotFoundError
 
 
@@ -18,7 +18,7 @@ class AuthClient:
     """
 
     def __init__(self) -> None:
-        self._settings: Settings = get_settings()
+        self._settings: Settings = Settings.get()
         self._client: FusionAuthClient = FusionAuthClient(
             self._settings.api_key.get_secret_value(),
             self._settings.auth_provider_url

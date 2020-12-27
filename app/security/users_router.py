@@ -5,7 +5,7 @@ from fastapi.security import OAuth2PasswordRequestForm
 from .auth_client import AuthClient
 from .tokens import Token
 from .users_schemas import UserInfo, UserSignUp
-from ..core import Settings, get_settings
+from ..core import Settings
 
 router = APIRouter()
 
@@ -17,7 +17,7 @@ router = APIRouter()
 async def sign_up(
         user: UserSignUp = Depends(UserSignUp.as_form),
         client: AuthClient = Depends(AuthClient.create_client),
-        settings: Settings = Depends(get_settings)
+        settings: Settings = Depends(Settings.get)
 ) -> JSONResponse:
     """
     Create user account and register it with this application

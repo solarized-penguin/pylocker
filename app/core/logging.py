@@ -2,11 +2,11 @@ import sys
 
 from loguru import logger
 
-from .settings import get_settings, Settings
+from .settings import Settings
 
 
 def configure_logging() -> None:
-    _settings: Settings = get_settings()
+    _settings: Settings = Settings.get()
 
     logger.remove()
     logger.add(

@@ -1,6 +1,8 @@
 from abc import ABC
 from typing import Union, Dict, Any
 
+from ..core.settings import Settings
+
 
 def _parse_error_message(error_message: Union[str, Dict[str, Any]]) -> str:
     if isinstance(error_message, str):
@@ -48,4 +50,12 @@ class UserInfoNotFoundError(BasicError):
     def __init__(self, error_code: int, error_message: Union[str, Dict[str, Any]]) -> None:
         super(UserInfoNotFoundError, self).__init__(
             error_code=error_code, error_message=error_message
+        )
+
+
+class ChunkTooBigError(BasicError):
+    def __init__(self) -> None:
+        super(ChunkTooBigError, self).__init__(
+            error_code=413,
+            error_message=f'Chunk is too big. Maximal chunk size is {Settings.get().max_chunk_size} bytes.'
         )
