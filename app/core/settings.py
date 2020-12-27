@@ -25,7 +25,7 @@ def _set_up_environment() -> None:
 
 class Settings(BaseSettings):
     """
-    | Settings model for entire application.
+    | Settings for entire application.
     | Values are read from environment.
     Available settings:
         1. General environment info:

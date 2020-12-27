@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d7c14d73-f948-4f51-85f4-6e060db6510b" name="Default Changelist" comment="- adding file_path header to upload file endpoint">
-      <change afterPath="$PROJECT_DIR$/client/routers/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/routers/files.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/routers/users.py" afterDir="false" />
+    <list default="true" id="d7c14d73-f948-4f51-85f4-6e060db6510b" name="Default Changelist" comment="- moving client to separate repository">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/core/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/core/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/routers/files.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routers/files.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_local.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_local.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,7 +42,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/tests" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="database.main" />
   </component>
@@ -136,6 +136,8 @@
       <workItem from="1608985672581" duration="14783000" />
       <workItem from="1609007815989" duration="6406000" />
       <workItem from="1609071693607" duration="8155000" />
+      <workItem from="1609079981106" duration="72000" />
+      <workItem from="1609080306833" duration="1259000" />
     </task>
     <task id="LOCAL-00003" summary="- adding queries for blob manager">
       <created>1608654774414</created>
@@ -305,7 +307,14 @@
       <option name="project" value="LOCAL" />
       <updated>1609079070211</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="- moving client to separate repository">
+      <created>1609080034788</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1609080034788</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -321,7 +330,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="- hiding user endpoints from swagger&#10;- adding docstrings" />
     <MESSAGE value="- adding queries for blob manager" />
     <MESSAGE value="- adding get_lo_size function to migration scripts" />
     <MESSAGE value="- finishing basic blob manager" />
@@ -346,7 +354,8 @@
     <MESSAGE value="- fixing logger configuration" />
     <MESSAGE value="- upgrading logging mechanism" />
     <MESSAGE value="- adding file_path header to upload file endpoint" />
-    <option name="LAST_COMMIT_MESSAGE" value="- adding file_path header to upload file endpoint" />
+    <MESSAGE value="- moving client to separate repository" />
+    <option name="LAST_COMMIT_MESSAGE" value="- moving client to separate repository" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -371,7 +380,7 @@
     <SUITE FILE_PATH="coverage/pylocker$pytest_for_blob_manager_tests_test_blob_manager.coverage" NAME="pytest-blob_manager Coverage Results" MODIFIED="1608992220846" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/pylocker$pytest_all.coverage" NAME="pytest-all Coverage Results" MODIFIED="1609072524904" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/pylocker$Unittests_in_tests.coverage" NAME="Unittests in tests Coverage Results" MODIFIED="1608749715426" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
-    <SUITE FILE_PATH="coverage/pylocker$main_local.coverage" NAME="main_local Coverage Results" MODIFIED="1609076071813" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/pylocker$main_local.coverage" NAME="main_local Coverage Results" MODIFIED="1609081506622" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/pylocker$pytest_in_tests.coverage" NAME="pytest-all Coverage Results" MODIFIED="1608997585694" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/pylocker$main.coverage" NAME="main Coverage Results" MODIFIED="1608630285297" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
