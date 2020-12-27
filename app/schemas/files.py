@@ -21,7 +21,6 @@ class FileDb(FileBase):
 
 
 class FileRead(FileBase):
-    owner: str
     file_size_mb: float
 
 
