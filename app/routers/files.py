@@ -6,7 +6,7 @@ from fastapi.responses import JSONResponse
 
 from ..core import get_redis
 from ..repositories.blob_repository import BlobRepository
-from ..schemas.files import FileRead, UploadCreationHeaders, UploadCreation
+from ..schemas.files import FileRead, UploadCreationHeaders, UploadCacheData, UploadLocationData
 from ..security import UserInfo, logged_user
 
 router = APIRouter()
@@ -14,6 +14,7 @@ router = APIRouter()
 
 @router.post(
     '',
+    response_model=UploadLocationData,
     status_code=201
 )
 async def create_upload(
@@ -21,11 +22,11 @@ async def create_upload(
         redis: StrictRedis = Depends(get_redis),
         user_info: UserInfo = Depends(logged_user),
         blob_repository: BlobRepository = Depends(BlobRepository.create)
-) -> JSONResponse:
+) -> UploadLocationData:
     loid: int = await blob_repository.create_blob()
     location: str = token_urlsafe()
 
-    upload_location = UploadCreation(
+    upload_location = UploadCacheData(
         owner_id=user_info.id,
         loid=loid,
         file_path=str(headers.file_path)
@@ -33,12 +34,7 @@ async def create_upload(
 
     await redis.set(location, upload_location.json())
 
-    return JSONResponse(
-        headers={
-            'Location': location
-        },
-        status_code=201
-    )
+    return UploadLocationData(location=location)
 
 
 @router.patch(

@@ -25,13 +25,20 @@ class FileRead(FileBase):
     file_size_mb: float
 
 
-class UploadCreation(BaseModel):
+class UploadCacheData(BaseModel):
     owner_id: str
     loid: int
     file_path: str
 
     class Config:
         orm_values = True
+
+
+class UploadLocationData(BaseModel):
+    location: str
+
+    class Config:
+        orm_mode = True
 
 
 class UploadCreationHeaders(BaseModel):
