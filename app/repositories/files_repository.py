@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from pathlib import Path
+
 from databases import Database
 from fastapi import Depends
 from sqlalchemy.sql import Insert
@@ -31,15 +33,13 @@ class FilesRepository:
                 'file_size_bytes': file_size,
                 'owner_id': user_info.id
             }
-        ).returning(
-            files_table.c.file_path,
-            files_table.c.file_size_bytes
         )
-        inserted_file = await self._db.execute(query)
+
+        await self._db.execute(query)
 
         return FileRead(
-            file_path=inserted_file['file_path'],
-            file_size_mb=(inserted_file['file_size_bytes'] / self.bytes_in_mb)
+            file_path=Path(file_path),
+            file_size_mb=(file_size / 1000000)
         )
 
     @classmethod

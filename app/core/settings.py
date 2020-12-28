@@ -39,7 +39,10 @@ class Settings(BaseSettings):
             * api_swagger_url - swagger documentation location: **<api address>/api_swagger_url**
             * api_redoc_url - redoc documentation location: **<api address>/api_redoc_url**
         3. Connections (database dsn, redis, itp...):
-            * postgres_dsn - postgresql api database url
+            * postgres_dsn - postgresql connection string
+            * redis_host - address of redis host
+            * redis_port - port on which redis is listening
+            * redis_db - redis database to use
         4. Security (OAuth2, OpenId Connect):
             * api_key - api key
             * app_id - application id
@@ -67,6 +70,9 @@ class Settings(BaseSettings):
 
     # connections
     postgres_dsn: PostgresDsn
+    redis_host: str
+    redis_port: int
+    redis_db: int
 
     # security
     api_key: SecretStr

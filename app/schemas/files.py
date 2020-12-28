@@ -1,9 +1,10 @@
 from __future__ import annotations
 
 from pathlib import Path
+from typing import List
 
 from fastapi import Header
-from pydantic import BaseModel
+from pydantic import BaseModel, validator
 
 
 class FileBase(BaseModel):
@@ -26,6 +27,13 @@ class FileRead(FileBase):
 
 class FileUploadHeaders(BaseModel):
     file_path: Path = Header(...)
+
+    @validator('file_path')
+    def must_be_not_empty(cls, v: Path) -> Path:
+        path_parts: List[str] = str(v).split('/')
+        if len(path_parts) < 2:
+            raise ValueError('Each file must be put in at least one directory.')
+        return v
 
     @classmethod
     def as_header(
