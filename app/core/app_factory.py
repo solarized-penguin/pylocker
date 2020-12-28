@@ -43,11 +43,7 @@ def create_app() -> FastAPI:
     )
 
     # register redis
-    redis: StrictRedis = StrictRedis(
-        host=_settings.redis_host,
-        port=_settings.redis_port,
-        db=_settings.redis_db
-    )
+    redis: StrictRedis = StrictRedis.from_url(_settings.redis_dsn)
 
     # register database middleware
     @app.middleware('http')

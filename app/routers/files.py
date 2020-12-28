@@ -74,6 +74,7 @@ async def upload_file(
         await files_repository.create_file(
             cache_data.loid, cache_data.file_path, cache_data.upload_length, user_info
         )
+        await redis.delete(location)
         return JSONResponse(status_code=204)
 
     return JSONResponse(status_code=200)

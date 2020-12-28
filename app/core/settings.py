@@ -4,7 +4,7 @@ import os
 from functools import lru_cache
 from typing import List
 
-from pydantic import BaseSettings, PostgresDsn, SecretStr
+from pydantic import BaseSettings, PostgresDsn, SecretStr, RedisDsn
 
 DB_SCHEMA = './database_schema.py'
 
@@ -70,9 +70,7 @@ class Settings(BaseSettings):
 
     # connections
     postgres_dsn: PostgresDsn
-    redis_host: str
-    redis_port: int
-    redis_db: int
+    redis_dsn: RedisDsn
 
     # security
     api_key: SecretStr
