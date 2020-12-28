@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from datetime import datetime
 from pathlib import Path
 from typing import List
 
@@ -29,6 +30,7 @@ class UploadCacheData(BaseModel):
     owner_id: str
     loid: int
     file_path: str
+    creation_time: datetime = datetime.utcnow()
 
     class Config:
         orm_values = True
