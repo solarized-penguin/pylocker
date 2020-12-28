@@ -8,7 +8,6 @@ from fastapi.responses import JSONResponse
 from ..core import get_redis, Settings
 from ..errors import LocationNotFoundError, ChunkTooBigError
 from ..repositories.blob_repository import BlobRepository
-from ..repositories.files_repository import FilesRepository
 from ..schemas.files import UploadCreationHeaders, UploadCacheData, UploadLocationData, UploadFileHeaders
 from ..security import UserInfo, logged_user
 
@@ -33,7 +32,6 @@ async def create_upload(
     upload_cache_data = UploadCacheData(
         owner_id=user_info.id,
         loid=loid,
-        upload_length=headers.upload_length,
         file_path=str(headers.file_path)
     )
 
@@ -52,7 +50,6 @@ async def upload_file(
         headers: UploadFileHeaders = Depends(UploadFileHeaders.as_header),
         redis: StrictRedis = Depends(get_redis),
         blob_repository: BlobRepository = Depends(BlobRepository.create),
-        files_repository: FilesRepository = Depends(FilesRepository.create),
         settings: Settings = Depends(Settings.get),
         user_info: UserInfo = Depends(logged_user)
 ) -> JSONResponse:
@@ -70,14 +67,17 @@ async def upload_file(
         cache_data.loid, headers.upload_offset, chunk
     )
 
-    if (headers.upload_offset + len(chunk)) >= cache_data.upload_length:
-        await files_repository.create_file(
-            cache_data.loid, cache_data.file_path, cache_data.upload_length, user_info
-        )
-        await redis.delete(location)
-        return JSONResponse(status_code=204)
-
     return JSONResponse(status_code=200)
+
+
+@router.post(
+    '/confirm',
+    status_code=201
+)
+async def confirm_upload(
+        location: str = Query(..., description='upload location')
+) -> JSONResponse:
+    pass
 
 
 @router.head(

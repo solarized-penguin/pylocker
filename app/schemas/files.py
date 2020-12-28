@@ -28,7 +28,6 @@ class FileRead(FileBase):
 class UploadCacheData(BaseModel):
     owner_id: str
     loid: int
-    upload_length: int
     file_path: str
 
     class Config:
@@ -44,10 +43,9 @@ class UploadLocationData(BaseModel):
 
 class UploadCreationHeaders(BaseModel):
     file_path: Path
-    upload_length: int
 
     @validator('file_path')
-    def must_be_not_empty(cls, v: Path) -> Path:
+    def must_contain_at_least_one_directory(cls, v: Path) -> Path:
         path_parts: List[str] = str(v).split('/')
         if len(path_parts) < 2:
             raise ValueError('Each file must be put in at least one directory.')
@@ -60,15 +58,9 @@ class UploadCreationHeaders(BaseModel):
                 ...,
                 description='new file location',
                 convert_underscores=True
-            ),
-            upload_length: int = Header(
-                ...,
-                description='Total length of the file',
-                convert_underscores=True,
-                gt=0
             )
     ) -> UploadCreationHeaders:
-        return cls(file_path=file_path, upload_length=upload_length)
+        return cls(file_path=file_path)
 
 
 class UploadFileHeaders(BaseModel):
