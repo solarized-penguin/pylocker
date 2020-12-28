@@ -92,6 +92,7 @@ class Settings(BaseSettings):
     log_file_path: str
 
     # files
+    location_url_bytes: int
     max_chunk_size: int
 
     @property

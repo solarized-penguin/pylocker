@@ -1,14 +1,11 @@
 from __future__ import annotations
 
-from pathlib import Path
-
 from databases import Database
 from fastapi import Depends
 from sqlalchemy.sql import Insert
 
 from app.core import get_db
 from app.core.database_schema import files_table
-from app.schemas.files import FileRead
 from app.security import UserInfo
 
 
@@ -25,7 +22,7 @@ class FilesRepository:
 
     async def create_file(
             self, loid: int, file_path: str, file_size: int, user_info: UserInfo
-    ) -> FileRead:
+    ) -> None:
         query: Insert = files_table.insert(
             {
                 'oid': loid,
@@ -36,11 +33,6 @@ class FilesRepository:
         )
 
         await self._db.execute(query)
-
-        return FileRead(
-            file_path=Path(file_path),
-            file_size_mb=(file_size / self.bytes_in_mb)
-        )
 
     @classmethod
     def create(

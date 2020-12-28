@@ -59,3 +59,11 @@ class ChunkTooBigError(BasicError):
             error_code=413,
             error_message=f'Chunk is too big. Maximal chunk size is {Settings.get().max_chunk_size} bytes.'
         )
+
+
+class LocationNotFoundError(BasicError):
+    def __init__(self) -> None:
+        super(LocationNotFoundError, self).__init__(
+            error_code=404, error_message='Provided location not found! '
+                                          'Are you sure this location exists?'
+        )

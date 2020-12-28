@@ -28,6 +28,7 @@ class FileRead(FileBase):
 class UploadCacheData(BaseModel):
     owner_id: str
     loid: int
+    upload_length: int
     file_path: str
 
     class Config:
@@ -42,7 +43,8 @@ class UploadLocationData(BaseModel):
 
 
 class UploadCreationHeaders(BaseModel):
-    file_path: Path = Header(...)
+    file_path: Path
+    upload_length: int
 
     @validator('file_path')
     def must_be_not_empty(cls, v: Path) -> Path:
@@ -58,6 +60,30 @@ class UploadCreationHeaders(BaseModel):
                 ...,
                 description='new file location',
                 convert_underscores=True
+            ),
+            upload_length: int = Header(
+                ...,
+                description='Total length of the file',
+                convert_underscores=True,
+                gt=0
             )
     ) -> UploadCreationHeaders:
-        return cls(file_path=file_path)
+        return cls(file_path=file_path, upload_length=upload_length)
+
+
+class UploadFileHeaders(BaseModel):
+    upload_offset: int
+
+    class Config:
+        orm_mode = True
+
+    @classmethod
+    def as_header(
+            cls,
+            upload_offset: int = Header(
+                ...,
+                description='Tells api at which point it should start writing data at.',
+                convert_underscores=True
+            )
+    ) -> UploadFileHeaders:
+        return cls(upload_offset=upload_offset)
