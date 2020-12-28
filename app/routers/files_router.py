@@ -1,13 +1,16 @@
 from secrets import token_urlsafe
+from typing import Optional
 
 from aredis import StrictRedis
 from fastapi import APIRouter, Depends, Query, HTTPException, File
 from fastapi.responses import JSONResponse
 
+from .utils import calculate_hash
 from ..core import get_redis, Settings
 from ..errors import LocationNotFoundError, ChunkTooBigError
 from ..repositories.blob_repository import BlobRepository
-from ..schemas.files import UploadCreationHeaders, UploadCacheData, UploadLocationData, UploadFileHeaders
+from ..repositories.files_repository import FilesRepository
+from ..schemas.files import UploadCreationHeaders, UploadCacheData, UploadLocationData, UploadFileHeaders, FileRead
 from ..security import UserInfo, logged_user
 
 router = APIRouter()
@@ -58,7 +61,6 @@ async def upload_file(
         raise ChunkTooBigError()
 
     redis_data: bytes = await redis.get(location)
-
     cache_data: UploadCacheData = UploadCacheData.parse_raw(redis_data)
 
     if user_info.id != cache_data.owner_id:
@@ -73,12 +75,42 @@ async def upload_file(
 
 @router.post(
     '/confirm',
+    response_model=FileRead,
     status_code=201
 )
 async def confirm_upload(
-        location: str = Query(..., description='upload location')
-) -> JSONResponse:
-    pass
+        location: str = Query(..., description='upload location'),
+        checksum: Optional[str] = Query(None, description='checksum of the file - for optional validation'),
+        redis: StrictRedis = Depends(get_redis),
+        blob_repository: BlobRepository = Depends(BlobRepository.create),
+        files_repository: FilesRepository = Depends(FilesRepository.create),
+        settings: Settings = Depends(Settings.get),
+        user_info: UserInfo = Depends(logged_user)
+) -> FileRead:
+    if not await redis.exists(location):
+        raise LocationNotFoundError()
+
+    redis_data: bytes = await redis.get(location)
+    cache_data: UploadCacheData = UploadCacheData.parse_raw(redis_data)
+
+    if user_info.id != cache_data.owner_id:
+        raise HTTPException(status_code=403, detail='No privilege to access file!')
+
+    if checksum:
+        blob_checksum = await calculate_hash(cache_data.loid, blob_repository, settings)
+
+        if checksum != blob_checksum:
+            raise HTTPException(status_code=460, detail="Checksums don't match. File will be deleted soon.")
+
+    file_size: int = await blob_repository.get_last_byte(cache_data.loid)
+
+    file_read: FileRead = await files_repository.create_file(
+        cache_data.loid, cache_data.file_path, file_size, user_info
+    )
+
+    await redis.delete(location)
+
+    return file_read
 
 
 @router.head(

@@ -1,5 +1,5 @@
 from asyncpg import PostgresError
-from fastapi import Request, Response
+from fastapi import Request, Response, HTTPException
 from fastapi.responses import JSONResponse
 from loguru import logger
 from pydantic import ValidationError
@@ -35,4 +35,15 @@ async def postgres_error_handler(
     return JSONResponse(
         status_code=400,
         content=exception.as_dict()
+    )
+
+
+async def http_error_handler(
+        request: Request, exception: HTTPException
+) -> Response:
+    logger.error(f'{request.method} | {request.url} | {exception.status_code} | '
+                 f'{exception.detail}')
+    return JSONResponse(
+        status_code=exception.status_code,
+        content=exception.detail
     )
