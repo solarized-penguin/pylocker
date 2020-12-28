@@ -1,8 +1,7 @@
 from secrets import token_urlsafe
-from typing import Dict, Any
 
 from aredis import StrictRedis
-from fastapi import APIRouter, Depends, Query, HTTPException
+from fastapi import APIRouter, Depends, Query, HTTPException, File
 from fastapi.responses import JSONResponse
 
 from ..core import get_redis, Settings
@@ -45,7 +44,7 @@ async def create_upload(
     status_code=200
 )
 async def upload_file(
-        chunk: bytes,
+        chunk: bytes = File(..., description='chunk of the file'),
         location: str = Query(..., description='upload location'),
         headers: UploadFileHeaders = Depends(UploadFileHeaders.as_header),
         redis: StrictRedis = Depends(get_redis),
@@ -53,12 +52,14 @@ async def upload_file(
         settings: Settings = Depends(Settings.get),
         user_info: UserInfo = Depends(logged_user)
 ) -> JSONResponse:
-    redis_data: Dict[str, Any] = await redis.get(location)
+    if not await redis.exists(location):
+        raise LocationNotFoundError()
+    if len(chunk) > settings.max_chunk_size:
+        raise ChunkTooBigError()
 
-    if not redis_data: raise LocationNotFoundError()
-    if len(chunk) > settings.max_chunk_size: raise ChunkTooBigError()
+    redis_data: bytes = await redis.get(location)
 
-    cache_data: UploadCacheData = UploadCacheData(**redis_data)
+    cache_data: UploadCacheData = UploadCacheData.parse_raw(redis_data)
 
     if user_info.id != cache_data.owner_id:
         raise HTTPException(status_code=403, detail='No privilege to access file!')
