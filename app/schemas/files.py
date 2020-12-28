@@ -25,7 +25,16 @@ class FileRead(FileBase):
     file_size_mb: float
 
 
-class FileUploadHeaders(BaseModel):
+class UploadCreation(BaseModel):
+    owner_id: str
+    loid: int
+    file_path: str
+
+    class Config:
+        orm_values = True
+
+
+class UploadCreationHeaders(BaseModel):
     file_path: Path = Header(...)
 
     @validator('file_path')
@@ -43,5 +52,5 @@ class FileUploadHeaders(BaseModel):
                 description='new file location',
                 convert_underscores=True
             )
-    ) -> FileUploadHeaders:
+    ) -> UploadCreationHeaders:
         return cls(file_path=file_path)

@@ -39,7 +39,7 @@ class FilesRepository:
 
         return FileRead(
             file_path=Path(file_path),
-            file_size_mb=(file_size / 1000000)
+            file_size_mb=(file_size / self.bytes_in_mb)
         )
 
     @classmethod
