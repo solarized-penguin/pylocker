@@ -10,8 +10,7 @@ from ..core import get_redis, Settings
 from ..errors import LocationNotFoundError, ChunkTooBigError
 from ..repositories.blob_repository import BlobRepository
 from ..repositories.files_repository import FilesRepository
-from ..schemas.files import UploadCreationHeaders, UploadCacheData, UploadLocationData, UploadFileHeaders, FileRead, \
-    LastUploadedByte, FileDb
+from ..schemas.files import UploadCreationHeaders, UploadCacheData, UploadFileHeaders, FileRead, FileDb
 from ..security import UserInfo, logged_user
 
 router = APIRouter()
@@ -40,7 +39,6 @@ async def fetch_user_files(
 
 @router.post(
     '',
-    response_model=UploadLocationData,
     status_code=201
 )
 async def create_new_upload(
@@ -49,7 +47,7 @@ async def create_new_upload(
         user_info: UserInfo = Depends(logged_user),
         blob_repository: BlobRepository = Depends(BlobRepository.create),
         settings: Settings = Depends(Settings.get)
-) -> UploadLocationData:
+) -> JSONResponse:
     loid: int = await blob_repository.create_blob()
     location: str = token_urlsafe(settings.location_url_bytes)
 
@@ -61,7 +59,10 @@ async def create_new_upload(
 
     await redis.set(location, upload_cache_data.json())
 
-    return UploadLocationData(location=location)
+    return JSONResponse(
+        status_code=201,
+        headers={'location': location}
+    )
 
 
 @router.patch(
@@ -138,7 +139,7 @@ async def confirm_upload(
 
 @router.head(
     '',
-    response_model=LastUploadedByte,
+    response_model=int,
     status_code=200
 )
 async def fetch_upload_offset(
@@ -146,7 +147,7 @@ async def fetch_upload_offset(
         redis: StrictRedis = Depends(get_redis),
         blob_repository: BlobRepository = Depends(BlobRepository.create),
         user_info: UserInfo = Depends(logged_user)
-) -> LastUploadedByte:
+) -> JSONResponse:
     if not await redis.exists(location):
         raise LocationNotFoundError()
 
@@ -158,7 +159,10 @@ async def fetch_upload_offset(
 
     last_byte: int = await blob_repository.get_last_byte(cache_data.loid)
 
-    return LastUploadedByte(last_byte=last_byte)
+    return JSONResponse(
+        status_code=200,
+        headers={'upload-offset': last_byte}
+    )
 
 
 @router.delete(

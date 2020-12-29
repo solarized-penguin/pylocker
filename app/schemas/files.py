@@ -37,20 +37,6 @@ class UploadCacheData(BaseModel):
         orm_values = True
 
 
-class UploadLocationData(BaseModel):
-    location: str
-
-    class Config:
-        orm_mode = True
-
-
-class LastUploadedByte(BaseModel):
-    last_byte: int
-
-    class Config:
-        orm_mode = True
-
-
 class UploadCreationHeaders(BaseModel):
     file_path: Path
 
