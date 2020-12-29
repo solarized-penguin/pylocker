@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Optional, Mapping, Any, Dict
+from typing import Optional, Mapping, Any, List
 
 from databases import Database
 from fastapi import Depends
@@ -25,10 +25,17 @@ class FilesRepository:
     def __init__(self, db: Database) -> None:
         self._db = db
 
-    async def update_file(self, loid: int, params: Dict[str, Any]) -> None:
+    async def fetch_all_user_files(self, user_info: UserInfo) -> List[FileRead]:
+        query: Select = files_table.select(files_table.c.owner_id == user_info.id)
+
+        mappings: List[Mapping[str, Any]] = await self._db.fetch_all(query)
+
+        return [FileRead.parse_obj(mapping) for mapping in mappings]
+
+    async def update_file(self, loid: int, params: FileDb) -> None:
         query: Update = files_table.update(
             whereclause=files_table.c.oid == loid,
-            values=params
+            values=params.dict(exclude_unset=True)
         )
 
         await self._db.execute(query)
@@ -37,7 +44,7 @@ class FilesRepository:
         query: Delete = files_table.delete(files_table.c.oid == loid)
         await self._db.execute(query)
 
-    async def fetch_file(self, file_path: str) -> FileDb:
+    async def fetch_db_file(self, file_path: str) -> FileDb:
         query: Select = files_table.select(files_table.c.file_path == file_path)
 
         result: Optional[Mapping[str, Any]] = await self._db.fetch_one(query)

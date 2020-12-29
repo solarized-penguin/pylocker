@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="df6b04ce-8cc1-4544-85c3-a3ece333a6b9" name="Default Changelist" comment="- restructuring table">
+    <list default="true" id="df6b04ce-8cc1-4544-85c3-a3ece333a6b9" name="Default Changelist" comment="- reformating database, changing checksum to mandatory&#10;- checksum always calculates during confirmation process">
+      <change afterPath="$PROJECT_DIR$/app/schemas/messages.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/f0b294a2-1b29-4a55-8388-9eb76a1849ab.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/f0b294a2-1b29-4a55-8388-9eb76a1849ab.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/f0b294a2-1b29-4a55-8388-9eb76a1849ab/storage_v2/_src_/database/pylocker_db.HPOpYw/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/f0b294a2-1b29-4a55-8388-9eb76a1849ab/storage_v2/_src_/database/pylocker_db.HPOpYw/schema/public.abK9xQ.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/core/database_schema.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/core/database_schema.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/repositories/files_repository.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/repositories/files_repository.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/routers/files_router.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routers/files_router.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/schemas/files.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/schemas/files.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,7 +69,7 @@
       <updated>1609146183141</updated>
       <workItem from="1609146186667" duration="21251000" />
       <workItem from="1609177428302" duration="10791000" />
-      <workItem from="1609231816549" duration="7126000" />
+      <workItem from="1609231816549" duration="9484000" />
     </task>
     <task id="LOCAL-00003" summary="- preparing api for implementing TUS protocol">
       <created>1609153728438</created>
@@ -156,7 +155,14 @@
       <option name="project" value="LOCAL" />
       <updated>1609238336217</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="- reformating database, changing checksum to mandatory&#10;- checksum always calculates during confirmation process">
+      <created>1609239331657</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1609239331657</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -186,7 +192,8 @@
     <MESSAGE value="- file confirmation done" />
     <MESSAGE value="- added get last byte and delete functionality" />
     <MESSAGE value="- restructuring table" />
-    <option name="LAST_COMMIT_MESSAGE" value="- restructuring table" />
+    <MESSAGE value="- reformating database, changing checksum to mandatory&#10;- checksum always calculates during confirmation process" />
+    <option name="LAST_COMMIT_MESSAGE" value="- reformating database, changing checksum to mandatory&#10;- checksum always calculates during confirmation process" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/pylocker$Unittests_in_router_tests.coverage" NAME="Unittests in router_tests Coverage Results" MODIFIED="1608987872720" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/router_tests" />

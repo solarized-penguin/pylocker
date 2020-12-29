@@ -1419,7 +1419,7 @@ false posixrules
     <database id="3" parent="1" name="pylocker_db">
       <ObjectId>16384</ObjectId>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>231298</IntrospectionStateNumber>
+      <IntrospectionStateNumber>231303</IntrospectionStateNumber>
       <Relations>sequence|table|16410|16412|1
 </Relations>
     </database>
@@ -1491,7 +1491,7 @@ UC/10
 </Acl>
       <StateNumber>287</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>231299</IntrospectionStateNumber>
+      <IntrospectionStateNumber>231304</IntrospectionStateNumber>
       <Current>1</Current>
     </schema>
     <extension id="18" parent="3" name="plpgsql">
@@ -1671,7 +1671,8 @@ UC/10
     <column id="41" parent="32" name="file_checksum">
       <Position>6</Position>
       <DataType>text|0s</DataType>
-      <StateNumber>231297</StateNumber>
+      <NotNull>1</NotNull>
+      <StateNumber>231302</StateNumber>
       <TypeId>25</TypeId>
     </column>
     <index id="42" parent="32" name="files_pkey">

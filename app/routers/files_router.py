@@ -1,5 +1,5 @@
 from secrets import token_urlsafe
-from typing import Optional
+from typing import Optional, List, Union
 
 from aredis import StrictRedis
 from fastapi import APIRouter, Depends, Query, HTTPException, File
@@ -12,9 +12,34 @@ from ..repositories.blob_repository import BlobRepository
 from ..repositories.files_repository import FilesRepository
 from ..schemas.files import UploadCreationHeaders, UploadCacheData, UploadLocationData, UploadFileHeaders, FileRead, \
     LastUploadedByte, FileDb
+from ..schemas.messages import Message
 from ..security import UserInfo, logged_user
 
 router = APIRouter()
+
+
+@router.get(
+    '',
+    response_model=List[FileRead],
+    status_code=200,
+    responses={
+        200: {'description': 'All files that belong to user returned successfully.'},
+        204: {'model': Message, 'description': 'User has no files.'}
+    }
+)
+async def fetch_user_files(
+        files_repository: FilesRepository = Depends(FilesRepository.create),
+        user_info: UserInfo = Depends(logged_user)
+) -> Union[List[FileRead], JSONResponse]:
+    files: List[FileRead] = await files_repository.fetch_all_user_files(user_info)
+
+    if not files:
+        return JSONResponse(
+            status_code=204,
+            content={'message': 'No uploaded files found.'}
+        )
+
+    return files
 
 
 @router.post(
@@ -22,7 +47,7 @@ router = APIRouter()
     response_model=UploadLocationData,
     status_code=201
 )
-async def create_upload(
+async def create_new_upload(
         headers: UploadCreationHeaders = Depends(UploadCreationHeaders.as_header),
         redis: StrictRedis = Depends(get_redis),
         user_info: UserInfo = Depends(logged_user),
@@ -149,7 +174,7 @@ async def delete_file(
         files_repository: FilesRepository = Depends(FilesRepository.create),
         user_info: UserInfo = Depends(logged_user)
 ) -> JSONResponse:
-    db_file: FileDb = await files_repository.fetch_file(file_path)
+    db_file: FileDb = await files_repository.fetch_db_file(file_path)
 
     if db_file.owner_id != user_info.id:
         raise HTTPException(status_code=403, detail='No privilege to access file.')
