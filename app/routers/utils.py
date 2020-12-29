@@ -18,6 +18,4 @@ async def calculate_hash(
         offset += len(chunk)
         chunk = await blob_repository.read_from_blob(loid, offset, block_size)
 
-        print(offset)
-
     return md5_hash.hexdigest()
