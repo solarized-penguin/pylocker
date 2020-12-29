@@ -3,7 +3,7 @@ from typing import Optional, List, Union
 
 from aredis import StrictRedis
 from fastapi import APIRouter, Depends, Query, HTTPException, File
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, Response
 
 from .utils import calculate_hash
 from ..core import get_redis, Settings
@@ -12,7 +12,6 @@ from ..repositories.blob_repository import BlobRepository
 from ..repositories.files_repository import FilesRepository
 from ..schemas.files import UploadCreationHeaders, UploadCacheData, UploadLocationData, UploadFileHeaders, FileRead, \
     LastUploadedByte, FileDb
-from ..schemas.messages import Message
 from ..security import UserInfo, logged_user
 
 router = APIRouter()
@@ -24,20 +23,17 @@ router = APIRouter()
     status_code=200,
     responses={
         200: {'description': 'All files that belong to user returned successfully.'},
-        204: {'model': Message, 'description': 'User has no files.'}
+        204: {'description': 'User has no files.'}
     }
 )
 async def fetch_user_files(
         files_repository: FilesRepository = Depends(FilesRepository.create),
         user_info: UserInfo = Depends(logged_user)
-) -> Union[List[FileRead], JSONResponse]:
+) -> Union[List[FileRead], Response]:
     files: List[FileRead] = await files_repository.fetch_all_user_files(user_info)
 
     if not files:
-        return JSONResponse(
-            status_code=204,
-            content={'message': 'No uploaded files found.'}
-        )
+        return Response(status_code=204)
 
     return files
 
