@@ -17,7 +17,7 @@ router = APIRouter()
 
 
 @router.get(
-    '',
+    '/all',
     response_model=List[FileRead],
     status_code=200,
     responses={
@@ -35,6 +35,30 @@ async def fetch_user_files(
         return Response(status_code=204)
 
     return files
+
+
+@router.get(
+    '',
+    status_code=200
+)
+async def download_file(
+        file_path: str = Query(..., description='File path of the file to download.'),
+        upload_offset: int = Query(..., description='File offset to get appropriate chunk.'),
+        files_repository: FilesRepository = Depends(FilesRepository.create),
+        blob_repository: BlobRepository = Depends(BlobRepository.create),
+        settings: Settings = Depends(Settings.get),
+        user_info: UserInfo = Depends(logged_user)
+) -> bytes:
+    file_db: FileDb = await files_repository.fetch_db_file(file_path)
+
+    if file_db.owner_id != user_info.id:
+        raise HTTPException(status_code=403, detail='No privileges to access file.')
+
+    chunk: bytes = await blob_repository.read_from_blob(
+        file_db.oid, upload_offset, settings.max_chunk_size
+    )
+
+    return chunk
 
 
 @router.post(
@@ -87,7 +111,7 @@ async def upload_file(
     cache_data: UploadCacheData = UploadCacheData.parse_raw(redis_data)
 
     if user_info.id != cache_data.owner_id:
-        raise HTTPException(status_code=403, detail='No privilege to access file.')
+        raise HTTPException(status_code=403, detail='No privileges to access file.')
 
     await blob_repository.write_to_blob(
         cache_data.loid, headers.upload_offset, chunk
@@ -117,12 +141,13 @@ async def confirm_upload(
     cache_data: UploadCacheData = UploadCacheData.parse_raw(redis_data)
 
     if user_info.id != cache_data.owner_id:
-        raise HTTPException(status_code=403, detail='No privilege to access file.')
+        raise HTTPException(status_code=403, detail='No privileges to access file.')
 
     blob_checksum = await calculate_hash(cache_data.loid, blob_repository, settings)
 
     if checksum:
         if checksum != blob_checksum:
+            await redis.delete(location)
             raise HTTPException(status_code=460, detail="Checksums don't match. File will be deleted soon.")
 
     file_size: int = await blob_repository.get_last_byte(cache_data.loid)
@@ -155,7 +180,7 @@ async def fetch_upload_offset(
     cache_data: UploadCacheData = UploadCacheData.parse_raw(redis_data)
 
     if user_info.id != cache_data.owner_id:
-        raise HTTPException(status_code=403, detail='No privilege to access file.')
+        raise HTTPException(status_code=403, detail='No privileges to access file.')
 
     last_byte: int = await blob_repository.get_last_byte(cache_data.loid)
 
@@ -177,7 +202,7 @@ async def delete_file(
     db_file: FileDb = await files_repository.fetch_db_file(file_path)
 
     if db_file.owner_id != user_info.id:
-        raise HTTPException(status_code=403, detail='No privilege to access file.')
+        raise HTTPException(status_code=403, detail='No privileges to access file.')
 
     await files_repository.delete_file(db_file.oid)
 

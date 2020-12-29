@@ -30,7 +30,11 @@ class FilesRepository:
 
         mappings: List[Mapping[str, Any]] = await self._db.fetch_all(query)
 
-        return [FileRead.parse_obj(mapping) for mapping in mappings]
+        return [FileRead(
+            file_path=Path(mapping['file_path']),
+            file_size_mb=(mapping['file_size_bytes'] / self.bytes_in_mb),
+            checksum=mapping['file_checksum']
+        ) for mapping in mappings]
 
     async def update_file(self, loid: int, params: FileDb) -> None:
         query: Update = files_table.update(
