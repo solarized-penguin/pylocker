@@ -24,6 +24,7 @@ class FileDb(FileBase):
 
 class FileRead(FileBase):
     file_size_mb: float
+    checksum: str
 
 
 class UploadCacheData(BaseModel):

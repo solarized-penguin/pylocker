@@ -97,16 +97,17 @@ async def confirm_upload(
     if user_info.id != cache_data.owner_id:
         raise HTTPException(status_code=403, detail='No privilege to access file.')
 
-    if checksum:
-        blob_checksum = await calculate_hash(cache_data.loid, blob_repository, settings)
+    blob_checksum = await calculate_hash(cache_data.loid, blob_repository, settings)
 
+    if checksum:
         if checksum != blob_checksum:
             raise HTTPException(status_code=460, detail="Checksums don't match. File will be deleted soon.")
 
     file_size: int = await blob_repository.get_last_byte(cache_data.loid)
 
     file_read: FileRead = await files_repository.create_file(
-        cache_data.loid, cache_data.file_path, file_size, user_info
+        cache_data.loid, cache_data.file_path, file_size,
+        blob_checksum, user_info
     )
 
     await redis.delete(location)

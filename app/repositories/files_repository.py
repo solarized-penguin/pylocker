@@ -1,11 +1,11 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Optional, Mapping, Any
+from typing import Optional, Mapping, Any, Dict
 
 from databases import Database
 from fastapi import Depends
-from sqlalchemy.sql import Insert, Select, Delete
+from sqlalchemy.sql import Insert, Select, Delete, Update
 
 from app.core import get_db
 from app.core.database_schema import files_table
@@ -25,6 +25,14 @@ class FilesRepository:
     def __init__(self, db: Database) -> None:
         self._db = db
 
+    async def update_file(self, loid: int, params: Dict[str, Any]) -> None:
+        query: Update = files_table.update(
+            whereclause=files_table.c.oid == loid,
+            values=params
+        )
+
+        await self._db.execute(query)
+
     async def delete_file(self, loid: int) -> None:
         query: Delete = files_table.delete(files_table.c.oid == loid)
         await self._db.execute(query)
@@ -40,14 +48,16 @@ class FilesRepository:
         return FileDb.parse_obj(result)
 
     async def create_file(
-            self, loid: int, file_path: str, file_size: int, user_info: UserInfo
+            self, loid: int, file_path: str, file_size: int,
+            checksum: str, user_info: UserInfo
     ) -> FileRead:
         query: Insert = files_table.insert(
             {
                 'oid': loid,
                 'file_path': file_path,
                 'file_size_bytes': file_size,
-                'owner_id': user_info.id
+                'owner_id': user_info.id,
+                'file_checksum': checksum
             }
         )
 
@@ -55,7 +65,8 @@ class FilesRepository:
 
         return FileRead(
             file_path=Path(file_path),
-            file_size_mb=(file_size / self.bytes_in_mb)
+            file_size_mb=(file_size / self.bytes_in_mb),
+            checksum=checksum
         )
 
     @classmethod

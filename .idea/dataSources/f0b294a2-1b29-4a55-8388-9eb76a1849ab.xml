@@ -1408,19 +1408,18 @@ false posix/WET
 false posix/Zulu
 false posixrules
 </TimeZones>
-      <StartupTime>1608985398</StartupTime>
+      <StartupTime>1609238062</StartupTime>
     </root>
     <database id="2" parent="1" name="postgres">
       <ObjectId>13395</ObjectId>
       <Comment>default administrative connection database</Comment>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>1239</IntrospectionStateNumber>
       <Current>1</Current>
     </database>
     <database id="3" parent="1" name="pylocker_db">
       <ObjectId>16384</ObjectId>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>1242</IntrospectionStateNumber>
+      <IntrospectionStateNumber>231298</IntrospectionStateNumber>
       <Relations>sequence|table|16410|16412|1
 </Relations>
     </database>
@@ -1492,7 +1491,7 @@ UC/10
 </Acl>
       <StateNumber>287</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>1243</IntrospectionStateNumber>
+      <IntrospectionStateNumber>231299</IntrospectionStateNumber>
       <Current>1</Current>
     </schema>
     <extension id="18" parent="3" name="plpgsql">
@@ -1606,7 +1605,7 @@ UC/10
     <table id="32" parent="17" name="files">
       <ObjectId>16412</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>491</StateNumber>
+      <StateNumber>231297</StateNumber>
     </table>
     <column id="33" parent="31" name="version_num">
       <Position>1</Position>
@@ -1651,22 +1650,31 @@ UC/10
     <column id="38" parent="32" name="owner_id">
       <Position>3</Position>
       <DataType>text|0s</DataType>
-      <StateNumber>491</StateNumber>
+      <NotNull>1</NotNull>
+      <StateNumber>231297</StateNumber>
       <TypeId>25</TypeId>
     </column>
     <column id="39" parent="32" name="file_path">
       <Position>4</Position>
       <DataType>text|0s</DataType>
-      <StateNumber>491</StateNumber>
+      <NotNull>1</NotNull>
+      <StateNumber>231297</StateNumber>
       <TypeId>25</TypeId>
     </column>
     <column id="40" parent="32" name="file_size_bytes">
       <Position>5</Position>
       <DataType>integer|0s</DataType>
-      <StateNumber>491</StateNumber>
+      <NotNull>1</NotNull>
+      <StateNumber>231297</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <index id="41" parent="32" name="files_pkey">
+    <column id="41" parent="32" name="file_checksum">
+      <Position>6</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>231297</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <index id="42" parent="32" name="files_pkey">
       <ObjectId>16419</ObjectId>
       <StateNumber>491</StateNumber>
       <ColNames>id</ColNames>
@@ -1676,28 +1684,31 @@ UC/10
       <CollationIds>0</CollationIds>
       <ClassIds>1978</ClassIds>
     </index>
-    <index id="42" parent="32" name="files_file_path_key">
-      <ObjectId>16421</ObjectId>
-      <StateNumber>491</StateNumber>
-      <ColNames>file_path</ColNames>
+    <index id="43" parent="32" name="unique_paths_per_user">
+      <ObjectId>19153</ObjectId>
+      <StateNumber>231297</StateNumber>
+      <ColNames>owner_id
+file_path</ColNames>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
-      <CollationIds>100</CollationIds>
-      <CollationNames>default</CollationNames>
-      <ClassIds>3126</ClassIds>
+      <CollationIds>100,100</CollationIds>
+      <CollationNames>default
+default</CollationNames>
+      <ClassIds>3126,3126</ClassIds>
     </index>
-    <key id="43" parent="32" name="files_pkey">
+    <key id="44" parent="32" name="files_pkey">
       <ObjectId>16420</ObjectId>
       <StateNumber>491</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>files_pkey</UnderlyingIndexName>
     </key>
-    <key id="44" parent="32" name="files_file_path_key">
-      <ObjectId>16422</ObjectId>
-      <StateNumber>491</StateNumber>
-      <ColNames>file_path</ColNames>
-      <UnderlyingIndexName>files_file_path_key</UnderlyingIndexName>
+    <key id="45" parent="32" name="unique_paths_per_user">
+      <ObjectId>19154</ObjectId>
+      <StateNumber>231297</StateNumber>
+      <ColNames>owner_id
+file_path</ColNames>
+      <UnderlyingIndexName>unique_paths_per_user</UnderlyingIndexName>
     </key>
   </database-model>
 </dataSource>

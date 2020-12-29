@@ -12,6 +12,6 @@ files_table: sa.Table = sa.Table(
     sa.Column('owner_id', TEXT, nullable=False),
     sa.Column('file_path', TEXT, nullable=False),
     sa.Column('file_size_bytes', INTEGER, nullable=False),
-    sa.Column('file_checksum', TEXT, nullable=True),
+    sa.Column('file_checksum', TEXT, nullable=False),
     UniqueConstraint('owner_id', 'file_path', name='unique_paths_per_user')
 )
