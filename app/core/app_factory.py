@@ -60,7 +60,8 @@ def create_app() -> FastAPI:
         """
         request.state.db = db_pool
         request.state.redis = redis
-        return await call_next(request)
+        response: Response = await call_next(request)
+        return response
 
     # start/stop db pool
     @app.on_event('startup')

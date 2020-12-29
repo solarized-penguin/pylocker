@@ -67,3 +67,12 @@ class LocationNotFoundError(BasicError):
             error_code=404, error_message='Provided location not found! '
                                           'Are you sure this location exists?'
         )
+
+
+class FileDoesNotExistsError(BasicError):
+    def __init__(self) -> None:
+        super(FileDoesNotExistsError, self).__init__(
+            error_code=404,
+            error_message=f"File you are trying to delete doesn't exists. "
+                          f"Make sure file_path you supplied is correct."
+        )

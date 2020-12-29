@@ -43,6 +43,13 @@ class UploadLocationData(BaseModel):
         orm_mode = True
 
 
+class LastUploadedByte(BaseModel):
+    last_byte: int
+
+    class Config:
+        orm_mode = True
+
+
 class UploadCreationHeaders(BaseModel):
     file_path: Path
 

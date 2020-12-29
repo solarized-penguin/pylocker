@@ -10,7 +10,8 @@ from ..core import get_redis, Settings
 from ..errors import LocationNotFoundError, ChunkTooBigError
 from ..repositories.blob_repository import BlobRepository
 from ..repositories.files_repository import FilesRepository
-from ..schemas.files import UploadCreationHeaders, UploadCacheData, UploadLocationData, UploadFileHeaders, FileRead
+from ..schemas.files import UploadCreationHeaders, UploadCacheData, UploadLocationData, UploadFileHeaders, FileRead, \
+    LastUploadedByte, FileDb
 from ..security import UserInfo, logged_user
 
 router = APIRouter()
@@ -64,7 +65,7 @@ async def upload_file(
     cache_data: UploadCacheData = UploadCacheData.parse_raw(redis_data)
 
     if user_info.id != cache_data.owner_id:
-        raise HTTPException(status_code=403, detail='No privilege to access file!')
+        raise HTTPException(status_code=403, detail='No privilege to access file.')
 
     await blob_repository.write_to_blob(
         cache_data.loid, headers.upload_offset, chunk
@@ -94,7 +95,7 @@ async def confirm_upload(
     cache_data: UploadCacheData = UploadCacheData.parse_raw(redis_data)
 
     if user_info.id != cache_data.owner_id:
-        raise HTTPException(status_code=403, detail='No privilege to access file!')
+        raise HTTPException(status_code=403, detail='No privilege to access file.')
 
     if checksum:
         blob_checksum = await calculate_hash(cache_data.loid, blob_repository, settings)
@@ -114,14 +115,50 @@ async def confirm_upload(
 
 
 @router.head(
-    ''
+    '',
+    response_model=LastUploadedByte,
+    status_code=200
 )
-async def fetch_upload_offset() -> JSONResponse:
-    pass
+async def fetch_upload_offset(
+        location: str = Query(..., description='upload location'),
+        redis: StrictRedis = Depends(get_redis),
+        blob_repository: BlobRepository = Depends(BlobRepository.create),
+        user_info: UserInfo = Depends(logged_user)
+) -> LastUploadedByte:
+    if not await redis.exists(location):
+        raise LocationNotFoundError()
+
+    redis_data: bytes = await redis.get(location)
+    cache_data: UploadCacheData = UploadCacheData.parse_raw(redis_data)
+
+    if user_info.id != cache_data.owner_id:
+        raise HTTPException(status_code=403, detail='No privilege to access file.')
+
+    last_byte: int = await blob_repository.get_last_byte(cache_data.loid)
+
+    return LastUploadedByte(last_byte=last_byte)
 
 
 @router.delete(
-    ''
+    '',
+    status_code=200
 )
-async def delete_file() -> JSONResponse:
-    pass
+async def delete_file(
+        file_path: str = Query(..., description='path of file to delete'),
+        files_repository: FilesRepository = Depends(FilesRepository.create),
+        user_info: UserInfo = Depends(logged_user)
+) -> JSONResponse:
+    db_file: FileDb = await files_repository.fetch_file(file_path)
+
+    if db_file.owner_id != user_info.id:
+        raise HTTPException(status_code=403, detail='No privilege to access file.')
+
+    await files_repository.delete_file(db_file.oid)
+
+    return JSONResponse(
+        status_code=200,
+        content={
+            'message': f"Operation successful. "
+                       f"Object with path '{db_file.file_path}' was deleted."
+        }
+    )
