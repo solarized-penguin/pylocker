@@ -161,7 +161,7 @@ async def fetch_upload_offset(
 
     return JSONResponse(
         status_code=200,
-        headers={'upload-offset': last_byte}
+        headers={'upload-offset': str(last_byte)}
     )
 
 

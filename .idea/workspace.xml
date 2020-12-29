@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="df6b04ce-8cc1-4544-85c3-a3ece333a6b9" name="Default Changelist" comment="- fixing no-content issue">
+    <list default="true" id="df6b04ce-8cc1-4544-85c3-a3ece333a6b9" name="Default Changelist" comment="- movie responses for location and last uploaded byte to header">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/routers/files_router.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routers/files_router.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/schemas/files.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/schemas/files.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,7 +65,7 @@
       <updated>1609146183141</updated>
       <workItem from="1609146186667" duration="21251000" />
       <workItem from="1609177428302" duration="10791000" />
-      <workItem from="1609231816549" duration="13674000" />
+      <workItem from="1609231816549" duration="13806000" />
     </task>
     <task id="LOCAL-00003" summary="- preparing api for implementing TUS protocol">
       <created>1609153728438</created>
@@ -173,7 +172,14 @@
       <option name="project" value="LOCAL" />
       <updated>1609243225139</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="- movie responses for location and last uploaded byte to header">
+      <created>1609248250375</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1609248250375</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -206,7 +212,8 @@
     <MESSAGE value="- reformating database, changing checksum to mandatory&#10;- checksum always calculates during confirmation process" />
     <MESSAGE value="- added get all files endpoint" />
     <MESSAGE value="- fixing no-content issue" />
-    <option name="LAST_COMMIT_MESSAGE" value="- fixing no-content issue" />
+    <MESSAGE value="- movie responses for location and last uploaded byte to header" />
+    <option name="LAST_COMMIT_MESSAGE" value="- movie responses for location and last uploaded byte to header" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/pylocker$Unittests_in_router_tests.coverage" NAME="Unittests in router_tests Coverage Results" MODIFIED="1608987872720" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/router_tests" />
@@ -214,7 +221,7 @@
     <SUITE FILE_PATH="coverage/pylocker$pytest_all.coverage" NAME="pytest-all Coverage Results" MODIFIED="1609098848196" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/pylocker$Unittests_in_tests.coverage" NAME="Unittests in tests Coverage Results" MODIFIED="1609098995255" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/pylocker$pytest.coverage" NAME="pytest Coverage Results" MODIFIED="1609165244167" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
-    <SUITE FILE_PATH="coverage/pylocker$main_local.coverage" NAME="main_local Coverage Results" MODIFIED="1609247832218" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/pylocker$main_local.coverage" NAME="main_local Coverage Results" MODIFIED="1609248278697" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/pylocker$pytest_in_tests.coverage" NAME="pytest Coverage Results" MODIFIED="1609099089802" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/pylocker$main.coverage" NAME="main Coverage Results" MODIFIED="1608630285297" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
