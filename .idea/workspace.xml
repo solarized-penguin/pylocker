@@ -1,368 +1,259 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="AnalysisUIOptions">
-    <option name="SCOPE_TYPE" value="3" />
-  </component>
   <component name="ChangeListManager">
-    <list default="true" id="c26abca9-597d-48b7-a21a-635f2174fe78" name="Default Changelist" comment="- basic authorization (swagger-ui) finished&#10;- tests will follow">
+    <list default="true" id="df6b04ce-8cc1-4544-85c3-a3ece333a6b9" name="Default Changelist" comment="- working on test to resumable_files_router">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/security/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/security/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/security/security_enums.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/security/enum_models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/security/users_schemas.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/security/users_schemas.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/poetry.lock" beforeDir="false" afterPath="$PROJECT_DIR$/poetry.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/routers/resumable_files_router.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routers/resumable_files_router.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/router_tests/test_resumable_files_router.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/router_tests/test_resumable_files_router.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/settings_tests_version.env" beforeDir="false" afterPath="$PROJECT_DIR$/tests/settings_tests_version.env" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="DockerExecCommand">
-    <ExecCommand>
-      <option name="command" value="-it 901109b1bf9e bash" />
-      <option name="imageId" value="sha256:dc8b7ffdd53fc24deba3fbbeca845637fd748581cc8d66a59c6f8e87367cf997" />
-    </ExecCommand>
-    <ExecCommand>
-      <option name="command" value="docker exec -it pylocker bash\" />
-      <option name="imageId" value="sha256:dc8b7ffdd53fc24deba3fbbeca845637fd748581cc8d66a59c6f8e87367cf997" />
-    </ExecCommand>
-  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="BashSupport Pro Bash" />
         <option value="Python Script" />
       </list>
     </option>
   </component>
-  <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="main" />
-      </map>
-    </option>
-  </component>
-  <component name="ProjectId" id="1lhu5RWzIM28SMYfF6omxbyTgdw" />
+  <component name="ProjectId" id="1mHMhHgFp4etlMGiJFj3eIMQhql" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
-    <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="false" />
-    <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
-    <property name="ASKED_MARK_IGNORED_FILES_AS_EXCLUDED" value="true" />
-    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="DatabaseDriversLRU" value="redshift&#10;postgresql" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Documents/env_vars/pylocker/local.env" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/tests/router_tests/test_resumable_files_router.py" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/app/security" />
-      <recent name="$PROJECT_DIR$/docker" />
-      <recent name="$PROJECT_DIR$/docker-composes" />
-      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/app/schemas" />
+      <recent name="$PROJECT_DIR$/app/routers" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.main">
-    <configuration name="pylocker_api-compose" type="BashProRunConfiguration">
-      <option name="scriptParameters" value="PYLOCKER_API" />
-      <option name="scriptPath" value="$PROJECT_DIR$/docker/compose.sh" />
-      <RunnerSettings bashdbVersion="Automatic" bashPathMapper="Automatic" RunnerId="pro.bashsupport.shDebugRunner" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
-      <module name="pylocker" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="$USER_HOME$/.cache/pypoetry/virtualenvs/pylocker-KaPH-tJm-py3.8/bin/python" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <EXTENSION ID="net.ashald.envfile">
-        <option name="IS_ENABLED" value="false" />
-        <option name="IS_SUBST" value="false" />
-        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
-        <option name="IS_IGNORE_MISSING_FILES" value="false" />
-        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
-        <ENTRIES>
-          <ENTRY IS_ENABLED="true" PARSER="runconfig" />
-        </ENTRIES>
-      </EXTENSION>
-      <option name="SCRIPT_NAME" value="" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Python tests.pytest">
     <list>
-      <item itemvalue="BashSupport Pro.auth-compose" />
       <item itemvalue="BashSupport Pro.pylocker-compose" />
       <item itemvalue="BashSupport Pro.all-compose" />
       <item itemvalue="BashSupport Pro.pylocker_api-compose" />
-      <item itemvalue="Python.main" />
+      <item itemvalue="BashSupport Pro.auth-compose" />
+      <item itemvalue="Python.main_local" />
+      <item itemvalue="Python tests.pytest" />
     </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
-    <task active="true" id="Default" summary="Default task">
-      <changelist id="c26abca9-597d-48b7-a21a-635f2174fe78" name="Default Changelist" comment="" />
-      <created>1608061462037</created>
-      <option name="number" value="Default" />
-      <option name="presentableId" value="Default" />
-      <updated>1608061462037</updated>
-      <workItem from="1608061463643" duration="6000" />
-      <workItem from="1608061510726" duration="7630000" />
-      <workItem from="1608069788280" duration="6733000" />
-      <workItem from="1608076633239" duration="9730000" />
-      <workItem from="1608086778985" duration="3704000" />
-      <workItem from="1608092924121" duration="113000" />
-      <workItem from="1608093635332" duration="998000" />
-      <workItem from="1608098684762" duration="38000" />
-      <workItem from="1608101208864" duration="31065000" />
-      <workItem from="1608138927699" duration="150000" />
-      <workItem from="1608139094264" duration="12045000" />
-      <workItem from="1608188981295" duration="27506000" />
-      <workItem from="1608272854832" duration="10863000" />
-      <workItem from="1608288785430" duration="12494000" />
-      <workItem from="1608302040881" duration="1744000" />
-      <workItem from="1608304266896" duration="277000" />
-      <workItem from="1608476613170" duration="3609000" />
-      <workItem from="1608583155261" duration="56000" />
-      <workItem from="1608584289287" duration="62000" />
-      <workItem from="1608596122463" duration="25457000" />
-      <workItem from="1608626425993" duration="3881000" />
-    </task>
-    <task id="LOCAL-00001" summary="basic app setup almost done&#10;making fusionauth work with swagger - implicit is a next step">
-      <created>1608069962421</created>
+    <task id="LOCAL-00001" summary="- minor change in files router">
+      <created>1609098913996</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1608069962421</updated>
+      <updated>1609098913996</updated>
     </task>
-    <task id="LOCAL-00002" summary="basic app setup almost done&#10;making fusionauth work with swagger - implicit is a next step">
-      <created>1608070071081</created>
+    <task id="LOCAL-00002" summary="- adding test run configuration">
+      <created>1609099078420</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1608070071081</updated>
+      <updated>1609099078420</updated>
     </task>
-    <task id="LOCAL-00003" summary="working on fusionauth">
-      <created>1608084814060</created>
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="df6b04ce-8cc1-4544-85c3-a3ece333a6b9" name="Default Changelist" comment="- adding test run configuration" />
+      <created>1609146183141</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1609146183141</updated>
+      <workItem from="1609146186667" duration="21251000" />
+      <workItem from="1609177428302" duration="10791000" />
+      <workItem from="1609231816549" duration="23360000" />
+      <workItem from="1609258589509" duration="1591000" />
+      <workItem from="1609321169417" duration="8356000" />
+      <workItem from="1609331273106" duration="19073000" />
+    </task>
+    <task id="LOCAL-00003" summary="- preparing api for implementing TUS protocol">
+      <created>1609153728438</created>
       <option name="number" value="00003" />
       <option name="presentableId" value="LOCAL-00003" />
       <option name="project" value="LOCAL" />
-      <updated>1608084814065</updated>
+      <updated>1609153728438</updated>
     </task>
-    <task id="LOCAL-00004" summary="working on docker-compose">
-      <created>1608089505274</created>
+    <task id="LOCAL-00004" summary="- upload creation endpoint finished">
+      <created>1609156299263</created>
       <option name="number" value="00004" />
       <option name="presentableId" value="LOCAL-00004" />
       <option name="project" value="LOCAL" />
-      <updated>1608089505274</updated>
+      <updated>1609156299263</updated>
     </task>
-    <task id="LOCAL-00005" summary="working on docker-compose">
-      <created>1608089853590</created>
+    <task id="LOCAL-00005" summary="- upload creation endpoint refactored">
+      <created>1609159179400</created>
       <option name="number" value="00005" />
       <option name="presentableId" value="LOCAL-00005" />
       <option name="project" value="LOCAL" />
-      <updated>1608089853590</updated>
+      <updated>1609159179400</updated>
     </task>
-    <task id="LOCAL-00006" summary="basic working docker-compose.yml created,&#10;naming refactor will follow">
-      <created>1608108667041</created>
+    <task id="LOCAL-00006" summary="- working on implementing resumable upload - based on tus protocol">
+      <created>1609163944169</created>
       <option name="number" value="00006" />
       <option name="presentableId" value="LOCAL-00006" />
       <option name="project" value="LOCAL" />
-      <updated>1608108667041</updated>
+      <updated>1609163944169</updated>
     </task>
-    <task id="LOCAL-00007" summary="refactoring naming in docker-compose.yml">
-      <created>1608110293397</created>
+    <task id="LOCAL-00007" summary="- settings modification and redis removal after successful upload added">
+      <created>1609166117074</created>
       <option name="number" value="00007" />
       <option name="presentableId" value="LOCAL-00007" />
       <option name="project" value="LOCAL" />
-      <updated>1608110293397</updated>
+      <updated>1609166117074</updated>
     </task>
-    <task id="LOCAL-00008" summary="working on app security">
-      <created>1608125813521</created>
+    <task id="LOCAL-00008" summary="- removing upload-length and adding confirmation endpoint">
+      <created>1609176693897</created>
       <option name="number" value="00008" />
       <option name="presentableId" value="LOCAL-00008" />
       <option name="project" value="LOCAL" />
-      <updated>1608125813521</updated>
+      <updated>1609176693897</updated>
     </task>
-    <task id="LOCAL-00009" summary="working on app security">
-      <created>1608133354198</created>
+    <task id="LOCAL-00009" summary="- adding creation time to cached model">
+      <created>1609177041410</created>
       <option name="number" value="00009" />
       <option name="presentableId" value="LOCAL-00009" />
       <option name="project" value="LOCAL" />
-      <updated>1608133354198</updated>
+      <updated>1609177041410</updated>
     </task>
-    <task id="LOCAL-00010" summary="working on app security">
-      <created>1608135024702</created>
+    <task id="LOCAL-00010" summary="- upload files done">
+      <created>1609181471789</created>
       <option name="number" value="00010" />
       <option name="presentableId" value="LOCAL-00010" />
       <option name="project" value="LOCAL" />
-      <updated>1608135024702</updated>
+      <updated>1609181471789</updated>
     </task>
-    <task id="LOCAL-00011" summary="adding elastic search to fusionauth">
-      <created>1608192224745</created>
+    <task id="LOCAL-00011" summary="- working on file confirmation mechanism">
+      <created>1609188951092</created>
       <option name="number" value="00011" />
       <option name="presentableId" value="LOCAL-00011" />
       <option name="project" value="LOCAL" />
-      <updated>1608192224745</updated>
+      <updated>1609188951092</updated>
     </task>
-    <task id="LOCAL-00012" summary="creating working auth_search service (elasticsearch)&#10;working on plugging postgres database next">
-      <created>1608225226256</created>
+    <task id="LOCAL-00012" summary="- file confirmation done">
+      <created>1609233345104</created>
       <option name="number" value="00012" />
       <option name="presentableId" value="LOCAL-00012" />
       <option name="project" value="LOCAL" />
-      <updated>1608225226257</updated>
+      <updated>1609233345104</updated>
     </task>
-    <task id="LOCAL-00013" summary="- fixing dockerfile and deploy scripts">
-      <created>1608287154464</created>
+    <task id="LOCAL-00013" summary="- added get last byte and delete functionality">
+      <created>1609237416050</created>
       <option name="number" value="00013" />
       <option name="presentableId" value="LOCAL-00013" />
       <option name="project" value="LOCAL" />
-      <updated>1608287154464</updated>
+      <updated>1609237416050</updated>
     </task>
-    <task id="LOCAL-00014" summary="- fixing dockerfile and deploy scripts">
-      <created>1608287247778</created>
+    <task id="LOCAL-00014" summary="- restructuring table">
+      <created>1609238336217</created>
       <option name="number" value="00014" />
       <option name="presentableId" value="LOCAL-00014" />
       <option name="project" value="LOCAL" />
-      <updated>1608287247778</updated>
+      <updated>1609238336217</updated>
     </task>
-    <task id="LOCAL-00015" summary="- fixing dockerfile and deploy scripts">
-      <created>1608290771454</created>
+    <task id="LOCAL-00015" summary="- reformating database, changing checksum to mandatory&#10;- checksum always calculates during confirmation process">
+      <created>1609239331657</created>
       <option name="number" value="00015" />
       <option name="presentableId" value="LOCAL-00015" />
       <option name="project" value="LOCAL" />
-      <updated>1608290771454</updated>
+      <updated>1609239331657</updated>
     </task>
-    <task id="LOCAL-00016" summary="- minor modification in prestart script">
-      <created>1608291705617</created>
+    <task id="LOCAL-00016" summary="- added get all files endpoint">
+      <created>1609242838594</created>
       <option name="number" value="00016" />
       <option name="presentableId" value="LOCAL-00016" />
       <option name="project" value="LOCAL" />
-      <updated>1608291705617</updated>
+      <updated>1609242838594</updated>
     </task>
-    <task id="LOCAL-00017" summary="- minor modification in prestart script">
-      <created>1608291749784</created>
+    <task id="LOCAL-00017" summary="- fixing no-content issue">
+      <created>1609243225139</created>
       <option name="number" value="00017" />
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
-      <updated>1608291749784</updated>
+      <updated>1609243225139</updated>
     </task>
-    <task id="LOCAL-00018" summary="- minor modification in prestart script">
-      <created>1608291863704</created>
+    <task id="LOCAL-00018" summary="- movie responses for location and last uploaded byte to header">
+      <created>1609248250375</created>
       <option name="number" value="00018" />
       <option name="presentableId" value="LOCAL-00018" />
       <option name="project" value="LOCAL" />
-      <updated>1608291863704</updated>
+      <updated>1609248250375</updated>
     </task>
-    <task id="LOCAL-00019" summary="- fixing issues with prestart.sh&#10;Currently prestart generates correct PYTHONPATH by itself, so alembic works like a charm.">
-      <created>1608292479948</created>
+    <task id="LOCAL-00019" summary="- fioxing error - sending int in header without conversion">
+      <created>1609248370585</created>
       <option name="number" value="00019" />
       <option name="presentableId" value="LOCAL-00019" />
       <option name="project" value="LOCAL" />
-      <updated>1608292479948</updated>
+      <updated>1609248370585</updated>
     </task>
-    <task id="LOCAL-00020" summary="- fixing issues with prestart.sh&#10;Currently prestart generates correct PYTHONPATH by itself, so alembic works like a charm.">
-      <created>1608298722270</created>
+    <task id="LOCAL-00020" summary="- file download in progress">
+      <created>1609260151841</created>
       <option name="number" value="00020" />
       <option name="presentableId" value="LOCAL-00020" />
       <option name="project" value="LOCAL" />
-      <updated>1608298722270</updated>
+      <updated>1609260151841</updated>
     </task>
-    <task id="LOCAL-00021" summary="- fighting with deplojment issues continues...">
-      <created>1608301220515</created>
+    <task id="LOCAL-00021" summary="- restructuring database to handle big size files">
+      <created>1609326442823</created>
       <option name="number" value="00021" />
       <option name="presentableId" value="LOCAL-00021" />
       <option name="project" value="LOCAL" />
-      <updated>1608301220515</updated>
+      <updated>1609326442823</updated>
     </task>
-    <task id="LOCAL-00022" summary="- adding first migration&#10;- basic deploy all set-up, auth will be next">
-      <created>1608304097915</created>
+    <task id="LOCAL-00022" summary="- restructuring database to handle big size files">
+      <created>1609326455616</created>
       <option name="number" value="00022" />
       <option name="presentableId" value="LOCAL-00022" />
       <option name="project" value="LOCAL" />
-      <updated>1608304097916</updated>
+      <updated>1609326455616</updated>
     </task>
-    <task id="LOCAL-00023" summary="- adding fetch_user_by_email and UserNotFoundError">
-      <created>1608485353004</created>
+    <task id="LOCAL-00023" summary="- fixing error with data type">
+      <created>1609326739191</created>
       <option name="number" value="00023" />
       <option name="presentableId" value="LOCAL-00023" />
       <option name="project" value="LOCAL" />
-      <updated>1608485353004</updated>
+      <updated>1609326739191</updated>
     </task>
-    <task id="LOCAL-00024" summary="- adding fetch_user_by_email and UserNotFoundError">
-      <created>1608485419176</created>
+    <task id="LOCAL-00024" summary="- restructuring whole project">
+      <created>1609330910314</created>
       <option name="number" value="00024" />
       <option name="presentableId" value="LOCAL-00024" />
       <option name="project" value="LOCAL" />
-      <updated>1608485419176</updated>
+      <updated>1609330910314</updated>
     </task>
-    <task id="LOCAL-00025" summary="- working on user registration process">
-      <created>1608601773223</created>
+    <task id="LOCAL-00025" summary="- tests for files_repository.py done">
+      <created>1609337194564</created>
       <option name="number" value="00025" />
       <option name="presentableId" value="LOCAL-00025" />
       <option name="project" value="LOCAL" />
-      <updated>1608601773223</updated>
+      <updated>1609337194564</updated>
     </task>
-    <task id="LOCAL-00026" summary="- register user endpoint finished">
-      <created>1608607385831</created>
+    <task id="LOCAL-00026" summary="- extracting mocked files and users data to separate file, so they can be shared between tests">
+      <created>1609337812938</created>
       <option name="number" value="00026" />
       <option name="presentableId" value="LOCAL-00026" />
       <option name="project" value="LOCAL" />
-      <updated>1608607385831</updated>
+      <updated>1609337812938</updated>
     </task>
-    <task id="LOCAL-00027" summary="- register user endpoint finished">
-      <created>1608607409560</created>
+    <task id="LOCAL-00027" summary="- working on test to resumable_files_router">
+      <created>1609345299415</created>
       <option name="number" value="00027" />
       <option name="presentableId" value="LOCAL-00027" />
       <option name="project" value="LOCAL" />
-      <updated>1608607409560</updated>
+      <updated>1609345299415</updated>
     </task>
-    <task id="LOCAL-00028" summary="- register user endpoint finished">
-      <created>1608607441536</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1608607441536</updated>
-    </task>
-    <task id="LOCAL-00029" summary="- sign-in endpoint finished">
-      <created>1608616862278</created>
-      <option name="number" value="00029" />
-      <option name="presentableId" value="LOCAL-00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1608616862278</updated>
-    </task>
-    <task id="LOCAL-00030" summary="- basic authorization (swagger-ui) finished&#10;- tests will follow">
-      <created>1608622140906</created>
-      <option name="number" value="00030" />
-      <option name="presentableId" value="LOCAL-00030" />
-      <option name="project" value="LOCAL" />
-      <updated>1608622140906</updated>
-    </task>
-    <option name="localTasksCounter" value="31" />
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -378,27 +269,42 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="basic app setup almost done&#10;making fusionauth work with swagger - implicit is a next step" />
-    <MESSAGE value="working on fusionauth" />
-    <MESSAGE value="working on docker-compose" />
-    <MESSAGE value="basic working docker-compose.yml created,&#10;naming refactor will follow" />
-    <MESSAGE value="refactoring naming in docker-compose.yml" />
-    <MESSAGE value="working on app security" />
-    <MESSAGE value="adding elastic search to fusionauth" />
-    <MESSAGE value="creating working auth_search service (elasticsearch)&#10;working on plugging postgres database next" />
-    <MESSAGE value="- fixing dockerfile and deploy scripts" />
-    <MESSAGE value="- minor modification in prestart script" />
-    <MESSAGE value="- fixing issues with prestart.sh&#10;Currently prestart generates correct PYTHONPATH by itself, so alembic works like a charm." />
-    <MESSAGE value="- fighting with deplojment issues continues..." />
-    <MESSAGE value="- adding first migration&#10;- basic deploy all set-up, auth will be next" />
-    <MESSAGE value="- adding fetch_user_by_email and UserNotFoundError" />
-    <MESSAGE value="- working on user registration process" />
-    <MESSAGE value="- register user endpoint finished" />
-    <MESSAGE value="- sign-in endpoint finished" />
-    <MESSAGE value="- basic authorization (swagger-ui) finished&#10;- tests will follow" />
-    <option name="LAST_COMMIT_MESSAGE" value="- basic authorization (swagger-ui) finished&#10;- tests will follow" />
+    <MESSAGE value="- adding test run configuration" />
+    <MESSAGE value="- preparing api for implementing TUS protocol" />
+    <MESSAGE value="- upload creation endpoint finished" />
+    <MESSAGE value="- upload creation endpoint refactored" />
+    <MESSAGE value="- working on implementing resumable upload - based on tus protocol" />
+    <MESSAGE value="- settings modification and redis removal after successful upload added" />
+    <MESSAGE value="- removing upload-length and adding confirmation endpoint" />
+    <MESSAGE value="- adding creation time to cached model" />
+    <MESSAGE value="- upload files done" />
+    <MESSAGE value="- working on file confirmation mechanism" />
+    <MESSAGE value="- file confirmation done" />
+    <MESSAGE value="- added get last byte and delete functionality" />
+    <MESSAGE value="- restructuring table" />
+    <MESSAGE value="- reformating database, changing checksum to mandatory&#10;- checksum always calculates during confirmation process" />
+    <MESSAGE value="- added get all files endpoint" />
+    <MESSAGE value="- fixing no-content issue" />
+    <MESSAGE value="- movie responses for location and last uploaded byte to header" />
+    <MESSAGE value="- fioxing error - sending int in header without conversion" />
+    <MESSAGE value="- file download in progress" />
+    <MESSAGE value="- restructuring database to handle big size files" />
+    <MESSAGE value="- fixing error with data type" />
+    <MESSAGE value="- restructuring whole project" />
+    <MESSAGE value="- tests for files_repository.py done" />
+    <MESSAGE value="- extracting mocked files and users data to separate file, so they can be shared between tests" />
+    <MESSAGE value="- working on test to resumable_files_router" />
+    <option name="LAST_COMMIT_MESSAGE" value="- working on test to resumable_files_router" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/pylocker$Unittests_in_router_tests.coverage" NAME="Unittests in router_tests Coverage Results" MODIFIED="1608987872720" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/router_tests" />
+    <SUITE FILE_PATH="coverage/pylocker$pytest_for_blob_manager_tests_test_blob_manager.coverage" NAME="pytest-blob_manager Coverage Results" MODIFIED="1608992220846" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/pylocker$pytest_all.coverage" NAME="pytest-all Coverage Results" MODIFIED="1609098848196" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/pylocker$Unittests_in_tests.coverage" NAME="Unittests in tests Coverage Results" MODIFIED="1609098995255" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/pylocker$pytest.coverage" NAME="pytest Coverage Results" MODIFIED="1609345307324" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/pylocker$main_local.coverage" NAME="main_local Coverage Results" MODIFIED="1609333778474" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/pylocker$files_pytest.coverage" NAME="files_pytest Coverage Results" MODIFIED="1609350223019" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/pylocker$pytest_in_tests.coverage" NAME="pytest Coverage Results" MODIFIED="1609099089802" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/pylocker$main.coverage" NAME="main Coverage Results" MODIFIED="1608630285297" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

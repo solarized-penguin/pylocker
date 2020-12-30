@@ -24,7 +24,6 @@ services:
     environment:
       ALLOW_EMPTY_PASSWORD: ${redis_allow_empty_password}
       REDIS_DISABLE_COMMANDS: ${redis_disable_commands}
-      REDIS_PASSWORD: ${redis_password}
     ports:
       - ${redis_port}:6379
     command: [ "redis-server", "--appendonly", "yes" ]

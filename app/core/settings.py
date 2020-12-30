@@ -1,8 +1,10 @@
+from __future__ import annotations
+
 import os
 from functools import lru_cache
 from typing import List
 
-from pydantic import BaseSettings, PostgresDsn, SecretStr
+from pydantic import BaseSettings, PostgresDsn, SecretStr, RedisDsn
 
 DB_SCHEMA = './database_schema.py'
 
@@ -25,7 +27,7 @@ def _set_up_environment() -> None:
 
 class Settings(BaseSettings):
     """
-    | Settings model for entire application.
+    | Settings for entire application.
     | Values are read from environment.
     Available settings:
         1. General environment info:
@@ -37,7 +39,10 @@ class Settings(BaseSettings):
             * api_swagger_url - swagger documentation location: **<api address>/api_swagger_url**
             * api_redoc_url - redoc documentation location: **<api address>/api_redoc_url**
         3. Connections (database dsn, redis, itp...):
-            * postgres_dsn - postgresql api database url
+            * postgres_dsn - postgresql connection string
+            * redis_host - address of redis host
+            * redis_port - port on which redis is listening
+            * redis_db - redis database to use
         4. Security (OAuth2, OpenId Connect):
             * api_key - api key
             * app_id - application id
@@ -45,6 +50,12 @@ class Settings(BaseSettings):
             * token_url - url that should be used to obtain access token
         5. Scopes/Roles:
             * standard_user_roles - roles assigned by default to standard user account
+        6. Logging:
+            * log_format - log message formatting
+            * log_level - minimal logging level
+            * log_file_path - path to log file
+        7. Files:
+            * max_chunk_size - maximal size of a single chunk
     """
 
     # General environment info
@@ -59,8 +70,9 @@ class Settings(BaseSettings):
 
     # connections
     postgres_dsn: PostgresDsn
+    redis_dsn: RedisDsn
 
-    # security
+    # auth_client
     api_key: SecretStr
     app_id: SecretStr
     client_id: SecretStr
@@ -72,6 +84,15 @@ class Settings(BaseSettings):
     # roles\scopes
     standard_user_roles_list: str
 
+    # logging
+    log_format: str
+    log_level: str
+    log_file_path: str
+
+    # files
+    location_url_bytes: int
+    max_chunk_size: int
+
     @property
     def standard_user_roles(self) -> List[str]:
         return _comma_separated_env_str_to_list(self.standard_user_roles_list)
@@ -79,14 +100,14 @@ class Settings(BaseSettings):
     class Config:
         case_sensitive = False
 
+    @classmethod
+    @lru_cache()
+    def get(cls) -> Settings:
+        """
+        Loads settings and
+        sets up environment
+        :rtype: Settings
+        """
+        _set_up_environment()
 
-@lru_cache()
-def get_settings() -> Settings:
-    """
-    Loads settings and
-    sets up environment
-    :rtype: Settings
-    """
-    _set_up_environment()
-
-    return Settings()
+        return Settings()
