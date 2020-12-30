@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Optional, Mapping, Any, List
+from typing import Optional, Mapping, Any, List, Dict
 
 from databases import Database
 from fastapi import Depends
@@ -62,15 +62,17 @@ class FilesRepository:
             self, loid: int, file_path: str, file_size: int,
             checksum: str, user_info: UserInfo
     ) -> FileRead:
-        query: Insert = files_table.insert(
-            {
-                'oid': loid,
-                'file_path': file_path,
-                'file_size_bytes': file_size,
-                'owner_id': user_info.id,
-                'file_checksum': checksum
-            }
-        )
+        insert_data: Dict[str, Any] = {
+            'oid': loid,
+            'file_path': file_path,
+            'file_size_bytes': file_size,
+            'owner_id': user_info.id
+        }
+
+        if checksum:
+            insert_data['file_checksum'] = checksum
+
+        query: Insert = files_table.insert(insert_data)
 
         await self._db.execute(query)
 

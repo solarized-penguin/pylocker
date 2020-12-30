@@ -1408,7 +1408,7 @@ false posix/WET
 false posix/Zulu
 false posixrules
 </TimeZones>
-      <StartupTime>1609238062</StartupTime>
+      <StartupTime>1609321160</StartupTime>
     </root>
     <database id="2" parent="1" name="postgres">
       <ObjectId>13395</ObjectId>
@@ -1419,8 +1419,8 @@ false posixrules
     <database id="3" parent="1" name="pylocker_db">
       <ObjectId>16384</ObjectId>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>231303</IntrospectionStateNumber>
-      <Relations>sequence|table|16410|16412|1
+      <IntrospectionStateNumber>236999</IntrospectionStateNumber>
+      <Relations>sequence|table|27376|27378|1
 </Relations>
     </database>
     <role id="4" parent="1" name="pg_execute_server_program">
@@ -1491,7 +1491,7 @@ UC/10
 </Acl>
       <StateNumber>287</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>231304</IntrospectionStateNumber>
+      <IntrospectionStateNumber>237000</IntrospectionStateNumber>
       <Current>1</Current>
     </schema>
     <extension id="18" parent="3" name="plpgsql">
@@ -1592,31 +1592,31 @@ UC/10
       <Type>index</Type>
     </access-method>
     <sequence id="30" parent="17" name="files_id_seq">
-      <ObjectId>16410</ObjectId>
+      <ObjectId>27376</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>491</StateNumber>
+      <StateNumber>236998</StateNumber>
       <DataType>integer|0s</DataType>
     </sequence>
     <table id="31" parent="17" name="alembic_version">
-      <ObjectId>16405</ObjectId>
+      <ObjectId>27371</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>491</StateNumber>
+      <StateNumber>236997</StateNumber>
     </table>
     <table id="32" parent="17" name="files">
-      <ObjectId>16412</ObjectId>
+      <ObjectId>27378</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>231297</StateNumber>
+      <StateNumber>236998</StateNumber>
     </table>
     <column id="33" parent="31" name="version_num">
       <Position>1</Position>
       <DataType>varchar(32)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>491</StateNumber>
+      <StateNumber>236997</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <index id="34" parent="31" name="alembic_version_pkc">
-      <ObjectId>16408</ObjectId>
-      <StateNumber>491</StateNumber>
+      <ObjectId>27374</ObjectId>
+      <StateNumber>236997</StateNumber>
       <ColNames>version_num</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
@@ -1626,8 +1626,8 @@ UC/10
       <ClassIds>3126</ClassIds>
     </index>
     <key id="35" parent="31" name="alembic_version_pkc">
-      <ObjectId>16409</ObjectId>
-      <StateNumber>491</StateNumber>
+      <ObjectId>27375</ObjectId>
+      <StateNumber>236997</StateNumber>
       <ColNames>version_num</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>alembic_version_pkc</UnderlyingIndexName>
@@ -1636,7 +1636,7 @@ UC/10
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>491</StateNumber>
+      <StateNumber>236998</StateNumber>
       <DefaultExpression>nextval(&apos;files_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
@@ -1644,40 +1644,39 @@ UC/10
       <Position>2</Position>
       <DataType>oid|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>491</StateNumber>
+      <StateNumber>236998</StateNumber>
       <TypeId>26</TypeId>
     </column>
     <column id="38" parent="32" name="owner_id">
       <Position>3</Position>
       <DataType>text|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>231297</StateNumber>
+      <StateNumber>236998</StateNumber>
       <TypeId>25</TypeId>
     </column>
     <column id="39" parent="32" name="file_path">
       <Position>4</Position>
       <DataType>text|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>231297</StateNumber>
+      <StateNumber>236998</StateNumber>
       <TypeId>25</TypeId>
     </column>
     <column id="40" parent="32" name="file_size_bytes">
       <Position>5</Position>
-      <DataType>integer|0s</DataType>
+      <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>231297</StateNumber>
-      <TypeId>23</TypeId>
+      <StateNumber>236998</StateNumber>
+      <TypeId>20</TypeId>
     </column>
     <column id="41" parent="32" name="file_checksum">
       <Position>6</Position>
       <DataType>text|0s</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>231302</StateNumber>
+      <StateNumber>236998</StateNumber>
       <TypeId>25</TypeId>
     </column>
     <index id="42" parent="32" name="files_pkey">
-      <ObjectId>16419</ObjectId>
-      <StateNumber>491</StateNumber>
+      <ObjectId>27385</ObjectId>
+      <StateNumber>236998</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
@@ -1686,8 +1685,8 @@ UC/10
       <ClassIds>1978</ClassIds>
     </index>
     <index id="43" parent="32" name="unique_paths_per_user">
-      <ObjectId>19153</ObjectId>
-      <StateNumber>231297</StateNumber>
+      <ObjectId>27387</ObjectId>
+      <StateNumber>236998</StateNumber>
       <ColNames>owner_id
 file_path</ColNames>
       <Unique>1</Unique>
@@ -1698,15 +1697,15 @@ default</CollationNames>
       <ClassIds>3126,3126</ClassIds>
     </index>
     <key id="44" parent="32" name="files_pkey">
-      <ObjectId>16420</ObjectId>
-      <StateNumber>491</StateNumber>
+      <ObjectId>27386</ObjectId>
+      <StateNumber>236998</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>files_pkey</UnderlyingIndexName>
     </key>
     <key id="45" parent="32" name="unique_paths_per_user">
-      <ObjectId>19154</ObjectId>
-      <StateNumber>231297</StateNumber>
+      <ObjectId>27388</ObjectId>
+      <StateNumber>236998</StateNumber>
       <ColNames>owner_id
 file_path</ColNames>
       <UnderlyingIndexName>unique_paths_per_user</UnderlyingIndexName>

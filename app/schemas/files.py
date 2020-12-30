@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from datetime import datetime
 from pathlib import Path
-from typing import List
+from typing import List, Optional
 
 from fastapi import Header
 from pydantic import BaseModel, validator
@@ -24,7 +24,7 @@ class FileDb(FileBase):
 
 class FileRead(FileBase):
     file_size_mb: float
-    checksum: str
+    checksum: Optional[str] = None
 
 
 class UploadCacheData(BaseModel):
