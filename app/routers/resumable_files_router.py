@@ -154,7 +154,7 @@ async def confirm_upload(
 
     file_read: FileRead = await files_repository.create_file(
         cache_data.loid, cache_data.file_path, file_size,
-        blob_checksum if checksum else None, user_info
+        blob_checksum, user_info
     )
 
     await redis.delete(location)
