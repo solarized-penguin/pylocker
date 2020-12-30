@@ -5,7 +5,7 @@ from typing import Optional, Mapping, Any, List, Dict
 
 from databases import Database
 from fastapi import Depends
-from sqlalchemy.sql import Insert, Select, Delete
+from sqlalchemy.sql import Insert, Select, Delete, Update
 
 from app.core import get_db
 from app.core.database_schema import files_table
@@ -73,6 +73,14 @@ class FilesRepository:
             file_size_mb=(file_size / self.bytes_in_mb),
             checksum=checksum if checksum else None
         )
+
+    async def update_file_data(self, file_path: str, **update_data: Any) -> None:
+        query: Update = files_table.update(
+            whereclause=files_table.c.file_path == file_path,
+            values=update_data
+        )
+
+        await self._db.execute(query)
 
     @classmethod
     def create(

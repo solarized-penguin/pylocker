@@ -1,41 +1,20 @@
 from secrets import token_urlsafe
-from typing import Optional, List, Union
+from typing import Optional
 
 from aredis import StrictRedis
-from fastapi import APIRouter, Depends, Query, HTTPException, File
-from fastapi.responses import JSONResponse, Response
+from fastapi import APIRouter, Depends, Query, HTTPException, File, BackgroundTasks
+from fastapi.responses import JSONResponse
 
-from .utils import calculate_hash
+from .utils import calculate_hash, calculate_checksum
 from ..auth_client import logged_user
 from ..core import get_redis, Settings
 from ..errors import LocationNotFoundError, ChunkTooBigError
 from ..repositories.blob_repository import BlobRepository
 from ..repositories.files_repository import FilesRepository
-from ..schemas.files import UploadCreationHeaders, UploadCacheData, UploadFileHeaders, FileRead, FileDb
+from ..schemas.files import UploadFilePath, UploadCacheData, UploadFileHeaders, FileRead, FileDb
 from ..schemas.users import UserInfo
 
 router: APIRouter = APIRouter()
-
-
-@router.get(
-    '/all',
-    response_model=List[FileRead],
-    status_code=200,
-    responses={
-        200: {'description': 'All files that belong to user returned successfully.'},
-        204: {'description': 'User has no files.'}
-    }
-)
-async def fetch_user_files(
-        files_repository: FilesRepository = Depends(FilesRepository.create),
-        user_info: UserInfo = Depends(logged_user)
-) -> Union[List[FileRead], Response]:
-    files: List[FileRead] = await files_repository.fetch_all_user_files(user_info)
-
-    if not files:
-        return Response(status_code=204)
-
-    return files
 
 
 @router.get(
@@ -67,7 +46,7 @@ async def download_file(
     status_code=201
 )
 async def create_new_upload(
-        headers: UploadCreationHeaders = Depends(UploadCreationHeaders.as_header),
+        headers: UploadFilePath = Depends(UploadFilePath.as_header),
         redis: StrictRedis = Depends(get_redis),
         user_info: UserInfo = Depends(logged_user),
         blob_repository: BlobRepository = Depends(BlobRepository.create),
@@ -132,6 +111,7 @@ async def upload_file(
     status_code=201
 )
 async def confirm_upload(
+        background_tasks: BackgroundTasks,
         location: str = Query(..., description='upload location'),
         checksum: Optional[str] = Query(None, description='checksum of the file - for optional validation'),
         redis: StrictRedis = Depends(get_redis),
@@ -164,6 +144,12 @@ async def confirm_upload(
     )
 
     await redis.delete(location)
+
+    background_tasks.add_task(
+        calculate_checksum,
+        file_read.file_path, settings,
+        files_repository, blob_repository
+    )
 
     return file_read
 

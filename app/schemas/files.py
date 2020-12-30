@@ -4,8 +4,8 @@ from datetime import datetime
 from pathlib import Path
 from typing import List, Optional
 
-from fastapi import Header
-from pydantic import BaseModel, validator
+from fastapi import Header, UploadFile, File
+from pydantic import BaseModel
 
 
 class FileBase(BaseModel):
@@ -38,15 +38,8 @@ class UploadCacheData(BaseModel):
         orm_values = True
 
 
-class UploadCreationHeaders(BaseModel):
+class UploadFilePath(BaseModel):
     file_path: Path
-
-    @validator('file_path')
-    def must_contain_at_least_one_directory(cls, v: Path) -> Path:
-        path_parts: List[str] = str(v).split('/')
-        if len(path_parts) < 2:
-            raise ValueError('Each file must be put in at least one directory.')
-        return v
 
     @classmethod
     def as_header(
@@ -56,7 +49,7 @@ class UploadCreationHeaders(BaseModel):
                 description='new file location',
                 convert_underscores=True
             )
-    ) -> UploadCreationHeaders:
+    ) -> UploadFilePath:
         return cls(file_path=file_path)
 
 
@@ -76,3 +69,17 @@ class UploadFileHeaders(BaseModel):
             )
     ) -> UploadFileHeaders:
         return cls(upload_offset=upload_offset)
+
+
+class FilesToUpload(BaseModel):
+    files: List[UploadFile]
+
+    @classmethod
+    def as_files(
+            cls,
+            files: List[UploadFile] = File(..., description='files to upload')
+    ) -> FilesToUpload:
+        return cls(files=files)
+
+    class Config:
+        orm_mode = True

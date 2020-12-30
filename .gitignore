@@ -127,18 +127,4 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
-/.idea/markdown-navigator.xml
-/.idea/markdown-navigator-enh.xml
-/.idea/misc.xml
-/.idea/modules.xml
-/.idea/inspectionProfiles/profiles_settings.xml
-/.idea/inspectionProfiles/Project_Default.xml
-/.idea/vcs.xml
-/.idea/.gitignore
-/venv9/*
-/.idea/dataSources/bc01a6e7-45ff-45f5-a927-8abfbbf0f9a3.xml
-/.idea/dataSources.local.xml
-/.idea/dataSources/bc01a6e7-45ff-45f5-a927-8abfbbf0f9a3/storage_v2/_src_/database/pylocker_db.HPOpYw/schema/information_schema.FNRwLQ.meta
-/.idea/dataSources/bc01a6e7-45ff-45f5-a927-8abfbbf0f9a3/storage_v2/_src_/database/pylocker_db.HPOpYw/schema/pg_catalog.0S1ZNQ.meta
-/.idea/dataSources/bc01a6e7-45ff-45f5-a927-8abfbbf0f9a3/storage_v2/_src_/database/pylocker_db.HPOpYw/schema/public.abK9xQ.meta
-/.idea/dataSources/bc01a6e7-45ff-45f5-a927-8abfbbf0f9a3/storage_v2/_src_/database/pylocker_db.HPOpYw.meta
+/.idea

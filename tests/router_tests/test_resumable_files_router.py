@@ -1,6 +1,6 @@
 import hashlib
 from pathlib import Path
-from typing import List, AsyncGenerator, Tuple
+from typing import AsyncGenerator, Tuple
 
 import pytest
 from aredis import StrictRedis
@@ -100,36 +100,6 @@ async def upload_file(aclient: AsyncClient, confirm_upload: bool) -> Tuple[str, 
     return file_path, location
 
 
-class TestFetchUserFiles:
-
-    @pytest.mark.asyncio
-    async def test__user_has_files__returns_list_of_files(
-            self, aclient: AsyncClient, db: Database
-    ) -> None:
-        async with db.transaction(force_rollback=True):
-            await insert_test_data(db)
-
-            expected_result: List[FileRead] = [FileRead(
-                file_path=file.file_path,
-                file_size_mb=file.file_size_bytes / bytes_in_mb,
-                checksum=file.file_checksum
-            ) for file in test_files if file.owner_id == user_id_1.id]
-
-            response: Response = await aclient.get('/resumable/files/all')
-
-            result: List[FileRead] = [FileRead.parse_obj(file) for file in response.json()]
-
-            assert_that(result).is_equal_to(expected_result)
-
-    @pytest.mark.asyncio
-    async def test__user_has_no_files__returns_204(
-            self, aclient: AsyncClient
-    ) -> None:
-        response: Response = await aclient.get('/resumable/files/all')
-
-        assert_that(response.status_code).is_equal_to(204)
-
-
 class TestDownloadFile:
 
     @pytest.mark.asyncio
@@ -198,19 +168,6 @@ class TestCreateNewUpload:
         result: str = response.headers.get('location')
 
         assert_that(result).is_not_empty()
-
-    @pytest.mark.asyncio
-    async def test__file_path_passed_incorrectly__returns_400(
-            self, aclient: AsyncClient
-    ) -> None:
-        response: Response = await aclient.post(
-            '/resumable/files',
-            headers={
-                'file-path': 'test_file.txt'
-            }
-        )
-
-        assert_that(response.status_code).is_equal_to(400)
 
 
 class TestUploadFile:
