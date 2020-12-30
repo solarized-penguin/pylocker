@@ -1419,7 +1419,7 @@ false posixrules
     <database id="3" parent="1" name="pylocker_db">
       <ObjectId>16384</ObjectId>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>236999</IntrospectionStateNumber>
+      <IntrospectionStateNumber>238992</IntrospectionStateNumber>
       <Relations>sequence|table|27376|27378|1
 </Relations>
     </database>
@@ -1491,7 +1491,7 @@ UC/10
 </Acl>
       <StateNumber>287</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>237000</IntrospectionStateNumber>
+      <IntrospectionStateNumber>238993</IntrospectionStateNumber>
       <Current>1</Current>
     </schema>
     <extension id="18" parent="3" name="plpgsql">

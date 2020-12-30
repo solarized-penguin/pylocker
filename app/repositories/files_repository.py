@@ -5,7 +5,7 @@ from typing import Optional, Mapping, Any, List, Dict
 
 from databases import Database
 from fastapi import Depends
-from sqlalchemy.sql import Insert, Select, Delete, Update
+from sqlalchemy.sql import Insert, Select, Delete
 
 from app.core import get_db
 from app.core.database_schema import files_table
@@ -35,14 +35,6 @@ class FilesRepository:
             file_size_mb=(mapping['file_size_bytes'] / self.bytes_in_mb),
             checksum=mapping['file_checksum']
         ) for mapping in mappings]
-
-    async def update_file(self, loid: int, params: FileDb) -> None:
-        query: Update = files_table.update(
-            whereclause=files_table.c.oid == loid,
-            values=params.dict(exclude_unset=True)
-        )
-
-        await self._db.execute(query)
 
     async def delete_file(self, loid: int) -> None:
         query: Delete = files_table.delete(files_table.c.oid == loid)
@@ -79,7 +71,7 @@ class FilesRepository:
         return FileRead(
             file_path=Path(file_path),
             file_size_mb=(file_size / self.bytes_in_mb),
-            checksum=checksum
+            checksum=checksum if checksum else None
         )
 
     @classmethod

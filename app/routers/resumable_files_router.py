@@ -8,7 +8,7 @@ from fastapi.responses import JSONResponse, Response
 from .utils import calculate_hash
 from ..auth_client import logged_user
 from ..core import get_redis, Settings
-from ..errors import LocationNotFoundError, ChunkTooBigError
+from ..errors import LocationNotFoundError, ChunkTooBigError, FileDoesNotExistsError
 from ..repositories.blob_repository import BlobRepository
 from ..repositories.files_repository import FilesRepository
 from ..schemas.files import UploadCreationHeaders, UploadCacheData, UploadFileHeaders, FileRead, FileDb
@@ -201,6 +201,9 @@ async def delete_file(
         user_info: UserInfo = Depends(logged_user)
 ) -> JSONResponse:
     db_file: FileDb = await files_repository.fetch_db_file(file_path)
+
+    if not db_file:
+        raise FileDoesNotExistsError()
 
     if db_file.owner_id != user_info.id:
         raise HTTPException(status_code=403, detail='No privileges to access file.')

@@ -20,6 +20,7 @@ class FileDb(FileBase):
     oid: int
     owner_id: str
     file_size_bytes: int
+    file_checksum: Optional[str] = None
 
 
 class FileRead(FileBase):

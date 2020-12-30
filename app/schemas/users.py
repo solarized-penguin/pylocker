@@ -34,8 +34,10 @@ class UserBase(BaseModel):
 
 class UserInfo(UserBase):
     id: str
-    imageUrl: Optional[HttpUrl]
-    birthDate: Optional[date]
+    imageUrl: Optional[HttpUrl] = None
+    birthDate: Optional[date] = None
+    fullName: Optional[str] = None
+    mobilePhone: Optional[str] = None
     active: bool
     passwordLastUpdateInstant: datetime
     usernameStatus: UsernameStatus
@@ -43,7 +45,7 @@ class UserInfo(UserBase):
     verified: bool
     tenantId: str
     passwordChangeRequired: bool
-    insertInstant: int
+    insertInstant: float
 
 
 # user sign up models
