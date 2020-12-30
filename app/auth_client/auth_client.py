@@ -5,8 +5,8 @@ from typing import List
 from fusionauth.fusionauth_client import FusionAuthClient
 from fusionauth.rest_client import ClientResponse
 
-from .tokens import Token
-from .users_schemas import UserRegistrationForm, UserInfo, RegistrationRequest, \
+from app.schemas.tokens import Token
+from app.schemas.users import UserRegistrationForm, UserInfo, RegistrationRequest, \
     AppRegistrationForm, UserSignUp
 from ..core.settings import Settings
 from ..errors import UserSignUpError, UserSignInError, UserInfoNotFoundError

@@ -6,14 +6,15 @@ from fastapi import APIRouter, Depends, Query, HTTPException, File
 from fastapi.responses import JSONResponse, Response
 
 from .utils import calculate_hash
+from ..auth_client import logged_user
 from ..core import get_redis, Settings
 from ..errors import LocationNotFoundError, ChunkTooBigError
 from ..repositories.blob_repository import BlobRepository
 from ..repositories.files_repository import FilesRepository
 from ..schemas.files import UploadCreationHeaders, UploadCacheData, UploadFileHeaders, FileRead, FileDb
-from ..security import UserInfo, logged_user
+from ..schemas.users import UserInfo
 
-router = APIRouter()
+router: APIRouter = APIRouter()
 
 
 @router.get(

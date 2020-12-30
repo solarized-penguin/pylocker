@@ -3,12 +3,12 @@ from fastapi.responses import JSONResponse
 from fastapi.security import OAuth2PasswordRequestForm
 from loguru import logger
 
-from .auth_client import AuthClient
-from .tokens import Token
-from .users_schemas import UserInfo, UserSignUp
-from ..core import Settings
+from app.auth_client.auth_client import AuthClient
+from app.core import Settings
+from app.schemas.tokens import Token
+from app.schemas.users import UserInfo, UserSignUp
 
-router = APIRouter()
+router: APIRouter = APIRouter()
 
 
 @router.post(

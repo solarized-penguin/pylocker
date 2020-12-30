@@ -7,8 +7,8 @@ from typing import Optional, List, Union, Dict, Any
 from fastapi import Form
 from pydantic import BaseModel, EmailStr, SecretStr, validator, HttpUrl
 
-from .enum_models import TwoFactorDelivery, UsernameStatus
-from .user_validations import UserValidationRules
+from app.schemas.enums import TwoFactorDelivery, UsernameStatus
+from .validations import UserValidationRules
 
 
 class UserBase(BaseModel):

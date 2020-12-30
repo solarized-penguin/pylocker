@@ -7,9 +7,9 @@ from fastapi.testclient import TestClient
 from pytest_mock import MockerFixture
 from requests import Response
 
-from app.security.enum_models import UsernameStatus, TwoFactorDelivery
-from app.security.user_validations import UserValidationRules
-from app.security.users_schemas import UserSignUp, UserInfo
+from app.schemas.enums import UsernameStatus, TwoFactorDelivery
+from app.schemas.users import UserSignUp, UserInfo
+from app.schemas.validations import UserValidationRules
 
 test_user_sign_up: Dict[str, Any] = {
     'email': 'test@domain.com',
@@ -55,7 +55,7 @@ def mock_register_user(
         return UserInfo(**user_info)
 
     mocker.patch(
-        'app.security.users_router.AuthClient.register_user',
+        'app.routers.users_router.AuthClient.register_user',
         _register_user
     )
 

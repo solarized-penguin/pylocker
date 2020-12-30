@@ -11,7 +11,7 @@ from app.core import get_db
 from app.core.database_schema import files_table
 from app.errors import FileDoesNotExistsError
 from app.schemas.files import FileRead, FileDb
-from app.security import UserInfo
+from app.schemas.users import UserInfo
 
 
 class FilesRepository:

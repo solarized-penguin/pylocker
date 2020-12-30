@@ -2,8 +2,8 @@ from fastapi import Depends, Request
 from fastapi.security import OAuth2PasswordBearer
 from loguru import logger
 
-from app.security.auth_client import AuthClient
-from app.security.users_schemas import UserInfo
+from app.auth_client.auth_client import AuthClient
+from app.schemas.users import UserInfo
 
 security_scheme: OAuth2PasswordBearer = OAuth2PasswordBearer(
     tokenUrl='/users/sign-in'

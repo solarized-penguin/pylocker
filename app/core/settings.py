@@ -72,7 +72,7 @@ class Settings(BaseSettings):
     postgres_dsn: PostgresDsn
     redis_dsn: RedisDsn
 
-    # security
+    # auth_client
     api_key: SecretStr
     app_id: SecretStr
     client_id: SecretStr
