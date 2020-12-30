@@ -8,7 +8,7 @@ from fastapi.responses import JSONResponse, Response
 from .utils import calculate_hash
 from ..auth_client import logged_user
 from ..core import get_redis, Settings
-from ..errors import LocationNotFoundError, ChunkTooBigError, FileDoesNotExistsError
+from ..errors import LocationNotFoundError, ChunkTooBigError
 from ..repositories.blob_repository import BlobRepository
 from ..repositories.files_repository import FilesRepository
 from ..schemas.files import UploadCreationHeaders, UploadCacheData, UploadFileHeaders, FileRead, FileDb
@@ -118,7 +118,12 @@ async def upload_file(
         cache_data.loid, headers.upload_offset, chunk
     )
 
-    return JSONResponse(status_code=200)
+    upload_offset: int = (headers.upload_offset + len(chunk))
+
+    return JSONResponse(
+        status_code=200,
+        headers={'upload-offset': str(upload_offset)}
+    )
 
 
 @router.post(
@@ -198,17 +203,16 @@ async def fetch_upload_offset(
 async def delete_file(
         file_path: str = Query(..., description='path of file to delete'),
         files_repository: FilesRepository = Depends(FilesRepository.create),
+        blob_repository: BlobRepository = Depends(BlobRepository.create),
         user_info: UserInfo = Depends(logged_user)
 ) -> JSONResponse:
     db_file: FileDb = await files_repository.fetch_db_file(file_path)
-
-    if not db_file:
-        raise FileDoesNotExistsError()
 
     if db_file.owner_id != user_info.id:
         raise HTTPException(status_code=403, detail='No privileges to access file.')
 
     await files_repository.delete_file(db_file.oid)
+    await blob_repository.remove_blob(db_file.oid)
 
     return JSONResponse(
         status_code=200,
