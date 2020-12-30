@@ -147,7 +147,7 @@ async def confirm_upload(
 
     background_tasks.add_task(
         calculate_checksum,
-        file_read.file_path, settings,
+        str(file_read.file_path), settings,
         files_repository, blob_repository
     )
 

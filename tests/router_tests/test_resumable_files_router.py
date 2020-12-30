@@ -1,6 +1,6 @@
 import hashlib
 from pathlib import Path
-from typing import AsyncGenerator, Tuple
+from typing import AsyncGenerator, Tuple, Any
 
 import pytest
 from aredis import StrictRedis
@@ -321,7 +321,7 @@ class TestDeleteFile:
 
             query: Select = files_table.select(files_table.c.file_path == file_path)
 
-            result: None = await db.fetch_one(query)
+            result: Any = await db.fetch_one(query)
 
             assert_that(result).is_none()
 
