@@ -35,6 +35,8 @@ pytest-mock = "^3.4.0"
 pytest-asyncio = "^0.14.0"
 pytest-dotenv = "^0.5.2"
 assertpy = "^1.1"
+httpx = "^0.16.1"
+Faker = "^5.1.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

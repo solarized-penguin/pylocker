@@ -1,15 +1,33 @@
 from copy import deepcopy
 from datetime import datetime, date
-from typing import Dict, List, Any, Callable
+from typing import Dict, List, Any, Callable, Generator
 
+import pytest
 from assertpy import assert_that
+from databases import Database
+from fastapi import FastAPI
 from fastapi.testclient import TestClient
 from pytest_mock import MockerFixture
 from requests import Response
 
+from app import create_app
+from app.core import get_db
 from app.schemas.enums import UsernameStatus, TwoFactorDelivery
 from app.schemas.users import UserSignUp, UserInfo
 from app.schemas.validations import UserValidationRules
+
+
+@pytest.fixture(scope='function')
+def client(db: Database) -> Generator[TestClient, None, None]:
+    app: FastAPI = create_app()
+
+    def _get_db() -> Database: return db
+
+    app.dependency_overrides[get_db] = _get_db
+
+    client: TestClient = TestClient(app)
+    yield client
+
 
 test_user_sign_up: Dict[str, Any] = {
     'email': 'test@domain.com',

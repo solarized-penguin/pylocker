@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="df6b04ce-8cc1-4544-85c3-a3ece333a6b9" name="Default Changelist" comment="- tests for files_repository.py done">
-      <change afterPath="$PROJECT_DIR$/tests/router_tests/test_resumable_files_router.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/utils/shared_mock_data.py" afterDir="false" />
+    <list default="true" id="df6b04ce-8cc1-4544-85c3-a3ece333a6b9" name="Default Changelist" comment="- extracting mocked files and users data to separate file, so they can be shared between tests">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/repositories_tests/test_files_repository.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/repositories_tests/test_files_repository.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/poetry.lock" beforeDir="false" afterPath="$PROJECT_DIR$/poetry.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/conftest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/router_tests/test_resumable_files_router.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/router_tests/test_resumable_files_router.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/router_tests/test_users_router.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/router_tests/test_users_router.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/settings_tests_version.env" beforeDir="false" afterPath="$PROJECT_DIR$/tests/settings_tests_version.env" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,7 +33,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/tests/repositories_tests/test_files_repository.py" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/tests/router_tests/test_resumable_files_router.py" />
     <property name="restartRequiresConfirmation" value="false" />
   </component>
   <component name="RecentsManager">
@@ -63,7 +66,7 @@
       <option name="_new_keywords" value="&quot;&quot;" />
       <option name="_new_parameters" value="&quot;&quot;" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;$PROJECT_DIR$/tests/repositories_tests/test_files_repository.py&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/tests/router_tests/test_resumable_files_router.py&quot;" />
       <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method v="2" />
     </configuration>
@@ -104,7 +107,7 @@
       <workItem from="1609231816549" duration="23360000" />
       <workItem from="1609258589509" duration="1591000" />
       <workItem from="1609321169417" duration="8356000" />
-      <workItem from="1609331273106" duration="6311000" />
+      <workItem from="1609331273106" duration="13952000" />
     </task>
     <task id="LOCAL-00003" summary="- preparing api for implementing TUS protocol">
       <created>1609153728438</created>
@@ -267,7 +270,14 @@
       <option name="project" value="LOCAL" />
       <updated>1609337194564</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="- extracting mocked files and users data to separate file, so they can be shared between tests">
+      <created>1609337812938</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1609337812938</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -307,16 +317,28 @@
     <MESSAGE value="- fixing error with data type" />
     <MESSAGE value="- restructuring whole project" />
     <MESSAGE value="- tests for files_repository.py done" />
-    <option name="LAST_COMMIT_MESSAGE" value="- tests for files_repository.py done" />
+    <MESSAGE value="- extracting mocked files and users data to separate file, so they can be shared between tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="- extracting mocked files and users data to separate file, so they can be shared between tests" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/tests/router_tests/test_resumable_files_router.py</url>
+          <line>74</line>
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/pylocker$Unittests_in_router_tests.coverage" NAME="Unittests in router_tests Coverage Results" MODIFIED="1608987872720" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/router_tests" />
     <SUITE FILE_PATH="coverage/pylocker$pytest_for_blob_manager_tests_test_blob_manager.coverage" NAME="pytest-blob_manager Coverage Results" MODIFIED="1608992220846" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/pylocker$pytest_all.coverage" NAME="pytest-all Coverage Results" MODIFIED="1609098848196" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/pylocker$Unittests_in_tests.coverage" NAME="Unittests in tests Coverage Results" MODIFIED="1609098995255" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
-    <SUITE FILE_PATH="coverage/pylocker$pytest.coverage" NAME="pytest Coverage Results" MODIFIED="1609337155652" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/pylocker$pytest.coverage" NAME="pytest Coverage Results" MODIFIED="1609340906454" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/pylocker$main_local.coverage" NAME="main_local Coverage Results" MODIFIED="1609333778474" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/pylocker$files_pytest.coverage" NAME="files_pytest Coverage Results" MODIFIED="1609337136704" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/pylocker$files_pytest.coverage" NAME="files_pytest Coverage Results" MODIFIED="1609345222462" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/pylocker$pytest_in_tests.coverage" NAME="pytest Coverage Results" MODIFIED="1609099089802" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/pylocker$main.coverage" NAME="main Coverage Results" MODIFIED="1608630285297" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>

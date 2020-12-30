@@ -1,15 +1,14 @@
 from typing import AsyncGenerator, Generator
 
 import pytest
+from aredis import StrictRedis
 from assertpy import add_extension
 from databases import Database
-from fastapi import FastAPI
-from fastapi.testclient import TestClient
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 from sqlalchemy import create_engine
 from sqlalchemy.engine import Engine
 
-from app.core import Settings, create_app, get_db
+from app.core import Settings
 from app.core.database_schema import db_schema
 from .utils import config_queries
 from .utils.assert_extensions import is_successful_status_code, is_validation_message_correct
@@ -44,20 +43,15 @@ def create_test_database() -> Generator[None, None, None]:
 
 @pytest.mark.asyncio
 @pytest.fixture(scope='function')
+async def redis() -> AsyncGenerator[StrictRedis, None]:
+    redis: StrictRedis = StrictRedis.from_url(settings.redis_dsn)
+    yield redis
+
+
+@pytest.mark.asyncio
+@pytest.fixture(scope='function')
 async def db() -> AsyncGenerator[Database, None]:
     db: Database = Database(settings.postgres_dsn)
     await db.connect()
     yield db
     await db.disconnect()
-
-
-@pytest.fixture(scope='function')
-def client(db: Database) -> Generator[TestClient, None, None]:
-    app: FastAPI = create_app()
-
-    def _get_db() -> Database: return db
-
-    app.dependency_overrides[get_db] = _get_db
-
-    client: TestClient = TestClient(app)
-    yield client
