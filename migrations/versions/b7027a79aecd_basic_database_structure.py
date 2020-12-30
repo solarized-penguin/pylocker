@@ -1,8 +1,8 @@
-"""basic setup
+"""basic database structure
 
-Revision ID: 56338f79a0ae
+Revision ID: b7027a79aecd
 Revises: 
-Create Date: 2020-12-18 15:51:05.735231
+Create Date: 2020-12-30 12:02:46.218986
 
 """
 import sqlalchemy as sa
@@ -10,7 +10,7 @@ from alembic import op
 from sqlalchemy.dialects import postgresql
 
 # revision identifiers, used by Alembic.
-revision = '56338f79a0ae'
+revision = 'b7027a79aecd'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -21,11 +21,12 @@ def upgrade():
     op.create_table('files',
                     sa.Column('id', sa.INTEGER(), autoincrement=True, nullable=False),
                     sa.Column('oid', postgresql.OID(), nullable=False),
-                    sa.Column('owner_id', sa.TEXT(), nullable=True),
-                    sa.Column('file_path', sa.TEXT(), nullable=True),
-                    sa.Column('file_size_bytes', sa.INTEGER(), nullable=True),
+                    sa.Column('owner_id', sa.TEXT(), nullable=False),
+                    sa.Column('file_path', sa.TEXT(), nullable=False),
+                    sa.Column('file_size_bytes', sa.BigInteger(), nullable=False),
+                    sa.Column('file_checksum', sa.TEXT(), nullable=True),
                     sa.PrimaryKeyConstraint('id'),
-                    sa.UniqueConstraint('file_path')
+                    sa.UniqueConstraint('owner_id', 'file_path', name='unique_paths_per_user')
                     )
     # ### end Alembic commands ###
 
