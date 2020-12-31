@@ -2,9 +2,9 @@ from __future__ import annotations
 
 from datetime import datetime
 from pathlib import Path
-from typing import List, Optional
+from typing import Optional
 
-from fastapi import Header, UploadFile, File
+from fastapi import Header
 from pydantic import BaseModel
 
 
@@ -69,17 +69,3 @@ class UploadFileHeaders(BaseModel):
             )
     ) -> UploadFileHeaders:
         return cls(upload_offset=upload_offset)
-
-
-class FilesToUpload(BaseModel):
-    files: List[UploadFile]
-
-    @classmethod
-    def as_files(
-            cls,
-            files: List[UploadFile] = File(..., description='files to upload')
-    ) -> FilesToUpload:
-        return cls(files=files)
-
-    class Config:
-        orm_mode = True

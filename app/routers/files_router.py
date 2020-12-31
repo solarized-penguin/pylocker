@@ -1,6 +1,6 @@
 from typing import List, Union, Tuple
 
-from fastapi import APIRouter, Depends, Header, UploadFile
+from fastapi import APIRouter, Depends, Header, UploadFile, File
 from fastapi import Response, BackgroundTasks
 
 from app.auth_client import logged_user
@@ -8,7 +8,7 @@ from app.core import Settings
 from app.repositories.blob_repository import BlobRepository
 from app.repositories.files_repository import FilesRepository
 from app.routers.utils import upload_file_generator, calculate_checksums, extract_paths
-from app.schemas.files import FileRead, FilesToUpload
+from app.schemas.files import FileRead
 from app.schemas.users import UserInfo
 
 router: APIRouter = APIRouter()
@@ -42,15 +42,15 @@ async def fetch_user_files(
 )
 async def upload_file(
         background_tasks: BackgroundTasks,
-        upload_files: FilesToUpload = Depends(FilesToUpload.as_files),
-        paths: str = Header(..., description='Paths in format file_name=file_path'),
+        files: List[UploadFile] = File(..., description='files to upload'),
+        paths: str = Header(..., description='file_name=file_path,file_name=file_path,...'),
         blob_repository: BlobRepository = Depends(BlobRepository.create),
         files_repository: FilesRepository = Depends(FilesRepository.create),
         settings: Settings = Depends(Settings.get),
         user_info: UserInfo = Depends(logged_user)
 ) -> List[FileRead]:
     results: List[FileRead] = []
-    mapped_files: List[Tuple[str, UploadFile]] = extract_paths(paths=paths, files=upload_files.files)
+    mapped_files: List[Tuple[str, UploadFile]] = extract_paths(paths=paths, files=files)
 
     for path, file in mapped_files:
         loid: int = await blob_repository.create_blob()
