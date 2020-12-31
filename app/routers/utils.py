@@ -1,5 +1,5 @@
 from hashlib import md5
-from typing import AsyncGenerator, Union, List
+from typing import AsyncGenerator, Union, List, Tuple
 
 from fastapi import UploadFile
 
@@ -7,6 +7,32 @@ from app.core import Settings
 from app.repositories.blob_repository import BlobRepository
 from app.repositories.files_repository import FilesRepository
 from app.schemas.files import FileDb
+
+
+def extract_paths(
+        paths: str, files: List[UploadFile]
+) -> List[Tuple[str, UploadFile]]:
+    def _split_into_pairs(_path: str) -> Tuple[str, str]:
+        parts = _path.split('=')
+        return parts[0], parts[1]
+
+    def _correct_path(_path: str) -> str:
+        if len(_path.split('/')) == 1 or \
+                _path[0] == '/':
+            return _path
+        return f'/{_path}'
+
+    extracted_paths: List[Tuple[str, str]] = [
+        _split_into_pairs(path) for path in paths.split(',')
+    ]
+    path_map = {key: _correct_path(value) for key, value in extracted_paths}
+
+    results: List[Tuple[str, UploadFile]] = []
+
+    for file in files:
+        result = (path_map[file.filename], file)
+        results.append(result)
+    return results
 
 
 async def calculate_hash(
