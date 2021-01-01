@@ -10,8 +10,7 @@ from app.core.database_schema import files_table
 from app.errors import FileDoesNotExistsError
 from app.repositories.files_repository import FilesRepository
 from app.schemas.files import FileDb, FileRead
-from app.schemas.users import UserInfo
-from tests.utils.shared_mock_data import insert_test_data, user_id_3, test_files, bytes_in_mb, user_id_1, user_id_2
+from tests.utils.shared_test_utils import insert_test_data, user_id_3, test_files, bytes_in_mb, user_id_1, user_id_2
 
 
 @pytest.fixture(scope='function')
@@ -20,30 +19,30 @@ def files_repository(db: Database) -> FilesRepository:
 
 
 class TestFetchAllUserFiles:
-    test_data: List[Tuple[UserInfo, List[FileRead]]] = [
-        (user_id_1, [FileRead(
+    test_data: List[Tuple[str, List[FileRead]]] = [
+        (user_id_1.email, [FileRead(
             file_path=file.file_path,
             file_size_mb=(file.file_size_bytes / bytes_in_mb),
             checksum=file.file_checksum
-        ) for file in test_files if file.owner_id == user_id_1.id]),
-        (user_id_2, [FileRead(
+        ) for file in test_files if file.owner_id == user_id_1.email]),
+        (user_id_2.email, [FileRead(
             file_path=file.file_path,
             file_size_mb=(file.file_size_bytes / bytes_in_mb),
             checksum=file.file_checksum
-        ) for file in test_files if file.owner_id == user_id_2.id])
+        ) for file in test_files if file.owner_id == user_id_2.email])
     ]
 
-    @pytest.mark.parametrize('user_info,expected_result', test_data)
+    @pytest.mark.parametrize('user_email,expected_result', test_data)
     @pytest.mark.asyncio
     async def test__user_has_files__returns_list_of_files(
             self, files_repository: FilesRepository, db: Database,
-            user_info: UserInfo, expected_result: List[FileRead]
+            user_email: str, expected_result: List[FileRead]
     ) -> None:
         async with db.transaction(force_rollback=True):
             await insert_test_data(db)
 
             result: List[FileRead] = await files_repository \
-                .fetch_all_user_files(user_info)
+                .fetch_all_user_files(user_email)
 
             assert_that(result).is_equal_to(expected_result)
 
@@ -53,7 +52,7 @@ class TestFetchAllUserFiles:
     ) -> None:
         async with db.transaction(force_rollback=True):
             result: List[FileRead] = await files_repository \
-                .fetch_all_user_files(user_id_3)
+                .fetch_all_user_files(user_id_3.email)
 
             assert_that(result).is_equal_to([])
 
@@ -108,7 +107,7 @@ class TestCreateFile:
         (
             {
                 'loid': 10003, 'file_path': 'test_path/test_file.json',
-                'file_size': 10 * bytes_in_mb, 'user_info': user_id_3,
+                'file_size': 10 * bytes_in_mb, 'user_email': user_id_3.email,
                 'checksum': '6a1cebc7-6f83-40c3-a63b-6ae4c77fce16'
             },
             FileRead(file_path=Path('test_path/test_file.json'), file_size_mb=10,
@@ -117,7 +116,7 @@ class TestCreateFile:
         (
             {
                 'loid': 10003, 'file_path': 'test_path/test_file.json',
-                'file_size': 10 * bytes_in_mb, 'user_info': user_id_3,
+                'file_size': 10 * bytes_in_mb, 'user_email': user_id_3.email,
                 'checksum': ''
             },
             FileRead(file_path=Path('test_path/test_file.json'), file_size_mb=10)
@@ -133,7 +132,7 @@ class TestCreateFile:
         async with db.transaction(force_rollback=True):
             result: FileRead = await files_repository.create_file(
                 data['loid'], data['file_path'], data['file_size'],
-                data['checksum'], data['user_info']
+                data['checksum'], data['user_email']
             )
 
             assert_that(result).is_equal_to(expected_result)

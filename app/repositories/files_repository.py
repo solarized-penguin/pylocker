@@ -11,7 +11,6 @@ from app.core import get_db
 from app.core.database_schema import files_table
 from app.errors import FileDoesNotExistsError
 from app.schemas.files import FileRead, FileDb
-from app.schemas.users import UserInfo
 
 
 class FilesRepository:
@@ -25,8 +24,8 @@ class FilesRepository:
     def __init__(self, db: Database) -> None:
         self._db = db
 
-    async def fetch_all_user_files(self, user_info: UserInfo) -> List[FileRead]:
-        query: Select = files_table.select(files_table.c.owner_id == user_info.id)
+    async def fetch_all_user_files(self, user_email: str) -> List[FileRead]:
+        query: Select = files_table.select(files_table.c.owner_id == user_email)
 
         mappings: List[Mapping[str, Any]] = await self._db.fetch_all(query)
 
@@ -52,13 +51,13 @@ class FilesRepository:
 
     async def create_file(
             self, loid: int, file_path: str, file_size: int,
-            checksum: str, user_info: UserInfo
+            checksum: str, user_email: str
     ) -> FileRead:
         insert_data: Dict[str, Any] = {
             'oid': loid,
             'file_path': file_path,
             'file_size_bytes': file_size,
-            'owner_id': user_info.id
+            'owner_id': user_email
         }
 
         if checksum:

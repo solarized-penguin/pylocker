@@ -9,7 +9,6 @@ from app.repositories.blob_repository import BlobRepository
 from app.repositories.files_repository import FilesRepository
 from app.routers.utils import upload_file_generator, calculate_checksums, extract_paths
 from app.schemas.files import FileRead
-from app.schemas.users import UserInfo
 
 router: APIRouter = APIRouter()
 
@@ -25,9 +24,9 @@ router: APIRouter = APIRouter()
 )
 async def fetch_user_files(
         files_repository: FilesRepository = Depends(FilesRepository.create),
-        user_info: UserInfo = Depends(logged_user)
+        user_email: str = Depends(logged_user)
 ) -> Union[List[FileRead], Response]:
-    files: List[FileRead] = await files_repository.fetch_all_user_files(user_info)
+    files: List[FileRead] = await files_repository.fetch_all_user_files(user_email)
 
     if not files:
         return Response(status_code=204)
@@ -47,7 +46,7 @@ async def upload_file(
         blob_repository: BlobRepository = Depends(BlobRepository.create),
         files_repository: FilesRepository = Depends(FilesRepository.create),
         settings: Settings = Depends(Settings.get),
-        user_info: UserInfo = Depends(logged_user)
+        user_email: str = Depends(logged_user)
 ) -> List[FileRead]:
     results: List[FileRead] = []
     mapped_files: List[Tuple[str, UploadFile]] = extract_paths(paths=paths, files=files)
@@ -59,7 +58,7 @@ async def upload_file(
             await blob_repository.write_to_blob(loid, offset, chunk)
             offset += len(chunk)
         file_read: FileRead = await files_repository.create_file(
-            loid, path, offset, '', user_info
+            loid, path, offset, '', user_email
         )
         results.append(file_read)
 

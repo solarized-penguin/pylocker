@@ -1,103 +1,19 @@
-import hashlib
 from pathlib import Path
-from typing import AsyncGenerator, Tuple, Any
+from typing import Any
 
 import pytest
-from aredis import StrictRedis
 from assertpy import assert_that
 from databases import Database
-from faker import Faker
-from fastapi import FastAPI
 from httpx import AsyncClient, Response
-from sqlalchemy.sql import Insert, Select
+from sqlalchemy.sql import Select
 
-from app import create_app
-from app.auth_client import logged_user
-from app.core import get_db, get_redis, Settings
+from app.core import Settings
 from app.core.database_schema import files_table
-from app.schemas.files import FileRead, FileDb
-from app.schemas.users import UserInfo
-from tests.utils.shared_mock_data import insert_test_data, user_id_1, bytes_in_mb, test_files
+from app.schemas.files import FileRead
+from tests.utils.shared_test_utils import insert_test_data, bytes_in_mb, test_files, upload_file, \
+    test_content, test_content_hash
 
 settings: Settings = Settings.get()
-
-
-@pytest.mark.asyncio
-@pytest.fixture(scope='function')
-async def aclient(
-        db: Database, redis: StrictRedis
-) -> AsyncGenerator[AsyncClient, None]:
-    app: FastAPI = create_app()
-
-    def _get_db() -> Database: return db
-
-    def _get_redis() -> StrictRedis: return redis
-
-    def _logged_user() -> UserInfo: return user_id_1
-
-    app.dependency_overrides[get_db] = _get_db
-    app.dependency_overrides[get_redis] = _get_redis
-    app.dependency_overrides[logged_user] = _logged_user
-
-    aclient: AsyncClient = AsyncClient(app=app, base_url='http://testserver')
-    yield aclient
-    await aclient.aclose()
-
-
-def calculate_hash(text: bytes) -> str:
-    md5_hash = hashlib.md5(text)
-    return md5_hash.hexdigest()
-
-
-faker: Faker = Faker('en_US')
-
-test_content: bytes = ' '.join(faker.sentences(10)).encode('utf-8')
-test_content_hash: str = calculate_hash(test_content)
-
-
-async def insert_uploaded_data(db: Database, file: FileDb) -> None:
-    query: Insert = files_table.insert(
-        {
-            'id': file.id,
-            'oid': file.oid,
-            'file_path': str(file.file_path),
-            'file_size_bytes': file.file_size_bytes,
-            'owner_id': file.owner_id,
-            'file_checksum': file.file_checksum
-        }
-    )
-    await db.execute(query)
-
-
-async def upload_file(aclient: AsyncClient, confirm_upload: bool) -> Tuple[str, str]:
-    file_path: str = 'test_directory/test_file'
-
-    response: Response = await aclient.post(
-        '/resumable/files',
-        headers={
-            'file-path': file_path
-        }
-    )
-
-    location: str = response.headers.get('location')
-
-    await aclient.patch(
-        '/resumable/files',
-        files={'chunk': test_content},
-        params={'location': location},
-        headers={'upload-offset': '0'}
-    )
-
-    if confirm_upload:
-        await aclient.post(
-            '/resumable/files/confirm',
-            params={
-                'location': location,
-                'checksum': test_content_hash
-            }
-        )
-
-    return file_path, location
 
 
 class TestDownloadFile:
@@ -232,7 +148,7 @@ class TestConfirmUpload:
             self, aclient: AsyncClient, db: Database
     ) -> None:
         async with db.transaction(force_rollback=True):
-            file_path: str = 'test_directory/test_file'
+            file_path: str = '/test_directory/test_file'
 
             response: Response = await aclient.post(
                 '/resumable/files',

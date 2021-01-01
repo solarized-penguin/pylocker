@@ -9,6 +9,13 @@ from app.repositories.files_repository import FilesRepository
 from app.schemas.files import FileDb
 
 
+def correct_path(_path: str) -> str:
+    if len(_path.split('/')) == 1 or \
+            _path[0] == '/':
+        return _path
+    return f'/{_path}'
+
+
 def extract_paths(
         paths: str, files: List[UploadFile]
 ) -> List[Tuple[str, UploadFile]]:
@@ -16,16 +23,10 @@ def extract_paths(
         parts = _path.split('=')
         return parts[0], parts[1]
 
-    def _correct_path(_path: str) -> str:
-        if len(_path.split('/')) == 1 or \
-                _path[0] == '/':
-            return _path
-        return f'/{_path}'
-
     extracted_paths: List[Tuple[str, str]] = [
         _split_into_pairs(path) for path in paths.split(',')
     ]
-    path_map = {key: _correct_path(value) for key, value in extracted_paths}
+    path_map = {key: correct_path(value) for key, value in extracted_paths}
 
     results: List[Tuple[str, UploadFile]] = []
 

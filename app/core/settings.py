@@ -75,9 +75,12 @@ class Settings(BaseSettings):
     # auth_client
     api_key: SecretStr
     app_id: SecretStr
+
+    jwt_signing_key: SecretStr
+    jwt_algorithms_list: str
+
     client_id: SecretStr
     client_secret: SecretStr
-
     auth_provider_url: str
     token_url: str
 
@@ -96,6 +99,10 @@ class Settings(BaseSettings):
     @property
     def standard_user_roles(self) -> List[str]:
         return _comma_separated_env_str_to_list(self.standard_user_roles_list)
+
+    @property
+    def jwt_algorithms(self) -> List[str]:
+        return _comma_separated_env_str_to_list(self.jwt_algorithms_list)
 
     class Config:
         case_sensitive = False

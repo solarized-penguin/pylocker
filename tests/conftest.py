@@ -4,14 +4,20 @@ import pytest
 from aredis import StrictRedis
 from assertpy import add_extension
 from databases import Database
+from fastapi import FastAPI
+from httpx import AsyncClient
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 from sqlalchemy import create_engine
 from sqlalchemy.engine import Engine
+from starlette.testclient import TestClient
 
-from app.core import Settings
+from app import create_app
+from app.auth_client import logged_user
+from app.core import Settings, get_db, get_redis
 from app.core.database_schema import db_schema
 from .utils import config_queries
 from .utils.assert_extensions import is_successful_status_code, is_validation_message_correct
+from .utils.shared_test_utils import user_id_1
 
 base_db_url: str = 'postgresql://postgres:postgres@0.0.0.0:5433/postgres'
 test_db_name: str = 'pylocker_test_db'
@@ -55,3 +61,37 @@ async def db() -> AsyncGenerator[Database, None]:
     await db.connect()
     yield db
     await db.disconnect()
+
+
+@pytest.fixture(scope='function')
+def client(db: Database) -> Generator[TestClient, None, None]:
+    app: FastAPI = create_app()
+
+    def _get_db() -> Database: return db
+
+    app.dependency_overrides[get_db] = _get_db
+
+    client: TestClient = TestClient(app)
+    yield client
+
+
+@pytest.mark.asyncio
+@pytest.fixture(scope='function')
+async def aclient(
+        db: Database, redis: StrictRedis
+) -> AsyncGenerator[AsyncClient, None]:
+    app: FastAPI = create_app()
+
+    def _get_db() -> Database: return db
+
+    def _get_redis() -> StrictRedis: return redis
+
+    def _logged_user() -> str: return user_id_1.email
+
+    app.dependency_overrides[get_db] = _get_db
+    app.dependency_overrides[get_redis] = _get_redis
+    app.dependency_overrides[logged_user] = _logged_user
+
+    aclient: AsyncClient = AsyncClient(app=app, base_url='http://testserver')
+    yield aclient
+    await aclient.aclose()

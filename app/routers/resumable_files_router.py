@@ -5,14 +5,13 @@ from aredis import StrictRedis
 from fastapi import APIRouter, Depends, Query, HTTPException, File, BackgroundTasks
 from fastapi.responses import JSONResponse
 
-from .utils import calculate_hash, calculate_checksum
+from .utils import calculate_hash, calculate_checksum, correct_path
 from ..auth_client import logged_user
 from ..core import get_redis, Settings
 from ..errors import LocationNotFoundError, ChunkTooBigError
 from ..repositories.blob_repository import BlobRepository
 from ..repositories.files_repository import FilesRepository
 from ..schemas.files import UploadFilePath, UploadCacheData, UploadFileHeaders, FileRead, FileDb
-from ..schemas.users import UserInfo
 
 router: APIRouter = APIRouter()
 
@@ -27,11 +26,11 @@ async def download_file(
         files_repository: FilesRepository = Depends(FilesRepository.create),
         blob_repository: BlobRepository = Depends(BlobRepository.create),
         settings: Settings = Depends(Settings.get),
-        user_info: UserInfo = Depends(logged_user)
+        user_email: str = Depends(logged_user)
 ) -> bytes:
     file_db: FileDb = await files_repository.fetch_db_file(file_path)
 
-    if file_db.owner_id != user_info.id:
+    if file_db.owner_id != user_email:
         raise HTTPException(status_code=403, detail='No privileges to access file.')
 
     chunk: bytes = await blob_repository.read_from_blob(
@@ -48,17 +47,17 @@ async def download_file(
 async def create_new_upload(
         headers: UploadFilePath = Depends(UploadFilePath.as_header),
         redis: StrictRedis = Depends(get_redis),
-        user_info: UserInfo = Depends(logged_user),
         blob_repository: BlobRepository = Depends(BlobRepository.create),
-        settings: Settings = Depends(Settings.get)
+        settings: Settings = Depends(Settings.get),
+        user_email: str = Depends(logged_user)
 ) -> JSONResponse:
     loid: int = await blob_repository.create_blob()
     location: str = token_urlsafe(settings.location_url_bytes)
 
     upload_cache_data = UploadCacheData(
-        owner_id=user_info.id,
+        owner_id=user_email,
         loid=loid,
-        file_path=str(headers.file_path)
+        file_path=correct_path(str(headers.file_path))
     )
 
     await redis.set(location, upload_cache_data.json())
@@ -80,7 +79,7 @@ async def upload_file(
         redis: StrictRedis = Depends(get_redis),
         blob_repository: BlobRepository = Depends(BlobRepository.create),
         settings: Settings = Depends(Settings.get),
-        user_info: UserInfo = Depends(logged_user)
+        user_email: str = Depends(logged_user)
 ) -> JSONResponse:
     if not await redis.exists(location):
         raise LocationNotFoundError()
@@ -90,7 +89,7 @@ async def upload_file(
     redis_data: bytes = await redis.get(location)
     cache_data: UploadCacheData = UploadCacheData.parse_raw(redis_data)
 
-    if user_info.id != cache_data.owner_id:
+    if cache_data.owner_id != user_email:
         raise HTTPException(status_code=403, detail='No privileges to access file.')
 
     await blob_repository.write_to_blob(
@@ -118,7 +117,7 @@ async def confirm_upload(
         blob_repository: BlobRepository = Depends(BlobRepository.create),
         files_repository: FilesRepository = Depends(FilesRepository.create),
         settings: Settings = Depends(Settings.get),
-        user_info: UserInfo = Depends(logged_user)
+        user_email: str = Depends(logged_user)
 ) -> FileRead:
     if not await redis.exists(location):
         raise LocationNotFoundError()
@@ -126,7 +125,7 @@ async def confirm_upload(
     redis_data: bytes = await redis.get(location)
     cache_data: UploadCacheData = UploadCacheData.parse_raw(redis_data)
 
-    if user_info.id != cache_data.owner_id:
+    if cache_data.owner_id != user_email:
         raise HTTPException(status_code=403, detail='No privileges to access file.')
 
     blob_checksum: str = ''
@@ -140,7 +139,7 @@ async def confirm_upload(
 
     file_read: FileRead = await files_repository.create_file(
         cache_data.loid, cache_data.file_path, file_size,
-        blob_checksum, user_info
+        blob_checksum, user_email
     )
 
     await redis.delete(location)
@@ -163,7 +162,7 @@ async def fetch_upload_offset(
         location: str = Query(..., description='upload location'),
         redis: StrictRedis = Depends(get_redis),
         blob_repository: BlobRepository = Depends(BlobRepository.create),
-        user_info: UserInfo = Depends(logged_user)
+        user_email: str = Depends(logged_user)
 ) -> JSONResponse:
     if not await redis.exists(location):
         raise LocationNotFoundError()
@@ -171,7 +170,7 @@ async def fetch_upload_offset(
     redis_data: bytes = await redis.get(location)
     cache_data: UploadCacheData = UploadCacheData.parse_raw(redis_data)
 
-    if user_info.id != cache_data.owner_id:
+    if cache_data.owner_id != user_email:
         raise HTTPException(status_code=403, detail='No privileges to access file.')
 
     last_byte: int = await blob_repository.get_last_byte(cache_data.loid)
@@ -190,11 +189,11 @@ async def delete_file(
         file_path: str = Query(..., description='path of file to delete'),
         files_repository: FilesRepository = Depends(FilesRepository.create),
         blob_repository: BlobRepository = Depends(BlobRepository.create),
-        user_info: UserInfo = Depends(logged_user)
+        user_email: str = Depends(logged_user)
 ) -> JSONResponse:
     db_file: FileDb = await files_repository.fetch_db_file(file_path)
 
-    if db_file.owner_id != user_info.id:
+    if db_file.owner_id != user_email:
         raise HTTPException(status_code=403, detail='No privileges to access file.')
 
     await files_repository.delete_file(db_file.oid)
